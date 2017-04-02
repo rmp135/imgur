@@ -4,23 +4,6 @@ import axios from 'axios'
 import * as url from 'url'
 import Endpoints from './Endpoints'
 
-interface RequestTokenResponse {
-  access_token: string
-  expires_in: number
-  token_type: string
-  scope: null,
-  account_id: string,
-  refresh_token: string
-  account_username: string
-}
-
-export interface ClientConfig {
-  client_id?: string
-  client_secret?: string
-  access_token?: string
-  refresh_token?: string
-}
-
 export default class Client {
   client_id: string = ''
   client_secret: string = ''
@@ -38,7 +21,7 @@ export default class Client {
     }    
   }
   
-  async authorizeByPIN (applicationState?: string) : Promise<{ url: string, authorize: (pin: string) => Promise<object> } > {
+  async authorizeByPIN (applicationState?: string) : Promise<{ url: string, authorize: (pin: string) => Promise<RequestTokenResponse> } > {
     if (this.client_id === '') {
       console.warn('This client has no client_id.')
     }
@@ -68,7 +51,7 @@ export default class Client {
     return { url: userURL, authorize: PINAuth }
   }
 
-  async regenerateFromRefreshToken (refreshToken?: string) : Promise<string> {
+  async regenerateFromRefreshToken (refreshToken?: string) : Promise<RequestTokenResponse> {
     const token = refreshToken || this.refresh_token
     if (this.client_id === '') {
       console.warn('This client has no client_id.')
@@ -92,9 +75,10 @@ export default class Client {
     const res = await this._performRequest(options) as RequestTokenResponse
     this.access_token = res.access_token;
     this.refresh_token = res.refresh_token
+    return res
   }
 
-  async getImage (id: string) : Promise<Image> {
+  async getImage (id: string) : Promise<ImageResponse> {
     const options = {
       headers: {
         'Authorization': `Client-ID ${this.client_id}`
@@ -104,7 +88,7 @@ export default class Client {
     }
     return this._performRequest(options)
   }
-  
+
   private async _performRequest (newOptions: object): Promise<any> {
     const options = {
       validateStatus (status) {
