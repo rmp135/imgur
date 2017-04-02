@@ -7,7 +7,6 @@ interface RequestTokenResponse {
   access_token: string
   expires_in: number
   token_type: string
-  scope: null,
   account_id: string,
   refresh_token: string
   account_username: string

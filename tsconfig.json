@@ -5,6 +5,8 @@
     "target": "es6",
     "strictNullChecks": true,
     "declaration": true,
+    "experimentalDecorators": true,
+    "preserveConstEnums": true,
     "typeRoots": [
       "node_modules/@types"
     ]

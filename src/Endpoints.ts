@@ -1,6 +1,6 @@
 export default {
   "authentication": {
-    "base": "https://api.imgur.com/oauth2/token",
+    "base": "https://api.imgur.com/oauth2",
     "token": "/token",
     "authorize": "/authorize"
   },

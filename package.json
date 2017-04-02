@@ -3,8 +3,20 @@
   "version": "0.0.0",
   "main": "dist/Client.js",
   "license": "MIT",
+  "scripts": {
+    "test": "mocha -w ./dist/**/*.spec.js"
+  },
   "dependencies": {
+    "@types/chai": "^3.4.35",
     "@types/node": "^7.0.12",
-    "axios": "^0.16.0"
+    "@types/rewire": "^2.5.27",
+    "axios": "^0.16.0",
+    "chai": "^3.5.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0",
+    "mocha-typescript": "^1.0.23",
+    "rewire": "^2.5.2",
+    "typescript": "^2.2.2"
   }
 }
