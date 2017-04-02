@@ -1,0 +1,10 @@
+{
+  "name": "@rmp135/imgur",
+  "version": "0.0.0",
+  "main": "dist/Client.js",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^7.0.12",
+    "axios": "^0.16.0"
+  }
+}
