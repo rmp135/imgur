@@ -23,7 +23,7 @@ export async function regenerateFromRefreshToken (client: Client, refreshToken?:
       grant_type: 'refresh_token'
     },
     method: 'post',
-    url: Endpoints.authentication.base + Endpoints.authentication.token,
+    url: Endpoints.authorization.base + Endpoints.authorization.token,
   }
   const res = await RequestTasks.performRequest(client, requestConfig) as RequestTokenResponse
   client.access_token = res.access_token;
@@ -47,7 +47,7 @@ export function twoStageAuth (client: Client, grantType: string, responseType: s
         [responseType]: responseValue
       },
       method: 'post',
-      url: Endpoints.authentication.base + Endpoints.authentication.token
+      url: Endpoints.authorization.base + Endpoints.authorization.token
     }
     const res = await RequestTasks.performRequest(client, requestConfig) as RequestTokenResponse
     this.access_token = res.access_token

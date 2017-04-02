@@ -10,9 +10,17 @@
   version "7.0.12"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.12.tgz#ae5f67a19c15f752148004db07cbbb372e69efc9"
 
+"@types/qs@^6.2.31":
+  version "6.2.31"
+  resolved "https://registry.yarnpkg.com/@types/qs/-/qs-6.2.31.tgz#7d929bd877f9cd3ece6415c602b7cf9b077133f1"
+
 "@types/rewire@^2.5.27":
   version "2.5.27"
   resolved "https://registry.yarnpkg.com/@types/rewire/-/rewire-2.5.27.tgz#6eb708f86841d34775b7fbbd9b9920cb7db6d040"
+
+"@types/url-join@^0.8.2":
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/@types/url-join/-/url-join-0.8.2.tgz#1181ecbe1d97b7034e0ea1e35e62e86cc26b422d"
 
 ansi-regex@^2.0.0:
   version "2.1.1"
@@ -391,6 +399,10 @@ pinkie@^2.0.0:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
 
+qs@^6.4.0:
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
+
 read-pkg-up@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/read-pkg-up/-/read-pkg-up-1.0.1.tgz#9d63c13276c065918d57f002a57f40a1b643fb02"
@@ -481,6 +493,10 @@ type-detect@^1.0.0:
 typescript@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.2.2.tgz#606022508479b55ffa368b58fee963a03dfd7b0c"
+
+url-join@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/url-join/-/url-join-1.1.0.tgz#741c6c2f4596c4830d6718460920d0c92202dc78"
 
 validate-npm-package-license@^3.0.1:
   version "3.0.1"
