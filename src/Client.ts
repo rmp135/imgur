@@ -2,6 +2,7 @@ import { ClientInstance } from '_debugger';
 import Image from './ResponseModels/Image'
 import axios from 'axios'
 import * as url from 'url'
+import Endpoints from './Endpoints'
 
 interface RequestTokenResponse {
   access_token: string
@@ -18,12 +19,6 @@ export interface ClientConfig {
   client_secret?: string
   access_token?: string
   refresh_token?: string
-}
-
-export class RequestError {
-  constructor () {
-
-  }
 }
 
 export default class Client {
@@ -59,7 +54,7 @@ export default class Client {
           pin
         },
         method: 'post',
-        url: `https://api.imgur.com/oauth2/token`,
+        url: Endpoints.authentication.base + Endpoints.authentication.token
       }
       const res = await this._performRequest(options) as RequestTokenResponse
       this.access_token = res.access_token
@@ -73,18 +68,30 @@ export default class Client {
     return { url: userURL, authorize: PINAuth }
   }
 
-  async regenerateFromRefreshToken (refreshToken: string) : Promise<string> {
+  async regenerateFromRefreshToken (refreshToken?: string) : Promise<string> {
+    const token = refreshToken || this.refresh_token
+    if (this.client_id === '') {
+      console.warn('This client has no client_id.')
+    }
+    if (this.client_secret === '') {
+      console.warn('This client has no client_secret.')
+    }
+    if (token == null) {
+      console.warn('No refresh token specified.')
+    }
     const options = {
       data: {
-        refresh_token: refreshToken,
+        refresh_token: token,
         client_id: this.client_id,
         client_secret: this.client_secret,
         grant_type: 'refresh_token'
       },
       method: 'post',
-      url: `https://api.imgur.com/oauth2/token`,
+      url: Endpoints.authentication.base + Endpoints.authentication.token,
     }
-    return this._performRequest(options)
+    const res = await this._performRequest(options) as RequestTokenResponse
+    this.access_token = res.access_token;
+    this.refresh_token = res.refresh_token
   }
 
   async getImage (id: string) : Promise<Image> {
@@ -97,6 +104,7 @@ export default class Client {
     }
     return this._performRequest(options)
   }
+  
   private async _performRequest (newOptions: object): Promise<any> {
     const options = {
       validateStatus (status) {
