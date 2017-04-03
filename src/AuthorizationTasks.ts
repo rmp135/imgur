@@ -1,44 +1,17 @@
 import { AxiosRequestConfig } from 'axios';
-import Endpoints from './Endpoints'
 import Client from './Client'
 import * as RequestTasks from './RequestTasks'
 import * as querystring from 'querystring'
 
-export async function regenerateFromRefreshToken (client: Client, refreshToken?: string) : Promise<RequestTokenResponse> {
+const OATH_BASE_PATH = 'https://api.imgur.com/oauth2'
+
+export function regenerateFromRefreshToken (client: Client, refreshToken?: string) : Promise<RequestTokenResponse> {
   const token = refreshToken || client.refresh_token
-  if (client.client_id === '') {
-    console.warn('This client has no client_id.')
-  }
-  if (client.client_secret === '') {
-    console.warn('This client has no client_secret.')
-  }
-  if (token == null) {
-    console.warn('No refresh token specified.')
-  }
-  const requestConfig : AxiosRequestConfig = {
-    data: {
-      refresh_token: token,
-      client_id: client.client_id,
-      client_secret: client.client_secret,
-      grant_type: 'refresh_token'
-    },
-    method: 'post',
-    url: Endpoints.authorization.base + Endpoints.authorization.token,
-  }
-  const res = await RequestTasks.performRequest(client, requestConfig) as RequestTokenResponse
-  client.access_token = res.access_token;
-  client.refresh_token = res.refresh_token
-  return res
+  return generateAuthRequest(client, 'refresh_token', 'refresh_token')(token)
 }
 
-export function twoStageAuth (client: Client, grantType: string, responseType: string, applicationState?: string) {
-  if (client.client_id === '') {
-    console.warn('This client has no client_id.')
-  }
-  if (client.client_secret === '') {
-    console.warn('This client has no client_secret.')
-  }
-  const authorize = async (responseValue: string) => {
+export function generateAuthRequest (client: Client, grantType: string, responseType: string) : (responseValue: string) => Promise<RequestTokenResponse> {
+  return async (responseValue: string) : Promise<RequestTokenResponse> => {
     const requestConfig: AxiosRequestConfig = {
       data: {
         client_id: client.client_id,
@@ -47,25 +20,23 @@ export function twoStageAuth (client: Client, grantType: string, responseType: s
         [responseType]: responseValue
       },
       method: 'post',
-      url: Endpoints.authorization.base + Endpoints.authorization.token
+      url: RequestTasks.joinURL([OATH_BASE_PATH, 'token' ])
     }
-    const res = await RequestTasks.performRequest(client, requestConfig) as RequestTokenResponse
-    this.access_token = res.access_token
-    this.refresh_token = res.refresh_token
+    const res = await RequestTasks.performRequest<RequestTokenResponse>(client, requestConfig)
+    client.access_token = res.access_token
+    client.refresh_token = res.refresh_token
     return res
   }
-  let userURL = `https://api.imgur.com/oauth2/authorize?client_id=${client.client_id}&response_type=${responseType}`
-  if (applicationState != null) {
-    userURL = userURL + `&state=${applicationState}`
-  }
+}
+
+export function twoStageAuth (client: Client, grantType: string, responseType: string, applicationState?: string) : { url: string, authorize: (input: string) => Promise<RequestTokenResponse> } {
+  const authorize = generateAuthRequest(client, grantType, responseType)
+  let userURL = RequestTasks.joinURL({ path: [OATH_BASE_PATH, 'authorize'], params: { client_id: client.client_id, response_type: responseType, state: applicationState } })
   return { url: userURL, authorize }
 }
 
-export function authorizeByToken (client: Client, applicationState?: string) {
-  let userURL = `https://api.imgur.com/oauth2/authorize?client_id=${client.client_id}&response_type=token`
-  if (applicationState != null) {
-    userURL = userURL + `&state=${applicationState}`
-  }
+export function authorizeByToken (client: Client, applicationState?: string) : string {
+  let userURL = RequestTasks.joinURL({ path: [OATH_BASE_PATH, 'authorizeByToken'], params: { client_id: client.client_id, repsonse_type: 'token', state: applicationState }})
   return userURL
 }
 

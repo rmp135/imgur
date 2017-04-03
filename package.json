@@ -2,24 +2,25 @@
   "name": "@rmp135/imgur",
   "version": "0.0.0",
   "main": "dist/Client.js",
+  "types": "dist/Client.d.ts",
   "license": "MIT",
   "scripts": {
-    "test": "mocha -w ./dist/**/*.spec.js"
+    "test": "jasmine ./**/*.spec.js",
+    "build": "tsc"
   },
   "dependencies": {
-    "@types/chai": "^3.4.35",
+    "@types/jasmine": "^2.5.47",
     "@types/node": "^7.0.12",
     "@types/qs": "^6.2.31",
     "@types/rewire": "^2.5.27",
     "@types/url-join": "^0.8.2",
     "axios": "^0.16.0",
+    "jasmine": "^2.5.3",
+    "jasmine-core": "^2.5.2",
     "qs": "^6.4.0",
     "url-join": "^1.1.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^3.2.0",
-    "mocha-typescript": "^1.0.23",
     "rewire": "^2.5.2",
     "typescript": "^2.2.2"
   }

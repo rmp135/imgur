@@ -1,26 +1,31 @@
-import Endpoints from './Endpoints';
 import * as join from 'url-join';
 import * as qs from 'qs';
 import axios, { AxiosRequestConfig, AxiosError } from 'axios'
 import Client from './Client'
 
-export interface apiResponse<T> {
+const API_BASE_PATH = 'https://api.imgur.com/3'
+
+export interface URLConfig {
+  path: any[],
+  params?: object
+}
+
+export interface APIResponse<T> {
   data: T,
   success: boolean,
   status: 200
 }
 
-export async function performRequest (client: Client, config: AxiosRequestConfig) : Promise<object> {
+export async function performRequest<T> (client: Client, config: AxiosRequestConfig) : Promise<T> {
   const options : AxiosRequestConfig = {
     validateStatus (status) {
       return status === 200
     },
     ...config
   }
-  // console.log(options)
+  console.log(options)
   try {
     const res = await axios(options)
-    console.log(res.headers['x-ratelimit-userreset'])
     client.RateLimits.client_limit = res.headers['x-ratelimit-clientlimit'] || client.RateLimits.client_limit
     client.RateLimits.client_remaining = res.headers['x-ratelimit-clientremaining'] || client.RateLimits.client_remaining
     client.RateLimits.user_limit = res.headers['x-ratelimit-userlimit'] || client.RateLimits.user_limit
@@ -38,17 +43,22 @@ export async function performRequest (client: Client, config: AxiosRequestConfig
   }
 }
 
-export function performAPIRequest (client: Client, url: { path: string[], params?: string[]}): Promise<object> {
-  url.path.unshift(Endpoints.api.base)
+export function performAPIRequest<T> (client: Client, url: URLConfig, axiosConfig?: AxiosRequestConfig): Promise<APIResponse<T>> {
+  url.path.unshift(API_BASE_PATH)
   const options : AxiosRequestConfig = {
     headers: {
       Authorization: `Bearer ${client.access_token}`
     },
-    url: joinURL(url.path, url.params)
+    url: joinURL(url),
+    ...axiosConfig
   }
   return performRequest(client, options)
 }
 
-export function joinURL (paths: string[], querstrings?: string[]) {
-  return join(...paths, qs.stringify(querstrings))
+export function joinURL (url: URLConfig | string[]) : string {
+  if (Array.isArray(url)) {
+    return join(...url)
+  }
+  const query = qs.stringify(url.params)
+  return join(...url.path, query == '' ? '' : `?${query}`)
 }
