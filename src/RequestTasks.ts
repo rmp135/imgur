@@ -23,7 +23,7 @@ export async function performRequest<T> (client: Client, config: AxiosRequestCon
     },
     ...config
   }
-  console.log(options)
+  // console.log(options)
   try {
     const res = await axios(options)
     client.RateLimits.client_limit = res.headers['x-ratelimit-clientlimit'] || client.RateLimits.client_limit
@@ -43,8 +43,12 @@ export async function performRequest<T> (client: Client, config: AxiosRequestCon
   }
 }
 
-export function performAPIRequest<T> (client: Client, url: URLConfig, axiosConfig?: AxiosRequestConfig): Promise<APIResponse<T>> {
-  url.path.unshift(API_BASE_PATH)
+export function performAPIRequest<T> (client: Client, url: URLConfig | any[], axiosConfig?: AxiosRequestConfig): Promise<APIResponse<T>> {
+  if (Array.isArray(url)) {
+    url.unshift(API_BASE_PATH)
+  } else {
+    url.path.unshift(API_BASE_PATH)
+  }
   const options : AxiosRequestConfig = {
     headers: {
       Authorization: `Bearer ${client.access_token}`

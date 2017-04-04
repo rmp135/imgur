@@ -1,8 +1,16 @@
+import {
+  accountGalleryProfile,
+  ChangeAccountSettingsOptions,
+  IdOption,
+  PageOption,
+  SortOption,
+  UsernameOption
+} from './api/Account';
 import { AxiosRequestConfig } from 'axios';
 import { APIResponse, joinURL, performRequest } from './RequestTasks';
-import * as AuthorizationTasks from './AuthorizationTasks'
-import * as Account from './api/Account'
-import * as Image from './api/Image'
+import * as AuthorizationTasks from './AuthorizationTasks';
+import * as Account from './api/Account';
+import * as Image from './api/Image';
 
 export interface ClientConfig {
   client_id?: string
@@ -66,19 +74,19 @@ IP Reset: ${this.RateLimits.ip_reset}
   }
 
   Authorize = {
-    regenerateFromRefreshToken: (refreshToken?: string) : Promise<RequestTokenResponse> => {
+    regenerateFromRefreshToken: (refreshToken?: string) => {
       return AuthorizationTasks.regenerateFromRefreshToken(this, refreshToken)
     },
-    byPIN: (applicationState?: string): { url: string, authorize: (pin: string) => Promise<RequestTokenResponse> } => {
+    byPIN: (applicationState?: string) => {
       return AuthorizationTasks.twoStageAuth(this, 'pin', 'pin', applicationState)
     },
-    byCode: (applicationState?: string): { url: string, authorize: (pin: string) => Promise<RequestTokenResponse> } => {
+    byCode: (applicationState?: string) => {
       return AuthorizationTasks.twoStageAuth(this, 'authorization_code', 'code', applicationState)
     },
-    byToken: (applicationState?: string) : { url: string, parse: (token: string) => RequestTokenResponse } => {
+    byToken: (applicationState?: string) => {
       return {
-        url: AuthorizationTasks.authorizeByToken(this, applicationState),
-        parse: (url: string) : RequestTokenResponse => {
+        url: AuthorizationTasks.generateTokenURL(this, applicationState),
+        parse: (url: string) => {
           const res = AuthorizationTasks.parseTokenURL(url)
           this.access_token = res.access_token
           this.refresh_token = res.refresh_token
@@ -89,11 +97,36 @@ IP Reset: ${this.RateLimits.ip_reset}
   }
 
   Account = {
-    get: (username?: string): Promise<APIResponse<AccountResponse>> => Account.get(this, username),
-    favorites: (config? : { username?: string, page?: number, sort?: Account.SortOrder }): Promise<APIResponse<BaseGalleryResponse>> => Account.favorites(this, config)
+    get: (username?: string) => Account.get(this, username),
+    galleryFavorites: (config: string | UsernameOption & PageOption & SortOption) => Account.galleryFavorites(this, config),
+    favorites: (config?: string | UsernameOption & PageOption) => Account.accountFavorites(this, config),
+    accountSubmissions: (config?: PageOption) => Account.accountSubmisions(this, config),
+    accountSettings: () => Account.accountSettings(this),
+    changeAccountSettings: (options: ChangeAccountSettingsOptions) => Account.changeAccountSettings(this, options),
+    accountGalleryProfile: (username?: string) => Account.accountGalleryProfile(this, username),
+    verifyEmail: (username?: string) => Account.verifyEmail(this, username),
+    sendVerificationEmail: () => Account.sendVerificationEmail(this),
+    albums: (options?: string | UsernameOption & PageOption) => Account.albums(this, options),
+    album: (options: string | IdOption & UsernameOption) => Account.album(this, options),
+    albumIds: (options?: string | UsernameOption & PageOption) => Account.albumIds(this, options),
+    albumCount: (id?: string) => Account.albumCount(this, id),
+    albumRemove: (options: string | UsernameOption & IdOption) => Account.albumRemove(this, options),
+    comments: (options: number | UsernameOption & SortOption & PageOption) => Account.comments(this, options),
+    comment: (options: number | UsernameOption & IdOption) => Account.comment(this, options),
+    commentIds: (options?: UsernameOption & SortOption & PageOption) => Account.commentIds(this, options),
+    commentCount: (username?: string) => Account.commentCount(this, username),
+    images: (options?: string | UsernameOption & PageOption) => Account.images(this, options),
+    image: (options: string | UsernameOption & IdOption) => Account.image(this, options),
+    imageIds: (options?: string | UsernameOption & PageOption) => Account.imageIds(this, options),
+    imageCount: (username?: string) => Account.imageCount(this, username),
+    imageRemove: (options: string | UsernameOption & { deleteHash: string }) => Account.imageRemove(this, options),
+    replies: (username?: string) => Account.replies(this, username)
   }
 
   Image = {
-    get: (id: string): Promise<APIResponse<ImageResponse>> => Image.get(this, id)
+    get: (id: string) => Image.get(this, id),
+    remove: (id: string) => Image.remove(this, id),
+    upload: (options: string | Image.UploadOptions) => Image.upload(this, options),
+    update: (options: Image.UpdateOptions) => Image.update(this, options)
   }
 }

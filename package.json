@@ -5,7 +5,9 @@
   "types": "dist/Client.d.ts",
   "license": "MIT",
   "scripts": {
-    "test": "jasmine ./**/*.spec.js",
+    "test:watch": "nodemon --ignore dist --ignore __test -e ts --exec yarn test ./__test/**/*.spec.js",
+    "test:build": "tsc -p tsconfig.test.json",
+    "test": "jasmine ./__test/**/*.spec.js",
     "build": "tsc"
   },
   "dependencies": {
@@ -21,6 +23,7 @@
     "url-join": "^1.1.0"
   },
   "devDependencies": {
+    "nodemon": "^1.11.0",
     "rewire": "^2.5.2",
     "typescript": "^2.2.2"
   }

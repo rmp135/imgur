@@ -8,6 +8,7 @@
     "declaration": true,
     "experimentalDecorators": true,
     "preserveConstEnums": true,
+    "sourceMap": true,
     "lib": [
       "es7"
     ],
@@ -20,6 +21,7 @@
     "./typings/*.d.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "__test"
   ]
 }

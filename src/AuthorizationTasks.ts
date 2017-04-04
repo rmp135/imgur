@@ -29,13 +29,18 @@ export function generateAuthRequest (client: Client, grantType: string, response
   }
 }
 
-export function twoStageAuth (client: Client, grantType: string, responseType: string, applicationState?: string) : { url: string, authorize: (input: string) => Promise<RequestTokenResponse> } {
+export interface TwoStageAuthReturn {
+  url: string,
+  authorize: (input: string) => Promise<RequestTokenResponse>
+}
+
+export function twoStageAuth (client: Client, grantType: string, responseType: string, applicationState?: string) : TwoStageAuthReturn {
   const authorize = generateAuthRequest(client, grantType, responseType)
   let userURL = RequestTasks.joinURL({ path: [OATH_BASE_PATH, 'authorize'], params: { client_id: client.client_id, response_type: responseType, state: applicationState } })
   return { url: userURL, authorize }
 }
 
-export function authorizeByToken (client: Client, applicationState?: string) : string {
+export function generateTokenURL (client: Client, applicationState?: string) : string {
   let userURL = RequestTasks.joinURL({ path: [OATH_BASE_PATH, 'authorizeByToken'], params: { client_id: client.client_id, repsonse_type: 'token', state: applicationState }})
   return userURL
 }
