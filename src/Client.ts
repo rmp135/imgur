@@ -20,10 +20,10 @@ export interface ClientConfig {
 }
 
 export default class {
-  client_id: string = ''
-  client_secret: string = ''
-  access_token: string = ''
-  refresh_token: string = ''
+  client_id: string | null = null
+  client_secret: string | null = null
+  access_token: string | null = null
+  refresh_token: string | null = null
   RateLimits: {
     client_limit: number | null
     client_remaining: number | null

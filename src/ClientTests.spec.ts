@@ -15,9 +15,9 @@ describe('Client', () => {
       expect(client.refresh_token).toEqual('')
       expect(client.client_secret).toEqual('')
     })
-    it('should construct with only the client_id', () => {
-      const client = new Client.default('client_id')
-      expect(client.client_id).toEqual('client_id')
+    it('should construct with only the access_token', () => {
+      const client = new Client.default('access_token')
+      expect(client.client_id).toEqual('access_token')
       expect(client.access_token).toEqual('')
       expect(client.refresh_token).toEqual('')
       expect(client.client_secret).toEqual('')
@@ -183,7 +183,7 @@ describe('Client', () => {
           const C = new MockClient.default()
           MockClient.__with__({
             Account: {
-              favorites: mockFavorites
+              accountFavorites: mockFavorites
             }
           })(() => {
             const res = C.Account.favorites('username')
@@ -198,7 +198,7 @@ describe('Client', () => {
           const C = new MockClient.default()
           MockClient.__with__({
             Account: {
-              favorites: mockFavorites
+              accountFavorites: mockFavorites
             }
           })(() => {
             const res = C.Account.favorites({ username: 'something' })
