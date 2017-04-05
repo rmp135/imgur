@@ -5,8 +5,12 @@ import * as querystring from 'querystring'
 
 const OATH_BASE_PATH = 'https://api.imgur.com/oauth2'
 
-export function regenerateFromRefreshToken (client: Client, refreshToken?: string) : Promise<RequestTokenResponse> {
+export function regenerateFromRefreshToken (client: Client, refreshToken?: string) : Promise<RequestTokenResponse> | null {
   const token = refreshToken || client.refresh_token
+  if (token == null) {
+    console.error('Please provide a refresh token on the client or as an argument.')
+    return null
+  }
   return generateAuthRequest(client, 'refresh_token', 'refresh_token')(token)
 }
 
