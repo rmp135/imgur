@@ -1,5 +1,5 @@
 import * as url from 'url';
-import { APIResponse, performAPIRequest } from '../RequestTasks';
+import { performAPIRequest } from '../RequestTasks';
 import { AxiosRequestConfig } from 'axios';
 import Client from '../Client'
 

@@ -7,10 +7,11 @@ import {
   UsernameOption
 } from './api/Account';
 import { AxiosRequestConfig } from 'axios';
-import { APIResponse, joinURL, performRequest } from './RequestTasks';
+import { joinURL, performRequest } from './RequestTasks';
 import * as AuthorizationTasks from './AuthorizationTasks';
 import * as Account from './api/Account';
 import * as Image from './api/Image';
+import * as Comment from './api/Comment'
 
 export interface ClientConfig {
   client_id?: string
@@ -128,5 +129,15 @@ IP Reset: ${this.RateLimits.ip_reset}
     remove: (id: string) => Image.remove(this, id),
     upload: (options: string | Image.UploadOptions) => Image.upload(this, options),
     update: (options: Image.UpdateOptions) => Image.update(this, options)
+  }
+
+  Comment = {
+    get: (id: string) => Comment.get(this, id),
+    create: (comment: string, imageId: string, parentId?: string) => Comment.create(this, comment, imageId, parentId),
+    remove: (id: string) => Comment.remove(this, id),
+    replies: (id: string) => Comment.replies(this, id),
+    replyCreate: (parentId: string, comment: string, imageId: string) => Comment.replyCreate(this, parentId, comment, imageId),
+    vote: (id: string, vote: 'up' | 'down') => Comment.vote(this, id, vote),
+    report: (id: string) => Comment.report(this, id)
   }
 }

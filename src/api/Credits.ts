@@ -1,8 +1,10 @@
+/// <reference path="../ResponseModels.d.ts" />
+
 import * as url from 'url';
-import { APIResponse, performAPIRequest } from '../RequestTasks';
+import { performAPIRequest } from '../RequestTasks';
 import Client from '../Client'
 
-export default async function (client: Client) {
+export default async function (client: Client): Promise<APIResponse<CreditsResponse>> {
   const url = {
     path: [
       'credits',

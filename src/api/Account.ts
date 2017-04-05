@@ -1,6 +1,6 @@
 import { parse } from 'querystring';
 import * as url from 'url';
-import { URLConfig, APIResponse, performAPIRequest } from '../RequestTasks';
+import { URLConfig, performAPIRequest } from '../RequestTasks';
 import { AxiosRequestConfig } from 'axios';
 import Client from '../Client'
 

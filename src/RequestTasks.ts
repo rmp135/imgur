@@ -10,12 +10,6 @@ export interface URLConfig {
   params?: object
 }
 
-export interface APIResponse<T> {
-  data: T,
-  success: boolean,
-  status: 200
-}
-
 export async function performRequest<T> (client: Client, config: AxiosRequestConfig) : Promise<T> {
   const options : AxiosRequestConfig = {
     validateStatus (status) {

@@ -7,6 +7,12 @@ declare enum ThumbnailSize {
   h
 }
 
+interface APIResponse<T> {
+  data: T,
+  success: boolean,
+  status: 200
+}
+
 interface RequestTokenResponse {
   access_token: string
   expires_in: number
