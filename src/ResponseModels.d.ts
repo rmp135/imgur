@@ -125,7 +125,7 @@ interface CommentResponse {
   children: CommentResponse[]
 }
 
-interface ConversationModel {
+interface ConversationResponse {
   id: number
   last_message_preview: string
   datetime: number
@@ -137,7 +137,7 @@ interface ConversationModel {
   page: number
 }
 
-interface CustomGallery {
+interface CustomGalleryResponse {
   account_url: string
   link: string
   tags: string[]
@@ -221,7 +221,7 @@ interface NotificationResponse {
   id: number
   account_id: number
   viewed: boolean
-  content: CommentResponse | ConversationModel
+  content: CommentResponse | ConversationResponse
 }
 
 interface TagResponse {
