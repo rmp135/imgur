@@ -10,17 +10,17 @@ describe('Client', () => {
   describe('Construction', () => {
     it('should construct with blank info', () => {
       const client = new Client.default()
-      expect(client.access_token).toEqual('')
-      expect(client.client_id).toEqual('')
-      expect(client.refresh_token).toEqual('')
-      expect(client.client_secret).toEqual('')
+      expect(client.access_token).toBeNull()
+      expect(client.client_id).toBeNull()
+      expect(client.refresh_token).toBeNull()
+      expect(client.client_secret).toBeNull()
     })
     it('should construct with only the access_token', () => {
       const client = new Client.default('access_token')
       expect(client.client_id).toEqual('access_token')
-      expect(client.access_token).toEqual('')
-      expect(client.refresh_token).toEqual('')
-      expect(client.client_secret).toEqual('')
+      expect(client.access_token).toBeNull()
+      expect(client.refresh_token).toBeNull()
+      expect(client.client_secret).toBeNull()
     })
     it('should construct with config', () => {
       const config = {
