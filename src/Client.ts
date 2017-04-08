@@ -87,7 +87,7 @@ IP Reset: ${this.RateLimits.ip_reset}
     byToken: (applicationState?: string) => {
       return {
         url: AuthorizationTasks.generateTokenURL(this, applicationState),
-        parse: (url: string) => {
+        authorize: (url: string) => {
           const res = AuthorizationTasks.parseTokenURL(url)
           this.access_token = res.access_token
           this.refresh_token = res.refresh_token

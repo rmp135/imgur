@@ -133,7 +133,7 @@ describe('Client', () => {
         })
         const res = client.Authorize.byToken('state')
         expect(mockGenerateTokenURL).toHaveBeenCalledWith(client, 'state')
-        const parsed = res.parse('url')
+        const parsed = res.authorize('url')
         expect(mockParseTokenURL).toHaveBeenCalledWith('url')
         expect(parsed).toBe(mockParseTokenURLReturn)
         expect(client.access_token).toBe('access_token')
