@@ -5,6 +5,11 @@ import * as querystring from 'querystring'
 
 const OATH_BASE_PATH = 'https://api.imgur.com/oauth2'
 
+export interface TwoStageAuthReturn {
+  url: string,
+  authorize: (input: string) => Promise<RequestTokenResponse>
+}
+
 export function regenerateFromRefreshToken (client: Client, refreshToken?: string) : Promise<RequestTokenResponse> | null {
   const token = refreshToken || client.refresh_token
   if (token == null) {
@@ -33,11 +38,6 @@ export function generateAuthRequest (client: Client, grantType: string, response
   }
 }
 
-export interface TwoStageAuthReturn {
-  url: string,
-  authorize: (input: string) => Promise<RequestTokenResponse>
-}
-
 export function twoStageAuth (client: Client, grantType: string, responseType: string, applicationState?: string) : TwoStageAuthReturn {
   const authorize = generateAuthRequest(client, grantType, responseType)
   let userURL = RequestTasks.joinURL({ path: [OATH_BASE_PATH, 'authorize'], params: { client_id: client.client_id, response_type: responseType, state: applicationState } })
@@ -45,7 +45,7 @@ export function twoStageAuth (client: Client, grantType: string, responseType: s
 }
 
 export function generateTokenURL (client: Client, applicationState?: string) : string {
-  let userURL = RequestTasks.joinURL({ path: [OATH_BASE_PATH, 'authorizeByToken'], params: { client_id: client.client_id, repsonse_type: 'token', state: applicationState }})
+  let userURL = RequestTasks.joinURL({ path: [OATH_BASE_PATH, 'authorize'], params: { client_id: client.client_id, response_type: 'token', state: applicationState }})
   return userURL
 }
 
@@ -57,6 +57,6 @@ export function parseTokenURL (url: string) : RequestTokenResponse {
     token_type: res.token_type,
     account_id: res.account_id,
     refresh_token: res.refresh_token,
-    account_username: res.account_id
+    account_username: res.account_username
   }
 }
