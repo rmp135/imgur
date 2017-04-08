@@ -8,10 +8,10 @@ export function getAll (client: Client): Promise<APIResponse<ConversationRespons
   return performAPIRequest<ConversationResponse[]>(client, url)
 }
 
-export function get (client: Client, id: string, options?: Options.PageOption & Options.OffsetOption): Promise<APIResponse<ConversationResponse>> {
+export function get (client: Client, conversationId: string, options?: Options.PageOption & Options.OffsetOption): Promise<APIResponse<ConversationResponse>> {
   const url: any[] = [
     'conversation',
-    id
+    conversationId
   ]
   if (options != null) {
     url.push(options.page, options.offset)

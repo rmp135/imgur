@@ -2,7 +2,7 @@ import * as url from 'url';
 import { performAPIRequest } from '../RequestTasks';
 import Client from '../Client'
 
-export default async function (client: Client): Promise<APIResponse<CreditsResponse>> {
+export async function get (client: Client): Promise<APIResponse<CreditsResponse>> {
   const url = [
     'credits'
   ]

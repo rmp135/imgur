@@ -11,10 +11,10 @@ export function get (client: Client, options?: Options.PageOption & Options.Gall
   return performAPIRequest<CustomGalleryResponse>(client, url)
 }
 
-export function image (client: Client, id: string): Promise<APIResponse<BaseImageResponse>> {
+export function image (client: Client, itemId: string): Promise<APIResponse<BaseImageResponse>> {
   const url = [
     'custom',
-    id
+    itemId
   ]
   return performAPIRequest<BaseImageResponse>(client, url)
 }

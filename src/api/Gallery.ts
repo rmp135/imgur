@@ -42,10 +42,6 @@ export function memesImage (client: Client, imageId: string): Promise<APIRespons
   return performAPIRequest<BaseGalleryResponse & MemeResponse>(client, url)
 }
 
-export interface SubRedditGalleriesResponse extends GalleryImageResponse {
-  reddit_comments: string
-}
-
 export function subredditGalleries (client: Client, subreddit: string, options?: Options.WindowOption & Options.PageOption & Options.GallerySortOption): Promise<APIResponse<SubRedditGalleriesResponse[]>> {
   const url: any = [
     'gallery',
@@ -58,18 +54,14 @@ export function subredditGalleries (client: Client, subreddit: string, options?:
   return performAPIRequest<SubRedditGalleriesResponse[]>(client, url)
 }
 
-export function subredditImage (client: Client, subreddit: string, image: string): Promise<APIResponse<SubRedditGalleriesResponse>> {
+export function subredditImage (client: Client, subreddit: string, imageId: string): Promise<APIResponse<SubRedditGalleriesResponse>> {
   const url = [
     'gallery',
     'r',
     subreddit,
-    image
+    imageId
   ]
   return performAPIRequest<SubRedditGalleriesResponse>(client, url)
-}
-
-export interface TagOption {
-  tagName: string
 }
 
 export function tag (client: Client, tagName: string, options?: Options.PageOption & Options.GallerySortOption & Options.WindowOption): Promise<APIResponse<TagResponse>> {
@@ -194,7 +186,7 @@ export interface ShareOptions {
   tags?: string[]
 }
 
-export  function share (client: Client, itemId: string, title: string, options?: ShareOptions): Promise<APIResponse<boolean>> {
+export function share (client: Client, itemId: string, title: string, options?: ShareOptions): Promise<APIResponse<boolean>> {
   const path = [
     'gallery',
     itemId
@@ -243,10 +235,10 @@ export function image (client: Client, imageId: string): Promise<APIResponse<Gal
   return performAPIRequest<BaseImageResponse>(client, url)
 }
 
-export function report (client: Client, id: string, reason?: ReportReasonEnum): Promise<APIResponse<boolean>> {
+export function report (client: Client, itemId: string, reason?: ReportReasonEnum): Promise<APIResponse<boolean>> {
   const url = [
     'gallery',
-    id,
+    itemId,
     'report'
   ]
   const requestOptions = {
@@ -318,20 +310,20 @@ export function commentReply (client: Client, itemId: string, commentId: string,
   return performAPIRequest<boolean>(client, url, requestOptions)
 }
 
-export function commentIds (client: Client, id: string): Promise<APIResponse<number[]>> {
+export function commentIds (client: Client, itemId: string): Promise<APIResponse<number[]>> {
   const url = [
     'gallery',
-    id,
+    itemId,
     'comments',
     'ids'
   ]
   return performAPIRequest<number[]>(client, url)
 }
 
-export function commentCount (client: Client, id: string): Promise<APIResponse<number>> {
+export function commentCount (client: Client, itemId: string): Promise<APIResponse<number>> {
   const url = [
     'gallery',
-    id,
+    itemId,
     'comments',
     'count'
   ]

@@ -29,7 +29,7 @@ describe('Credits', () => {
   describe('default', () => {
     it('should get and set the credits', async (done) => {
       jasmine.clock().mockDate(new Date(2017, 8, 11, 1, 1, 1))
-      const res = await MockCredits.default(client)
+      const res = await MockCredits.get(client)
       expect(mockPerformAPIRequest).toHaveBeenCalledWith(client, ['credits'])
       expect(client.RateLimits.user_limit).toBe(23)
       expect(client.RateLimits.user_remaining).toBe(44)

@@ -259,3 +259,7 @@ interface VoteResponse {
   ups: number
   down: number
 }
+
+interface SubRedditGalleriesResponse extends GalleryImageResponse {
+  reddit_comments: string
+}

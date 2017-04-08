@@ -5,13 +5,20 @@ import {
   SortOption,
   UsernameOption
 } from './api/Account';
-import { AxiosRequestConfig } from 'axios';
-import { joinURL, performRequest } from './RequestTasks';
-import * as AuthorizationTasks from './AuthorizationTasks';
+import { AxiosRequestConfig } from 'axios'
+import { joinURL, performRequest } from './RequestTasks'
+import * as AuthorizationTasks from './AuthorizationTasks'
 import * as Account from './api/Account';
-import * as Image from './api/Image';
 import * as Comment from './api/Comment'
-import { ReportReasonEnum } from "./api/ReportReasonEnum";
+import * as Conversation from './api/Conversation'
+import * as Credits from './api/Credits'
+import * as CustomGallery from './api/CustomGallery'
+import * as Gallery from './api/Gallery'
+import * as Image from './api/Image'
+import * as Memegen from './api/Memegen'
+import * as Notification from './api/Notification'
+import * as Topic from './api/Topic'
+import { ReportReasonEnum } from './api/ReportReasonEnum'
 
 export interface ClientConfig {
   client_id?: string
@@ -125,14 +132,6 @@ IP Reset: ${this.RateLimits.ip_reset}
     replies: () => Account.replies(this)
   }
 
-  Image = {
-    get: (imageId: string) => Image.get(this, imageId),
-    remove: (imageId: string) => Image.remove(this, imageId),
-    upload: (image: string, options?: Image.UploadOptions) => Image.upload(this, image, options),
-    update: (imageId: string, options: Image.UpdateOptions) => Image.update(this, imageId, options),
-    favorite: (imageId: string) => Image.favorite(this, imageId)
-  }
-
   Comment = {
     get: (commentId: string) => Comment.get(this, commentId),
     create: (imageId: string, comment: string, parentId?: string) => Comment.create(this, imageId, comment, parentId),
@@ -142,4 +141,72 @@ IP Reset: ${this.RateLimits.ip_reset}
     vote: (commentId: string, vote: 'up' | 'down') => Comment.vote(this, commentId, vote),
     report: (commentId: string, reason?: ReportReasonEnum) => Comment.report(this, commentId)
   }
+
+  Conversation = {
+    getAll: () => Conversation.getAll(this),
+    get: (conversationId: string, options?: Options.PageOption & Options.OffsetOption) => Conversation.get(this, conversationId, options)
+  }
+
+  Credits = {
+    get: () => Credits.get(this)
+  }
+
+  CustomGallery = {
+    get: (options?: Options.PageOption & Options.GallerySortOption & Options.WindowOption) => CustomGallery.get(this, options),
+    image: (itemId: string) => CustomGallery.image(this, itemId),
+    addTags: (tags: string[]) => CustomGallery.addTags(this, tags),
+    removeTags: (tags: string[]) => CustomGallery.removeTage(this, tags)
+  }
+
+  Gallery = {
+    get: (options?: Gallery.GalleryGetOptions) => Gallery.get(this, options),
+    memesGallery: (options?: Options.GallerySortOption & Options.PageOption & Options.WindowOption) => Gallery.memesGallery(this, options),
+    memesImage: (imageId: string) => Gallery.memesImage(this, imageId),
+    subredditGalleries: (subreddit: string, options?: Options.WindowOption & Options.PageOption & Options.GallerySortOption) => Gallery.subredditGalleries(this, subreddit, options),
+    subredditImage: (subreddit: string, imageId: string) => Gallery.subredditImage(this, subreddit, imageId),
+    tag: (tagName: string, options?: Options.PageOption & Options.GallerySortOption & Options.WindowOption) => Gallery.tag(this, tagName, options),
+    tagImage: (tagName: string, imageId: string) => Gallery.tagImage(this, tagName, imageId),
+    itemTags: (itemId: string) => Gallery.itemTags(this, itemId),
+    tagVoting: (itemId: string, tagName: string, vote: 'up' | 'down') => Gallery.tagVoting(this, itemId, tagName, vote),
+    updateTags: (itemId: string, tags: string[]) => Gallery.updateTags(this, itemId, tags),
+    search: (searchOptions: string | Gallery.GallerySearchOptions, filterOptions: Options.GallerySortOption & Options.WindowOption & Options.PageOption) => Gallery.search(this, searchOptions, filterOptions),
+    random: () => Gallery.random(this),
+    share: (itemId: string, title: string, options?: Gallery.ShareOptions) => Gallery.share(this, itemId, title, options),
+    remove: (itemId: string) => Gallery.remove(this, itemId),
+    album: (albumId: string) => Gallery.album(this, albumId),
+    image: (imageId: string) => Gallery.image(this, imageId),
+    report: (itemId: string, reason?: ReportReasonEnum) => Gallery.report(this, itemId, reason),
+    votes: (itemId: string) => Gallery.votes(this, itemId),
+    comments: (itemId: string, sort?: Options.CommentSort) => Gallery.comments(this, itemId, sort),
+    comment: (itemId: string, commentId: string) => Gallery.comment(this, itemId, commentId),
+    commentCreate: (itemId: string, comment: string) => Gallery.commentCreate(this, itemId, comment),
+    commentReply: (itemId: string, commentId: string, comment: string) => Gallery.commentReply(this, commentId, itemId, comment),
+    commentIds: (itemId: string) => Gallery.commentIds(this, itemId),
+    commentCount: (itemId: string) => Gallery.commentCount(this, itemId)
+  }
+
+  Image = {
+    get: (imageId: string) => Image.get(this, imageId),
+    upload: (image: string, options?: Image.UploadOptions) => Image.upload(this, image, options),
+    remove: (imageId: string) => Image.remove(this, imageId),
+    update: (imageId: string, options: Image.UpdateOptions) => Image.update(this, imageId, options),
+    favorite: (imageId: string) => Image.favorite(this, imageId)
+  }
+
+  Memegen = {
+    defaults: () => Memegen.defaults(this)
+  }
+
+  Notification = {
+    getAll: (unreadOnly?: boolean) => Notification.getAll(this, unreadOnly),
+    get: (notificationId: string) => Notification.get(this, notificationId),
+    markAsRead: (notificationId: string) => Notification.markAsRead(this, notificationId)
+  }
+
+  Topic = {
+    defaults: () => Topic.defaults(this),
+    galleryTopics: (topicId: string, options?: Options.GallerySortOption & Options.PageOption & Options.WindowOption) => Topic.galleryTopics(this, topicId, options),
+    topicItem: (topicId: string, itemId: string) => Topic.topicItem(this, topicId, itemId)
+  }
+
 }
