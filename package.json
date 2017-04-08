@@ -11,18 +11,18 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@types/jasmine": "^2.5.47",
-    "@types/node": "^7.0.12",
-    "@types/qs": "^6.2.31",
-    "@types/rewire": "^2.5.27",
-    "@types/url-join": "^0.8.2",
     "axios": "^0.16.0",
-    "jasmine": "^2.5.3",
-    "jasmine-core": "^2.5.2",
     "qs": "^6.4.0",
     "url-join": "^1.1.0"
   },
   "devDependencies": {
+    "@types/url-join": "^0.8.2",
+    "@types/qs": "^6.2.31",
+    "@types/rewire": "^2.5.27",
+    "@types/node": "^7.0.12",
+    "@types/jasmine": "^2.5.47",
+    "jasmine": "^2.5.3",
+    "jasmine-core": "^2.5.2",
     "nodemon": "^1.11.0",
     "rewire": "^2.5.2",
     "typescript": "^2.2.2"
