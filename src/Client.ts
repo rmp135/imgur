@@ -1,5 +1,4 @@
 import {
-  accountGalleryProfile,
   ChangeAccountSettingsOptions,
   IdOption,
   PageOption,
@@ -12,6 +11,7 @@ import * as AuthorizationTasks from './AuthorizationTasks';
 import * as Account from './api/Account';
 import * as Image from './api/Image';
 import * as Comment from './api/Comment'
+import { ReportReasonEnum } from "./api/ReportReasonEnum";
 
 export interface ClientConfig {
   client_id?: string
@@ -99,45 +99,47 @@ IP Reset: ${this.RateLimits.ip_reset}
 
   Account = {
     get: (username?: string) => Account.get(this, username),
-    galleryFavorites: (config: string | UsernameOption & PageOption & SortOption) => Account.galleryFavorites(this, config),
-    favorites: (config?: string | UsernameOption & PageOption) => Account.accountFavorites(this, config),
-    accountSubmissions: (config?: PageOption) => Account.accountSubmisions(this, config),
-    accountSettings: () => Account.accountSettings(this),
-    changeAccountSettings: (options: ChangeAccountSettingsOptions) => Account.changeAccountSettings(this, options),
-    accountGalleryProfile: (username?: string) => Account.accountGalleryProfile(this, username),
+    galleryFavorites: (username?: string | null, config?: PageOption & SortOption) => Account.galleryFavorites(this, username, config),
+    favorites: (username?: string | null, options?: PageOption & SortOption) => Account.favorites(this, username, options),
+    accountSubmissions: (username?: string | null, page?: number) => Account.submissions(this, username, page),
+    accountSettings: () => Account.settings(this),
+    changeAccountSettings: (options: ChangeAccountSettingsOptions) => Account.changeSettings(this, options),
+    accountGalleryProfile: (username?: string) => Account.galleryProfile(this, username),
     verifyEmail: (username?: string) => Account.verifyEmail(this, username),
     sendVerificationEmail: () => Account.sendVerificationEmail(this),
-    albums: (options?: string | UsernameOption & PageOption) => Account.albums(this, options),
-    album: (options: string | IdOption & UsernameOption) => Account.album(this, options),
-    albumIds: (options?: string | UsernameOption & PageOption) => Account.albumIds(this, options),
-    albumCount: (id?: string) => Account.albumCount(this, id),
-    albumRemove: (options: string | UsernameOption & IdOption) => Account.albumRemove(this, options),
-    comments: (options: number | UsernameOption & SortOption & PageOption) => Account.comments(this, options),
-    comment: (options: number | UsernameOption & IdOption) => Account.comment(this, options),
-    commentIds: (options?: UsernameOption & SortOption & PageOption) => Account.commentIds(this, options),
+    albums: (username?: string | null, page?: number) => Account.albums(this, username, page),
+    album: (username: string | null, albumId: string) => Account.album(this, username, albumId),
+    albumIds: (username: string | null, page: number) => Account.albumIds(this, username, page),
+    albumCount: (username?: string) => Account.albumCount(this, username),
+    albumRemove: (username: string | null, albumId: string) => Account.albumRemove(this, username, albumId),
+    comments: (username: string | null, options?: SortOption & PageOption) => Account.comments(this, username, options),
+    comment: (username: string | null, commentId: string) => Account.comment(this, username, commentId),
+    commentIds: (username: string | null, options?: SortOption & PageOption) => Account.commentIds(this, username, options),
     commentCount: (username?: string) => Account.commentCount(this, username),
-    images: (options?: string | UsernameOption & PageOption) => Account.images(this, options),
-    image: (options: string | UsernameOption & IdOption) => Account.image(this, options),
-    imageIds: (options?: string | UsernameOption & PageOption) => Account.imageIds(this, options),
+    commentRemove: (commentId: string) => Account.commentRemove(this, commentId),
+    images: (username?: string | null, page?: number) => Account.images(this, username, page),
+    image: (username: string | null, imageId: string) => Account.image(this, username, imageId),
+    imageIds: (username?: string | null, page?: number) => Account.imageIds(this, username, page),
     imageCount: (username?: string) => Account.imageCount(this, username),
-    imageRemove: (options: string | UsernameOption & { deleteHash: string }) => Account.imageRemove(this, options),
-    replies: (username?: string) => Account.replies(this, username)
+    imageRemove: (username: string | null, deleteHash: string) => Account.imageRemove(this, username, deleteHash),
+    replies: () => Account.replies(this)
   }
 
   Image = {
-    get: (id: string) => Image.get(this, id),
-    remove: (id: string) => Image.remove(this, id),
-    upload: (options: string | Image.UploadOptions) => Image.upload(this, options),
-    update: (options: Image.UpdateOptions) => Image.update(this, options)
+    get: (imageId: string) => Image.get(this, imageId),
+    remove: (imageId: string) => Image.remove(this, imageId),
+    upload: (image: string, options?: Image.UploadOptions) => Image.upload(this, image, options),
+    update: (imageId: string, options: Image.UpdateOptions) => Image.update(this, imageId, options),
+    favorite: (imageId: string) => Image.favorite(this, imageId)
   }
 
   Comment = {
-    get: (id: string) => Comment.get(this, id),
-    create: (comment: string, imageId: string, parentId?: string) => Comment.create(this, comment, imageId, parentId),
-    remove: (id: string) => Comment.remove(this, id),
-    replies: (id: string) => Comment.replies(this, id),
-    replyCreate: (parentId: string, comment: string, imageId: string) => Comment.replyCreate(this, parentId, comment, imageId),
-    vote: (id: string, vote: 'up' | 'down') => Comment.vote(this, id, vote),
-    report: (id: string) => Comment.report(this, id)
+    get: (commentId: string) => Comment.get(this, commentId),
+    create: (imageId: string, comment: string, parentId?: string) => Comment.create(this, imageId, comment, parentId),
+    remove: (commentId: string) => Comment.remove(this, commentId),
+    replies: (commentId: string) => Comment.replies(this, commentId),
+    replyCreate: (commentId: string, imageId: string, comment: string,) => Comment.replyCreate(this, commentId, imageId, comment),
+    vote: (commentId: string, vote: 'up' | 'down') => Comment.vote(this, commentId, vote),
+    report: (commentId: string, reason?: ReportReasonEnum) => Comment.report(this, commentId)
   }
 }

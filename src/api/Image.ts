@@ -4,9 +4,8 @@ import { AxiosRequestConfig } from 'axios';
 import Client from '../Client'
 
 export interface UploadOptions {
-  image: string
-  uploadType?: UploadType
-  type?: string
+  title?: string
+  type?: UploadType
   album?: string
   name?: string
   description?: string
@@ -15,33 +14,34 @@ export interface UploadOptions {
 export type UploadType = 'base64' | 'url'
 
 export interface UpdateOptions {
-  id: string,
   title?: string,
   description? : string
 }
 
-export function get (client: Client, id: string) : Promise<APIResponse<ImageResponse>> {
+export function get (client: Client, imageId: string) : Promise<APIResponse<ImageResponse>> {
   const url = [
     'image',
-    id,
+    imageId,
   ]
   return performAPIRequest<ImageResponse>(client, url)
 }
 
-export function upload (client: Client, options: string | UploadOptions) {
+export function upload (client: Client, image: string, options?: UploadOptions) {
   const url = [
     'image'
   ]
-  const config : AxiosRequestConfig = {
+  const config: AxiosRequestConfig = {
     method: 'post'
   }
-  if (typeof options === 'string') {
+  config.data = {
+    image,
+    type: 'base64'
+  }
+  if (options != null) {
     config.data = {
-      image: options,
-      type: 'base64'
+      ...config.data,
+      ...options
     }
-  } else {
-    config.data = options
   }
   return performAPIRequest<ImageResponse>(client, url, config)
 }
@@ -57,10 +57,10 @@ export function remove (client: Client, id: string) : Promise<APIResponse<boolea
   return performAPIRequest<boolean>(client, url, requestConfig)
 }
 
-export function update (client: Client, options: UpdateOptions) : Promise<APIResponse<boolean>> {
+export function update (client: Client, imageId: string, options: UpdateOptions) : Promise<APIResponse<boolean>> {
   const url = [
     'image',
-    options.id
+    imageId
   ]
   const requestConfig = {
     method: 'post',
@@ -72,10 +72,11 @@ export function update (client: Client, options: UpdateOptions) : Promise<APIRes
   return performAPIRequest<boolean>(client, url, requestConfig)
 }
 
-export function favorite (client: Client, id: string) : Promise<APIResponse<boolean>> {
+export function favorite (client: Client, imageId: string) : Promise<APIResponse<boolean>> {
   const url = [
     'image',
-    id
+    imageId,
+    'favorite'
   ]
   const requestOptions = {
     method: 'post'

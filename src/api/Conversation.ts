@@ -1,9 +1,7 @@
 import { performAPIRequest } from '../RequestTasks';
 import Client from '../Client'
-import './Options'
 
 export function getAll (client: Client): Promise<APIResponse<ConversationResponse[]>> {
-  console.warn('This endpoint does not appear to function correctly.')
   const url = [
     'conversations'
   ]

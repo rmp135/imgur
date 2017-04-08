@@ -1,15 +1,11 @@
-/// <reference path="../ResponseModels.d.ts" />
-
 import * as url from 'url';
 import { performAPIRequest } from '../RequestTasks';
 import Client from '../Client'
 
 export default async function (client: Client): Promise<APIResponse<CreditsResponse>> {
-  const url = {
-    path: [
-      'credits',
-    ]
-  }
+  const url = [
+    'credits'
+  ]
   const res = await performAPIRequest<CreditsResponse>(client, url)
   client.RateLimits.user_limit = res.data.UserLimit
   client.RateLimits.user_remaining = res.data.UserRemaining

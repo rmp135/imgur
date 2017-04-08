@@ -1,6 +1,5 @@
 import { performAPIRequest } from '../RequestTasks';
 import Client from '../Client';
-import './Options'
 
 export function defaults (client: Client): Promise<APIResponse<TopicResponse[]>> {
   const url = [

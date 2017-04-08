@@ -12,9 +12,13 @@ describe('AuthorizationTasks', () => {
   })
   describe('regenerateFromRequestToken', () => {
     it('should return null if the neither token can be found', () => {
+      const origError = console.error
+      console.error = jasmine.createSpy('console')
       const client = new Client()
       const res = MockAuthorizationTask.regenerateFromRefreshToken(client)
+      expect(console.error).toHaveBeenCalledWith('Please provide a refresh token on the client or as an argument.')
       expect(res).toBeNull()
+      console.error = origError
     })
     it('should use the paramter over the client refresh token', async (done) => {
       const clientOptions = {

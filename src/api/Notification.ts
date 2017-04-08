@@ -16,9 +16,6 @@ export function get (client: Client, notificationId: string): Promise<APIRespons
     'notification',
     notificationId
   ]
-  const requestOptions = {
-    method: 'post'
-  }
   return performAPIRequest<NotificationResponse>(client, url)
 }
 

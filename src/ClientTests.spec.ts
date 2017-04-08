@@ -1,4 +1,3 @@
-import { APIResponse } from '../__test/RequestTasks';
 import * as Client from './Client'
 import * as rewire from 'rewire'
 import { TwoStageAuthReturn } from './AuthorizationTasks'
@@ -107,7 +106,6 @@ describe('Client', () => {
         const res = client.Authorize.byToken('state')
         expect(mockGenerateTokenURL).toHaveBeenCalledWith(client, 'state')
         expect(res.url).toBe('url')
-        expect(res.parse)
       })
       it('should return the parsing function', () => {
         const mockParseTokenURLReturn =  {
@@ -138,68 +136,6 @@ describe('Client', () => {
         expect(parsed).toBe(mockParseTokenURLReturn)
         expect(client.access_token).toBe('access_token')
         expect(client.refresh_token).toBe('refresh_token')
-      })
-    })
-    describe('Account', () => {
-      describe('get', () => {
-        it('should call with just a username', () => {
-          const mockGetReturn = {} as Promise<APIResponse<AccountResponse>>
-          const mockGet = jasmine.createSpy('get').and.returnValue(mockGetReturn)
-
-          const client = new MockClient.default()
-          MockClient.__set__({
-            Account: {
-              get: mockGet
-            }
-          })
-          const res = client.Account.get('username')
-          expect(mockGet).toHaveBeenCalledWith(client, 'username')
-          expect(res).toEqual(mockGetReturn)
-        })
-        it('should call with no parameter username', () => {
-          const mockGetReturn = {} as Promise<APIResponse<AccountResponse>>
-          const mockGet = jasmine.createSpy('get').and.returnValue(mockGetReturn)
-
-          const client = new MockClient.default()
-          MockClient.__set__({
-            Account: {
-              get: mockGet
-            }
-          })
-          const res = client.Account.get()
-          expect(mockGet).toHaveBeenCalledWith(client, undefined)
-          expect(res).toEqual(mockGetReturn)
-        })
-      })
-      describe('favorites', () => {
-        it('should call with just a username', () => {
-          const mockFavoritesReturn = {} as Promise<APIResponse<BaseGalleryResponse[]>>
-          const mockFavorites = jasmine.createSpy('get').and.returnValue(mockFavoritesReturn)
-
-          const client = new MockClient.default()
-          MockClient.__set__({
-            Account: {
-              accountFavorites: mockFavorites
-            }
-          })
-          const res = client.Account.favorites('username')
-          expect(mockFavorites).toHaveBeenCalledWith(client, 'username')
-          expect(res).toEqual(mockFavoritesReturn)
-        })
-        it('should call with some options', () => {
-          const mockFavoritesReturn = {} as Promise<APIResponse<BaseGalleryResponse[]>>
-          const mockFavorites = jasmine.createSpy('get').and.returnValue(mockFavoritesReturn)
-
-          const client = new MockClient.default()
-          MockClient.__set__({
-            Account: {
-              accountFavorites: mockFavorites
-            }
-          })
-          const res = client.Account.favorites({ username: 'something' })
-          expect(mockFavorites).toHaveBeenCalledWith(client, { username: 'something' })
-          expect(res).toEqual(mockFavoritesReturn)
-        })
       })
     })
   })

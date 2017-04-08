@@ -1,6 +1,5 @@
 import { performAPIRequest } from "../RequestTasks";
 import Client from '../Client'
-import './Options'
 
 export function get (client: Client, options?: Options.PageOption & Options.GallerySortOption & Options.WindowOption): Promise<APIResponse<CustomGalleryResponse>> {
   const url: any[] = [
@@ -26,7 +25,10 @@ export function addTags (client: Client, tags: string[]): Promise<APIResponse<bo
     'add_tags'
   ]
   const requestOptions = {
-    method: 'put'
+    method: 'put',
+    data: {
+      tags: tags.join(',')
+    }
   }
   return performAPIRequest<boolean>(client, url, requestOptions)
 }
@@ -37,7 +39,10 @@ export function removeTage (client: Client, tags: string[]): Promise<APIResponse
     'remove_tags'
   ]
   const requestOptions = {
-    method: 'delete'
+    method: 'delete',
+    data: {
+      tags: tags.join(',')
+    }
   }
   return performAPIRequest<boolean>(client, url, requestOptions)
 }

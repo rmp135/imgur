@@ -1,17 +1,16 @@
-/// <reference path="../ResponseModels.d.ts" />
-
 import Client from '../Client';
 import { performAPIRequest } from '../RequestTasks';
+import { ReportReasonEnum } from "./ReportReasonEnum";
 
-export function get (client: Client, id: string): Promise<APIResponse<CommentResponse>> {
+export function get (client: Client, commentId: string): Promise<APIResponse<CommentResponse>> {
   const url = [
     'comment',
-    id
+    commentId
   ]
   return performAPIRequest<CommentResponse>(client, url)
 }
 
-export function create (client: Client, comment: string, imageId: string, parentId?: string): Promise<APIResponse<boolean>> {
+export function create (client: Client, imageId: string, comment: string, parentId?: string): Promise<APIResponse<boolean>> {
   const url = [
     'comment'
   ]
@@ -26,10 +25,10 @@ export function create (client: Client, comment: string, imageId: string, parent
   return performAPIRequest<boolean>(client, url, requestOptions)
 }
 
-export function remove (client: Client, id: string): Promise<APIResponse<boolean>> {
+export function remove (client: Client, commentId: string): Promise<APIResponse<boolean>> {
   const url = [
     'comment',
-    id
+    commentId
   ]
   const requestOptions = {
     method: 'delete'
@@ -37,19 +36,19 @@ export function remove (client: Client, id: string): Promise<APIResponse<boolean
   return performAPIRequest<boolean>(client, url, requestOptions)
 }
 
-export function replies (client: Client, id: string): Promise<APIResponse<CommentResponse[]>> {
+export function replies (client: Client, commentId: string): Promise<APIResponse<CommentResponse[]>> {
   const url = [
     'comment',
-    id,
+    commentId,
     'replies'
   ]
   return performAPIRequest<CommentResponse[]>(client, url)
 }
 
-export function replyCreate (client: Client, parentId: string, comment: string, imageId: string): Promise<APIResponse<boolean>> {
+export function replyCreate (client: Client, commentId: string, imageId: string, comment: string): Promise<APIResponse<boolean>> {
   const url = [
     'comment',
-    parentId
+    commentId
   ]
   const requestOptions = {
     method: 'post',
@@ -61,10 +60,10 @@ export function replyCreate (client: Client, parentId: string, comment: string, 
   return performAPIRequest<boolean>(client, url, requestOptions)
 }
 
-export function vote (client: Client, id: string, vote: 'up' | 'down'): Promise<APIResponse<boolean>> {
+export function vote (client: Client, commentId: string, vote: 'up' | 'down'): Promise<APIResponse<boolean>> {
   const url = [
     'comment',
-    id,
+    commentId,
     'vote',
     vote
   ]
@@ -74,14 +73,17 @@ export function vote (client: Client, id: string, vote: 'up' | 'down'): Promise<
   return performAPIRequest<boolean>(client, url, requestOptions)
 }
 
-export function report (client: Client, id: string): Promise<APIResponse<boolean>> {
+export function report (client: Client, commentId: string, reason?: ReportReasonEnum): Promise<APIResponse<boolean>> {
   const url = [
     'comment',
-    id,
+    commentId,
     'report'
   ]
   const requestOptions = {
-    method: 'post'
+    method: 'post',
+    data: {
+      reason
+    }
   }
   return performAPIRequest<boolean>(client, url, requestOptions)
 }

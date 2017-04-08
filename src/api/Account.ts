@@ -42,18 +42,14 @@ export function get (client: Client, username?: string) : Promise<APIResponse<Ac
   return performAPIRequest<AccountResponse>(client, url)
 }
 
-export function galleryFavorites (client: Client, options? : string | UsernameOption & PageOption & SortOption) : Promise<APIResponse<BaseGalleryResponse[]>> {
+export function galleryFavorites (client: Client, username?: string | null, options? : PageOption & SortOption) : Promise<APIResponse<BaseGalleryResponse[]>> {
   const defaultOptions = {
-    username: 'me',
+    username,
     page: null,
     sort: null
   }
   if (options != null) {
-    if (typeof options === 'string') {
-      defaultOptions.username = options
-    } else {
-      Object.assign(defaultOptions, options)
-    }
+    Object.assign(defaultOptions, options)
   }
   const url = [
     'account',
@@ -65,48 +61,37 @@ export function galleryFavorites (client: Client, options? : string | UsernameOp
   return performAPIRequest<BaseGalleryResponse[]>(client, url)
 }
 
-export function accountFavorites (client: Client, options?: PageOption) : Promise<APIResponse<BaseGalleryResponse[]>> {
-  const defaultOptions = {
-    username: 'me',
+export function favorites (client: Client, username?: string | null, options?: PageOption & SortOption) : Promise<APIResponse<BaseGalleryResponse[]>> {
+  const defaultOptions: any = {
+    username,
     page: null,
     sort: null
   }
   if (options != null) {
-    if (typeof options === 'string') {
-      defaultOptions.username = options
-    } else {
-      Object.assign(defaultOptions, options)
-    }
+    defaultOptions.page = options.page
+    defaultOptions.sort = options.sort
   }
   const url = [
     'account',
     defaultOptions.username || 'me',
     'favorites',
-    defaultOptions.page
+    defaultOptions.page,
+    defaultOptions.sort
   ]
   return performAPIRequest<BaseGalleryResponse[]>(client, url)
 }
 
-export function accountSubmisions (client: Client, options?: string | UsernameOption & PageOption): Promise<APIResponse<BaseGalleryResponse[]>> {
-  const baseOptions: any = {
-    username: 'me',
-    page: null
-  }
-  if (typeof options == 'string') {
-    baseOptions.username = options
-  } else {
-    Object.assign(baseOptions, options)
-  }
+export function submissions (client: Client, username?: string | null, page?: number): Promise<APIResponse<BaseGalleryResponse[]>> {
   const url = [
     'account',
-    baseOptions.username,
+    username || 'me',
     'submissions',
-    baseOptions.page
+    page
   ]
-  return performAPIRequest<BaseGalleryResponse[]>(client, baseOptions)
+  return performAPIRequest<BaseGalleryResponse[]>(client, url)
 }
 
-export function accountSettings (client: Client) : Promise<APIResponse<AccountResponse>> {
+export function settings (client: Client) : Promise<APIResponse<AccountResponse>> {
   const url = [
     'account',
     'me',
@@ -115,22 +100,24 @@ export function accountSettings (client: Client) : Promise<APIResponse<AccountRe
   return performAPIRequest<AccountResponse>(client, url)
 }
 
-export function changeAccountSettings (client: Client, options: ChangeAccountSettingsOptions): Promise<APIResponse<boolean>> {
+export function changeSettings (client: Client, options: ChangeAccountSettingsOptions): Promise<APIResponse<boolean>> {
   const url = [
     'account',
     'me',
     'settings'
   ]
   const requestOptions = {
-    method: 'put'
+    method: 'put',
+    data: options
   }
   return performAPIRequest<boolean>(client, url, requestOptions)
 }
 
-export function accountGalleryProfile (client: Client, username?: string) : Promise<APIResponse<GalleryProfileResponse>> {
+export function galleryProfile (client: Client, username?: string) : Promise<APIResponse<GalleryProfileResponse>> {
   const url = [
     'account',
     username || 'me',
+    'gallery_profile'
   ]
   return performAPIRequest<GalleryProfileResponse>(client, url)
 }
@@ -138,7 +125,8 @@ export function accountGalleryProfile (client: Client, username?: string) : Prom
 export function verifyEmail (client: Client, username?: string): Promise<APIResponse<boolean>> {
   const url = [
     'account',
-    username || 'me'
+    username || 'me',
+    'verifyemail'
   ]
   return performAPIRequest<boolean>(client, url)
 }
@@ -155,256 +143,111 @@ export function sendVerificationEmail (client: Client): Promise<APIResponse<bool
   return performAPIRequest<boolean>(client, url, requestOptions)
 }
 
-export function albums (client: Client, options?: string | UsernameOption & PageOption): Promise<APIResponse<AlbumResponse[]>> {
- const defaultOptions = {
-   username: 'me',
-   page: null
- }
- if (options != null) {
-   if (typeof options === 'string') {
-     defaultOptions.username = options
-   } else {
-     Object.assign(defaultOptions, options)
-   }
- }
+export function albums (client: Client, username?: string | null, page?: number): Promise<APIResponse<AlbumResponse[]>> {
  const url = [
    'account',
-   defaultOptions.username,
+   username || 'me',
    'albums',
-   defaultOptions.page
+   page
  ]
   return performAPIRequest<AlbumResponse[]>(client, url)
 }
 
-export function album (client: Client, options: string | IdOption & UsernameOption): Promise<APIResponse<AlbumResponse>> {
-  const defaultOptions = {
-    username: 'me',
-    id: ''
-  }
-  if (typeof options === 'string') {
-    defaultOptions.id = options
-  } else {
-    Object.assign(defaultOptions, options)
-  }
+export function album (client: Client, username: string | null, albumId: string): Promise<APIResponse<AlbumResponse>> {
   const url = [
     'account',
-    defaultOptions.username,
+    username || 'me',
     'album',
-    defaultOptions.id
+    albumId
   ]
   return performAPIRequest<AlbumResponse>(client, url)
 }
 
-export function albumIds (client: Client, options?: string | UsernameOption & PageOption) : Promise<APIResponse<number[]>> {
-  const defaultOptions: any = {
-    username: 'me'
-  }
-  if (options != null) {
-    if (typeof options === 'string') {
-      defaultOptions.username = options
-    } else {
-      Object.assign(defaultOptions, options) 
-    }
-  }
+export function albumIds (client: Client, username?: string | null, page?: number) : Promise<APIResponse<number[]>> {
   const url = [
     'account',
-    defaultOptions.username,
+    username || 'me',
     'albums',
     'ids',
-    defaultOptions.page
+    page
   ]
   return performAPIRequest<number[]>(client, url)
 }
 
-export function albumCount (client: Client, options?: string): Promise<APIResponse<number>> {
+export function albumCount (client: Client, username?: string): Promise<APIResponse<number>> {
   const url = [
     'account',
-    options || 'me',
+    username || 'me',
     'albums',
     'count'
   ]
   return performAPIRequest<number>(client, url)
 }
 
-export function albumRemove (client: Client, options: string | UsernameOption & IdOption): Promise<APIResponse<boolean>> {
-  const baseOptions: any = {
-    username: 'me',
-    id: null
-  }
-  if (typeof options === 'string') {
-    baseOptions.id = options
-  } else {
-    Object.assign(baseOptions, options)
-  }
+export function albumRemove (client: Client, username: string | null, albumId: string): Promise<APIResponse<boolean>> {
   const url = [
     'account',
-    baseOptions.username,
+    username || 'me',
     'album',
-    baseOptions.id
+    albumId
   ]
   const requestOptions = {
-    methods: 'delete'
+    method: 'delete'
   }
   return performAPIRequest<boolean>(client, url, requestOptions)
 }
 
-export function comments (client: Client, options?: string | UsernameOption & SortOption & PageOption) : Promise<APIResponse<CommentResponse[]>> {
-  const baseOptions: any = {
-    username: 'me',
-    sort: null,
-    page: null
-  }
-  Object.assign(baseOptions, options)
-  const url = [
+export function comments (client: Client, username?: string | null, options?: SortOption & PageOption) : Promise<APIResponse<CommentResponse[]>> {
+  const url: any[] = [
     'account',
-    baseOptions.username,
-    baseOptions.sort,
-    baseOptions.page
+    username || 'me',
+    'comments'
   ]
+  if (options != null) {
+    url.push(options.sort, options.page)
+  }
   return performAPIRequest<CommentResponse[]>(client, url)
 }
 
-export function comment (client: Client, options: number | UsernameOption & IdOption): Promise<APIResponse<CommentResponse>> {
-  const baseOptions: any = {
-    username: 'me',
-    id: null
-  }
-  if (typeof options === 'number') {
-    baseOptions.id = options
-  } else  {
-    Object.assign(baseOptions, options)
-  }
+export function comment (client: Client, username: string | null, commentId: string): Promise<APIResponse<CommentResponse>> {
   const url = [
     'account',
-    baseOptions.username,
+    username || 'me',
     'comment',
-    baseOptions.id
+    commentId
   ]
   return performAPIRequest<CommentResponse>(client, url)
 }
 
-export function commentIds (client: Client, options? : UsernameOption & SortOption & PageOption): Promise<APIResponse<number[]>> {
-  const baseOptions : any = {
-    username: 'me',
-    sort: null, 
-    page: null
-  }
-  Object.assign(baseOptions, options)
-  const url = [
+export function commentIds (client: Client, username?: string | null, options?: SortOption & PageOption): Promise<APIResponse<number[]>> {
+  const url: any[] = [
     'account',
-    baseOptions.username,
+    username || 'me',
     'comments',
-    'ids',
-    baseOptions.sort,
-    baseOptions.page
+    'ids'
   ]
+  if (options != null) {
+    url.push(options.sort, options.page)
+  }
   return performAPIRequest<number[]>(client, url)
 }
 
-export function commentCount (client: Client, options?: string): Promise<APIResponse<number>> {
+export function commentCount (client: Client, username?: string): Promise<APIResponse<number>> {
   const url = [
     'account',
-    options || 'me',
+    username || 'me',
     'comments',
     'count'
   ]
   return performAPIRequest<number>(client, url)
 }
 
-export function commentRemove (client: Client, options: number): Promise<APIResponse<boolean>> {
+export function commentRemove (client: Client, commentId: string): Promise<APIResponse<boolean>> {
   const url = [
     'account',
     'me',
     'comment',
-    options
-  ]
-  const requestOptions = {
-    method: 'delete'
-  }
-  return performAPIRequest<boolean>(client, url, options)
-}
-
-export function images (client: Client, options?: string | UsernameOption & PageOption) : Promise<APIResponse<ImageResponse[]>> {
-  const baseOptions : any = {
-    username:  'me',
-    page: null
-  }
-  if (typeof options === 'string') {
-    baseOptions.username = options
-  } else {
-    Object.assign(baseOptions, options)
-  }
-  const url = [
-    'account',
-    baseOptions.username,
-    'images',
-    baseOptions.page
-  ]
-  return performAPIRequest<ImageResponse[]>(client, baseOptions)
-}
-
-export function image (client: Client, options: string | UsernameOption & IdOption): Promise<APIResponse<ImageResponse>> {
-  const baseOptions: any = {
-    id: null,
-    username: 'me'
-  }
-  if (typeof options === 'string') {
-    baseOptions.id = options
-  } else {
-    Object.assign(baseOptions, options)
-  }
-  const url = [
-    'account',
-    'me',
-    'image',
-    baseOptions.id
-  ]
-  return performAPIRequest<ImageResponse>(client, url)
-}
-
-export function imageIds (client: Client, options?: string | UsernameOption & PageOption): Promise<APIResponse<string[]>> {
-  const baseOptions: any = {
-    username: 'me',
-    page: null
-  }
-  if (typeof options === 'string') {
-    baseOptions.username = options
-  } else {
-    Object.assign(baseOptions, options)
-  }
-  const url = [
-    'account',
-    baseOptions.username,
-    'images',
-    'ids',
-    baseOptions.page
-  ]
-  return performAPIRequest<string[]>(client, baseOptions)
-}
-
-export function imageCount (client: Client, options?: string): Promise<APIResponse<number>> {
-  const url = [
-    'account',
-    options || 'null'
-  ]
-  return performAPIRequest<number>(client, url)
-}
-
-export function imageRemove (client: Client, options: string | UsernameOption & { deleteHash: string }): Promise<APIResponse<boolean>> {
-  const baseOptions: any = {
-    username: 'me',
-    deleteHash: null
-  }
-  if (typeof options === 'string') {
-    baseOptions.deleteHash = options
-  } else {
-    Object.assign(baseOptions, options)
-  }
-  const url = [
-    'account',
-    baseOptions.username,
-    'image',
-    baseOptions.deleteHash
+    commentId
   ]
   const requestOptions = {
     method: 'delete'
@@ -412,10 +255,62 @@ export function imageRemove (client: Client, options: string | UsernameOption & 
   return performAPIRequest<boolean>(client, url, requestOptions)
 }
 
-export function replies (client: Client, options?: string): Promise<APIResponse<NotificationResponse[]>> {
+export function images (client: Client, username?: string | null, page?: number) : Promise<APIResponse<ImageResponse[]>> {
   const url = [
     'account',
-    options || 'me',
+    username || 'me',
+    'images',
+    page
+  ]
+  return performAPIRequest<ImageResponse[]>(client, url)
+}
+
+export function image (client: Client, username: string | null, imageId: string): Promise<APIResponse<ImageResponse>> {
+  const url = [
+    'account',
+    username || 'me',
+    'image',
+    imageId
+  ]
+  return performAPIRequest<ImageResponse>(client, url)
+}
+
+export function imageIds (client: Client, username?: string | null, page?: number): Promise<APIResponse<string[]>> {
+  const url = [
+    'account',
+    username || 'me',
+    'images',
+    'ids',
+    page
+  ]
+  return performAPIRequest<string[]>(client, url)
+}
+
+export function imageCount (client: Client, username?: string): Promise<APIResponse<number>> {
+  const url = [
+    'account',
+    username || 'null'
+  ]
+  return performAPIRequest<number>(client, url)
+}
+
+export function imageRemove (client: Client, username: string | null, deleteHash: string): Promise<APIResponse<boolean>> {
+  const url = [
+    'account',
+    username || 'me',
+    'image',
+    deleteHash
+  ]
+  const requestOptions = {
+    method: 'delete'
+  }
+  return performAPIRequest<boolean>(client, url, requestOptions)
+}
+
+export function replies (client: Client): Promise<APIResponse<NotificationResponse[]>> {
+  const url = [
+    'account',
+    'me',
     'notifications',
     'replies'
   ]

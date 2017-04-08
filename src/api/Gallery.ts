@@ -1,23 +1,22 @@
 import { SortOption } from './Account';
 import Client from "../Client";
 import { performAPIRequest, performRequest, URLConfig } from '../RequestTasks';
-import "./Options"
+import { ReportReasonEnum } from "./ReportReasonEnum";
 
-export interface GalleryGetOptions extends Options.GallerySortOption, Options.PageOption {
+export interface GalleryGetOptions extends Options.SectionOption, Options.GallerySortOption, Options.PageOption, Options.WindowOption {
   showViral?: boolean
 }
 
-export function get (client: Client, section: Options.Section, options?: GalleryGetOptions): Promise<APIResponse<BaseGalleryResponse[]>> {
+export function get (client: Client, options?: GalleryGetOptions): Promise<APIResponse<BaseGalleryResponse[]>> {
   const url: URLConfig = {
     path: [
-      'gallery',
-      section
+      'gallery'
     ],
     params: { }
   }
   url.params = { }
   if (options != null) {
-    url.path.push(options.sort, options.page)
+    url.path.push(options.section, options.sort, options.window, options.page)
     url.params.showViral = options.showViral
   }
   return performAPIRequest(client, url)
@@ -43,23 +42,18 @@ export function memesImage (client: Client, imageId: string): Promise<APIRespons
   return performAPIRequest<BaseGalleryResponse & MemeResponse>(client, url)
 }
 
-export interface SubRedditGalleriesOptions extends Options.WindowOption, Options.PageOption, Options.GallerySortOption {
-  subreddit: string
-}
-
 export interface SubRedditGalleriesResponse extends GalleryImageResponse {
   reddit_comments: string
 }
 
-export function subredditGalleries (client: Client, options: string | SubRedditGalleriesOptions): Promise<APIResponse<SubRedditGalleriesResponse[]>> {
+export function subredditGalleries (client: Client, subreddit: string, options?: Options.WindowOption & Options.PageOption & Options.GallerySortOption): Promise<APIResponse<SubRedditGalleriesResponse[]>> {
   const url: any = [
     'gallery',
-    'r'
+    'r',
+    subreddit
   ]
-  if (typeof options == 'string') {
-    url.push(options)
-  } else {
-    url.push(options.subreddit, options.sort, options.window, options.page)
+  if (options != null) {
+    url.push(options.sort, options.window, options.page)
   }
   return performAPIRequest<SubRedditGalleriesResponse[]>(client, url)
 }
@@ -78,15 +72,14 @@ export interface TagOption {
   tagName: string
 }
 
-export function tag (client: Client, options: string | TagOption & Options.PageOption & Options.GallerySortOption & Options.WindowOption): Promise<APIResponse<TagResponse>> {
+export function tag (client: Client, tagName: string, options?: Options.PageOption & Options.GallerySortOption & Options.WindowOption): Promise<APIResponse<TagResponse>> {
   const url: any[] = [
     'gallery',
-    'r'
+    't',
+    tagName
   ]
-  if (typeof options == 'string') {
-    url.push(options)
-  } else {
-    url.push(options.tagName, options.sort, options.window, options.page)
+  if (options != null) {
+    url.push(options.sort, options.window, options.page)
   }
   return performAPIRequest<TagResponse>(client, url)
 }
@@ -101,19 +94,19 @@ export function tagImage (client: Client, tagName: string, imageId: string): Pro
   return performAPIRequest<GalleryImageResponse>(client, url)
 }
 
-export function itemTags (client: Client, id: string): Promise<APIResponse<TagVoteResponse[]>> {
+export function itemTags (client: Client, itemId: string): Promise<APIResponse<TagVoteResponse[]>> {
   const url = [
     'gallery',
-    id,
+    itemId,
     'tags'
   ]
   return performAPIRequest<TagVoteResponse[]>(client, url)
 }
 
-export function tagVoting (client: Client, id: string, tagName: string, vote: 'up' | 'down'): Promise<APIResponse<boolean>> {
+export function tagVoting (client: Client, itemId: string, tagName: string, vote: 'up' | 'down'): Promise<APIResponse<boolean>> {
   const url = [
     'gallery',
-    id,
+    itemId,
     'vote',
     'tag',
     tagName,
@@ -125,14 +118,17 @@ export function tagVoting (client: Client, id: string, tagName: string, vote: 'u
   return performAPIRequest<boolean>(client, url, requestOptions)
 }
 
-export function updateTags (client: Client, id: string, tags: string[]): Promise<APIResponse<boolean>> {
+export function updateTags (client: Client, itemId: string, tags: string[]): Promise<APIResponse<boolean>> {
   const url = [
     'gallery',
     'tags',
-    id
+    itemId
   ]
   const requestOptions = {
-    method: 'post'
+    method: 'post',
+    data: {
+      tags: tags.join(',')
+    }
   }
   return performAPIRequest<boolean>(client, url, requestOptions)
 }
@@ -146,7 +142,7 @@ export interface GallerySearchOptions {
   exactly?: string
   not?: string[]
   type?: ImageType
-  q_size_px?: ImageSize
+  size?: ImageSize
 }
 
 export function search (client: Client, searchOptions: string | GallerySearchOptions, filterOptions?: Options.GallerySortOption & Options.WindowOption & Options.PageOption): Promise<APIResponse<BaseGalleryResponse[]>> {
@@ -175,7 +171,7 @@ export function search (client: Client, searchOptions: string | GallerySearchOpt
     params.q_any = searchOptions.any != null ? searchOptions.any.join(',') : undefined
     params.q_exactly = searchOptions.exactly
     params.q_not = searchOptions.not != null ? searchOptions.not.join(',') : undefined
-    params.q_size_px = searchOptions.q_size_px
+    params.q_size_px = searchOptions.size
     params.q_type = searchOptions.type
   }
   return performAPIRequest<BaseGalleryResponse[]>(client, { path, params })
@@ -192,40 +188,36 @@ export function random (client: Client, page?: number): Promise<APIResponse<Base
 }
 
 export interface ShareOptions {
-  title: string
   topic?: string
   bypassTerms?: boolean,
   mature?: boolean
-  tags: string[]
+  tags?: string[]
 }
 
-export  function share (client: Client, id: string, options: string | ShareOptions): Promise<APIResponse<boolean>> {
+export  function share (client: Client, itemId: string, title: string, options?: ShareOptions): Promise<APIResponse<boolean>> {
   const path = [
     'gallery',
-    id
+    itemId
   ]
-  const params: any = {
-
+  const requestOptions: any = {
+    method: 'post',
+    data: {
+      title
+    }
   }
-  if (typeof options == 'string') {
-    params.title = options
-  } else {
-    params.title = options.title
-    params.topic = options.topic
-    params.terms = options.bypassTerms ? '1' : undefined
-    params.mature = options.mature ? '1' : undefined
-    params.tags = options.tags != null ? options.tags.join(',') : undefined
+  if (options != null) {
+    requestOptions.data.topic = options.topic
+    requestOptions.data.terms = options.bypassTerms ? '1' : undefined
+    requestOptions.data.mature = options.mature ? '1' : undefined
+    requestOptions.data.tags = options.tags != null ? options.tags.join(',') : undefined
   }
-  const requestOptions = {
-    method: 'post'
-  }
-  return performAPIRequest<boolean>(client, { path, params }, requestOptions)
+  return performAPIRequest<boolean>(client, path, requestOptions)
 }
 
-export function remove (client: Client, id: string): Promise<APIResponse<boolean>> {
+export function remove (client: Client, imageId: string): Promise<APIResponse<boolean>> {
   const url = [
     'gallery',
-    id
+    imageId
   ]
   const requestOptions = {
     method: 'delete'
@@ -233,33 +225,25 @@ export function remove (client: Client, id: string): Promise<APIResponse<boolean
   return performAPIRequest<boolean>(client, url, requestOptions)
 }
 
-export function album (client: Client, id: string): Promise<APIResponse<GalleryAlbumResponse>> {
+export function album (client: Client, albumId: string): Promise<APIResponse<GalleryAlbumResponse>> {
   const url = [
     'gallery',
     'album',
-    id
+    albumId
   ]
   return performAPIRequest<GalleryAlbumResponse>(client, url)
 }
 
-export function image (client: Client, id: string): Promise<APIResponse<GalleryImageResponse>> {
+export function image (client: Client, imageId: string): Promise<APIResponse<GalleryImageResponse>> {
   const url = [
     'gallery',
-    'album',
-    id
+    'image',
+    imageId
   ]
   return performAPIRequest<BaseImageResponse>(client, url)
 }
 
-export enum ReportReasonEnum {
-  DOES_NOT_BELONG = 1,
-  SPAM = 2,
-  ABUSIVE = 3,
-  UNMARKED_MATURE = 4,
-  PORN = 5
-}
-
-export function report (client: Client, id: string, reason: ReportReasonEnum): Promise<APIResponse<boolean>> {
+export function report (client: Client, id: string, reason?: ReportReasonEnum): Promise<APIResponse<boolean>> {
   const url = [
     'gallery',
     id,
@@ -268,25 +252,25 @@ export function report (client: Client, id: string, reason: ReportReasonEnum): P
   const requestOptions = {
     method: 'post',
     data: {
-      reason: reason
+      reason
     }
   }
   return performAPIRequest<boolean>(client, url, requestOptions)
 }
 
-export function votes (client: Client, id: string): Promise<APIResponse<VoteResponse>> {
+export function votes (client: Client, itemId: string): Promise<APIResponse<VoteResponse>> {
   const url = [
     'gallery',
-    'album',
+    itemId,
     'votes'
   ]
   return performAPIRequest<VoteResponse>(client, url)
 }
 
-export function comments (client: Client, id: string, sort?: Options.CommentSort): Promise<APIResponse<CommentResponse[]>> {
+export function comments (client: Client, itemId: string, sort?: Options.CommentSort): Promise<APIResponse<CommentResponse[]>> {
   const url = [
     'gallery',
-    id,
+    itemId,
     'comments',
     sort    
   ]
@@ -303,10 +287,10 @@ export function comment (client: Client, itemId: string, commentId: string): Pro
   return performAPIRequest<CommentResponse>(client, url)
 }
 
-export function commentCreate (client: Client, id: string, comment: string): Promise<APIResponse<boolean>> {
+export function commentCreate (client: Client, itemId: string, comment: string): Promise<APIResponse<boolean>> {
   const url = [
     'gallery',
-    id,
+    itemId,
     'comment'
   ]
   const requestOptions = {
