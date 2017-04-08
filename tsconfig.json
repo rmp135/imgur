@@ -8,7 +8,7 @@
     "declaration": true,
     "experimentalDecorators": true,
     "preserveConstEnums": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "lib": [
       "es7"
     ],
@@ -17,11 +17,12 @@
     ]
   },
   "include": [
-    "./src/*",
+    "./src/**/*",
     "./typings/*.d.ts"
   ],
   "exclude": [
     "node_modules",
-    "__test"
+    "__test",
+    "**/*.spec.*"
   ]
 }

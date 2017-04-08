@@ -2,7 +2,9 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "__test",
-    "target": "es5"
+    "target": "es5",
+    "sourceMap": false,
+    "declaration": false
   },
   "exclude": [
     "node_modules",
