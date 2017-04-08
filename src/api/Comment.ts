@@ -1,6 +1,6 @@
 import Client from '../Client';
-import { performAPIRequest } from '../RequestTasks';
-import { ReportReasonEnum } from "./ReportReasonEnum";
+import { performAPIRequest } from '../RequestTasks'
+import { ReportReasonEnum } from '../ReportReasonEnum'
 
 export function get (client: Client, commentId: string): Promise<APIResponse<CommentResponse>> {
   const url = [

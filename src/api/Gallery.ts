@@ -1,7 +1,6 @@
-import { SortOption } from './Account';
 import Client from "../Client";
-import { performAPIRequest, performRequest, URLConfig } from '../RequestTasks';
-import { ReportReasonEnum } from "./ReportReasonEnum";
+import { performAPIRequest, URLConfig } from '../RequestTasks';
+import { ReportReasonEnum } from '../ReportReasonEnum'
 
 export interface GalleryGetOptions extends Options.SectionOption, Options.GallerySortOption, Options.PageOption, Options.WindowOption {
   showViral?: boolean
@@ -259,7 +258,7 @@ export function votes (client: Client, itemId: string): Promise<APIResponse<Vote
   return performAPIRequest<VoteResponse>(client, url)
 }
 
-export function comments (client: Client, itemId: string, sort?: Options.CommentSort): Promise<APIResponse<CommentResponse[]>> {
+export function comments (client: Client, itemId: string, sort?: Options.GalleryCommentSort): Promise<APIResponse<CommentResponse[]>> {
   const url = [
     'gallery',
     itemId,

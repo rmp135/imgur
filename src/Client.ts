@@ -1,10 +1,3 @@
-import {
-  ChangeAccountSettingsOptions,
-  IdOption,
-  PageOption,
-  SortOption,
-  UsernameOption
-} from './api/Account';
 import { AxiosRequestConfig } from 'axios'
 import { joinURL, performRequest } from './RequestTasks'
 import * as AuthorizationTasks from './AuthorizationTasks'
@@ -18,7 +11,8 @@ import * as Image from './api/Image'
 import * as Memegen from './api/Memegen'
 import * as Notification from './api/Notification'
 import * as Topic from './api/Topic'
-import { ReportReasonEnum } from './api/ReportReasonEnum'
+import { ReportReasonEnum } from './ReportReasonEnum'
+import './ResponseModels'
 
 export interface ClientConfig {
   client_id?: string
@@ -106,11 +100,11 @@ IP Reset: ${this.RateLimits.ip_reset}
 
   Account = {
     get: (username?: string) => Account.get(this, username),
-    galleryFavorites: (username?: string | null, config?: PageOption & SortOption) => Account.galleryFavorites(this, username, config),
-    favorites: (username?: string | null, options?: PageOption & SortOption) => Account.favorites(this, username, options),
+    galleryFavorites: (username?: string | null, config?: Options.PageOption & Options.AccountCommentSortOption) => Account.galleryFavorites(this, username, config),
+    favorites: (username?: string | null, options?: Options.PageOption & Options.AccountCommentSortOption) => Account.favorites(this, username, options),
     accountSubmissions: (username?: string | null, page?: number) => Account.submissions(this, username, page),
     accountSettings: () => Account.settings(this),
-    changeAccountSettings: (options: ChangeAccountSettingsOptions) => Account.changeSettings(this, options),
+    changeAccountSettings: (options: Options.ChangeAccountSettingsOptions) => Account.changeSettings(this, options),
     accountGalleryProfile: (username?: string) => Account.galleryProfile(this, username),
     verifyEmail: (username?: string) => Account.verifyEmail(this, username),
     sendVerificationEmail: () => Account.sendVerificationEmail(this),
@@ -119,9 +113,9 @@ IP Reset: ${this.RateLimits.ip_reset}
     albumIds: (username: string | null, page: number) => Account.albumIds(this, username, page),
     albumCount: (username?: string) => Account.albumCount(this, username),
     albumRemove: (username: string | null, albumId: string) => Account.albumRemove(this, username, albumId),
-    comments: (username: string | null, options?: SortOption & PageOption) => Account.comments(this, username, options),
+    comments: (username: string | null, options?: Options.AccountCommentSortOption & Options.PageOption) => Account.comments(this, username, options),
     comment: (username: string | null, commentId: string) => Account.comment(this, username, commentId),
-    commentIds: (username: string | null, options?: SortOption & PageOption) => Account.commentIds(this, username, options),
+    commentIds: (username: string | null, options?: Options.AccountCommentSortOption & Options.PageOption) => Account.commentIds(this, username, options),
     commentCount: (username?: string) => Account.commentCount(this, username),
     commentRemove: (commentId: string) => Account.commentRemove(this, commentId),
     images: (username?: string | null, page?: number) => Account.images(this, username, page),
@@ -177,7 +171,7 @@ IP Reset: ${this.RateLimits.ip_reset}
     image: (imageId: string) => Gallery.image(this, imageId),
     report: (itemId: string, reason?: ReportReasonEnum) => Gallery.report(this, itemId, reason),
     votes: (itemId: string) => Gallery.votes(this, itemId),
-    comments: (itemId: string, sort?: Options.CommentSort) => Gallery.comments(this, itemId, sort),
+    comments: (itemId: string, sort?: Options.GalleryCommentSort) => Gallery.comments(this, itemId, sort),
     comment: (itemId: string, commentId: string) => Gallery.comment(this, itemId, commentId),
     commentCreate: (itemId: string, comment: string) => Gallery.commentCreate(this, itemId, comment),
     commentReply: (itemId: string, commentId: string, comment: string) => Gallery.commentReply(this, commentId, itemId, comment),

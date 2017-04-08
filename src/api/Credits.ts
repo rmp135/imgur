@@ -1,4 +1,3 @@
-import * as url from 'url';
 import { performAPIRequest } from '../RequestTasks';
 import Client from '../Client'
 
