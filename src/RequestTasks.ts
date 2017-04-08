@@ -7,7 +7,9 @@ const API_BASE_PATH = 'https://api.imgur.com/3'
 
 export interface URLConfig {
   path: any[],
-  params?: object
+  params?: {
+    [key: string]: any
+  }
 }
 
 export async function performRequest<T> (client: Client, config: AxiosRequestConfig) : Promise<T> {

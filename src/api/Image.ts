@@ -77,5 +77,8 @@ export function favorite (client: Client, id: string) : Promise<APIResponse<bool
     'image',
     id
   ]
-  return performAPIRequest<boolean>(client, url)
+  const requestOptions = {
+    method: 'post'
+  }
+  return performAPIRequest<boolean>(client, url, requestOptions)
 }

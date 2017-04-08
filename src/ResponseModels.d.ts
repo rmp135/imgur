@@ -179,7 +179,7 @@ interface GalleryAlbumResponse extends BaseGalleryResponse {
   images: ImageResponse[]
 }
 
-interface GalleryImage extends ImageResponse, BaseGalleryResponse {
+interface GalleryImageResponse extends ImageResponse, BaseGalleryResponse {
   section: string
 }
 
@@ -222,6 +222,11 @@ interface NotificationResponse {
   account_id: number
   viewed: boolean
   content: CommentResponse | ConversationResponse
+}
+
+interface NotificationsContainerResponse {
+  messages: NotificationResponse[]
+  replies: NotificationResponse[]
 }
 
 interface TagResponse {

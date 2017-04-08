@@ -1,23 +1,8 @@
 import { performAPIRequest } from "../RequestTasks";
 import Client from '../Client'
+import './Options'
 
-export type Sort = 'viral' | 'top' | 'time'
-
-export type Window = 'day' | 'week' | 'month' | 'year' | 'all'
-
-export interface PageOption {
-  page?: number
-}
-
-export interface SortOption {
-  sort?: Sort
-}
-
-export interface WindowOption {
-  window?: Window
-}
-
-export function get (client: Client, options?: PageOption & SortOption & WindowOption): Promise<APIResponse<CustomGalleryResponse>> {
+export function get (client: Client, options?: Options.PageOption & Options.GallerySortOption & Options.WindowOption): Promise<APIResponse<CustomGalleryResponse>> {
   const url: any[] = [
     'custom'
   ]
