@@ -1,5 +1,3 @@
-import { AxiosRequestConfig } from 'axios'
-import { joinURL, performRequest } from './RequestTasks'
 import * as AuthorizationTasks from './AuthorizationTasks'
 import * as Account from './api/Account';
 import * as Comment from './api/Comment'
@@ -12,7 +10,6 @@ import * as Memegen from './api/Memegen'
 import * as Notification from './api/Notification'
 import * as Topic from './api/Topic'
 import { ReportReasonEnum } from './ReportReasonEnum'
-import './ResponseModels'
 
 export interface ClientConfig {
   client_id?: string
@@ -82,8 +79,12 @@ IP Reset: ${this.RateLimits.ip_reset}
     byPIN: (applicationState?: string) => {
       return AuthorizationTasks.twoStageAuth(this, 'pin', 'pin', applicationState)
     },
-    byCode: (applicationState?: string) => {
-      return AuthorizationTasks.twoStageAuth(this, 'authorization_code', 'code', applicationState)
+    byCode: (applicationState?: string): AuthorizationTasks.TwoStageAuthReturn =>  {
+      const auth = AuthorizationTasks.twoStageAuth(this, 'authorization_code', 'code', applicationState)
+      return {
+        url: auth.url,
+        authorize: (url: string) => auth.authorize(AuthorizationTasks.parseCodeURL(url))
+      }
     },
     byToken: (applicationState?: string) => {
       return {
@@ -202,5 +203,4 @@ IP Reset: ${this.RateLimits.ip_reset}
     galleryTopics: (topicId: string, options?: Options.GallerySortOption & Options.PageOption & Options.WindowOption) => Topic.galleryTopics(this, topicId, options),
     topicItem: (topicId: string, itemId: string) => Topic.topicItem(this, topicId, itemId)
   }
-
 }

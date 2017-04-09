@@ -1,7 +1,7 @@
 import * as urlJoin from 'url-join';
 import * as AuthorizationTasks from "./AuthorizationTasks";
 import * as rewire from 'rewire'
-import Client from "./Client";
+import Client from './Client'
 
 let RewireAuthorizationTasks = rewire('./AuthorizationTasks')
 const MockAuthorizationTask: typeof AuthorizationTasks & typeof RewireAuthorizationTasks = <any> RewireAuthorizationTasks
@@ -211,6 +211,19 @@ describe('AuthorizationTasks', () => {
         refresh_token: 'refresh token',
         account_username: 'account username'
       })
+    })
+  })
+  describe('parseCodeURL', () => {
+    it('should parse the code url', () => {
+      const mockparse = jasmine.createSpy('parse').and.returnValue({ code: 'code' })
+      MockAuthorizationTask.__set__({
+        querystring: {
+          parse: mockparse
+        }
+      })
+      const res = MockAuthorizationTask.parseCodeURL('url')
+      expect(mockparse).toHaveBeenCalledWith('url')
+      expect(res).toBe('code')
     })
   })
 })

@@ -49,6 +49,12 @@ export function generateTokenURL (client: Client, applicationState?: string) : s
   return userURL
 }
 
+export function parseCodeURL (url: string): string {
+   const res = querystring.parse(url)
+   console.log(res)
+   return res.code
+}
+
 export function parseTokenURL (url: string) : RequestTokenResponse {
   const res = querystring.parse(url)
   return {

@@ -72,7 +72,10 @@ describe('Client', () => {
     })
     describe('byCode', () => {
       it('should call twoStageAuth with the application state', () => {
-        const mockReturn = {} as TwoStageAuthReturn
+        const mockReturn: any = {
+          url: 'url',
+          authorize: () => {}
+        }
         const mocktwoStageAuth = jasmine.createSpy('mocktwoStageAuth').and.returnValue(mockReturn)
         
         const client = new MockClient.default()
@@ -83,7 +86,29 @@ describe('Client', () => {
         })
         const res = client.Authorize.byCode('state')
         expect(mocktwoStageAuth).toHaveBeenCalledWith(client, 'authorization_code', 'code', 'state')
-        expect(res).toBe(mockReturn)
+        expect(res.url).toBe('url')
+      })
+      it('should parse the code url and authorize', () => {
+        const mockAuthorize = jasmine.createSpy('authorize').and.returnValue('auth')
+        const mockReturn: any = {
+          url: 'url',
+          authorize: mockAuthorize
+        }
+        const mocktwoStageAuth = jasmine.createSpy('twoStageAuth').and.returnValue(mockReturn)
+        const mockParseCodeURL = jasmine.createSpy('parseCodeURL').and.returnValue('12345')
+        const client = new MockClient.default()
+        MockClient.__set__({
+          AuthorizationTasks: {
+            twoStageAuth: mocktwoStageAuth,
+            parseCodeURL: mockParseCodeURL
+          }
+        })
+        const res = client.Authorize.byCode('state')
+        expect(mocktwoStageAuth).toHaveBeenCalledWith(client, 'authorization_code', 'code', 'state')
+        const authRes = res.authorize('http://example.com?code=12345')
+        expect(mockParseCodeURL).toHaveBeenCalledWith('http://example.com?code=12345')
+        expect(mockAuthorize).toHaveBeenCalledWith('12345')
+        expect(authRes).toBe('auth' as any)
       })
     })
     describe('byToken', () => {
