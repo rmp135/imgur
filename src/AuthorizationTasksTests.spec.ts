@@ -20,7 +20,7 @@ describe('AuthorizationTasks', () => {
       expect(res).toBeNull()
       console.error = origError
     })
-    it('should use the paramter over the client refresh token', async (done) => {
+    it('should use the parameter over the client refresh token', async (done) => {
       const clientOptions = {
         client_id: 'client id',
         client_secret: 'client secret'
@@ -188,21 +188,26 @@ describe('AuthorizationTasks', () => {
   })
   describe('parseTokenURL', () => {
     it('should parse the result from a url', () => {
-      const mockparse = jasmine.createSpy('parse').and.returnValue({
-        'https://imgur.com/#access_token': 'access token',
+      const mockQParse = jasmine.createSpy('queryParse').and.returnValue({
+        '#access_token': 'access token',
         expires_in: '12345',
         token_type: 'token type',
         account_id: 'account id',
         refresh_token: 'refresh token',
         account_username: 'account username'
       })
+      const mockUParse = jasmine.createSpy('URLParse').and.returnValue({ hash: 'parsed hash' })
       MockAuthorizationTask.__set__({
         querystring: {
-          parse: mockparse
+          parse: mockQParse
+        },
+        URL: {
+          parse: mockUParse
         }
       })
       const res = MockAuthorizationTask.parseTokenURL('url to parse')
-      expect(mockparse).toHaveBeenCalledWith('url to parse')
+      expect(mockUParse).toHaveBeenCalledWith('url to parse')
+      expect(mockQParse).toHaveBeenCalledWith('parsed hash')
       expect(res).toEqual({
         access_token: 'access token',
         expires_in: 12345,
@@ -215,14 +220,19 @@ describe('AuthorizationTasks', () => {
   })
   describe('parseCodeURL', () => {
     it('should parse the code url', () => {
-      const mockparse = jasmine.createSpy('parse').and.returnValue({ code: 'code' })
+      const mockUParse = jasmine.createSpy('URLParse').and.returnValue({ query: 'parsed query'})
+      const mockQParse = jasmine.createSpy('queryParse').and.returnValue({ code: 'code' })
       MockAuthorizationTask.__set__({
         querystring: {
-          parse: mockparse
+          parse: mockQParse
+        },
+        URL: {
+          parse: mockUParse
         }
       })
       const res = MockAuthorizationTask.parseCodeURL('url')
-      expect(mockparse).toHaveBeenCalledWith('url')
+      expect(mockUParse).toHaveBeenCalledWith('url')
+      expect(mockQParse).toHaveBeenCalledWith('parsed query')
       expect(res).toBe('code')
     })
   })
