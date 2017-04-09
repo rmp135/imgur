@@ -17,7 +17,7 @@ yarn add @rmp135/imgur
 import the Client from the package.
 
 ```javascript
-import { Client } from @rmp135/imgur
+import { Client } from '@rmp135/imgur'
 ```
 
 Instantiate the Client with your credentails and call the relevant API endpoint. If you do not have credentials, refer to the [authorization](authorization.md) documentation on how to obtain these.
@@ -25,9 +25,11 @@ Instantiate the Client with your credentails and call the relevant API endpoint.
 The documentation in this guide will be written with Typescript / ES7 in mind. The `.then / .catch` callbacks still function as you would expect.
 
 ```javascript
+// The client can be initialised with the client_id.
+
 let client = new Client('43652b743b5a7a0')
 
-// The client can also be initialised with authorization information.
+// Or with full authorization information.
 
 client = new Client({
   access_token: 'be3fb3e75b229254c8a44e41e376bfc01154ba42',

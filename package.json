@@ -4,6 +4,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
+  "website": "https://github.com/rmp135/imgur",
   "author": {
     "name": "Ryan Poole",
     "email": "rmp135@gmail.com",
@@ -12,7 +13,8 @@
   "scripts": {
     "test:watch": "nodemon --ignore dist --ignore __test -e ts --exec yarn test",
     "test:build": "tsc -p tsconfig.test.json",
-    "test": "yarn test:build && jasmine ./__test/{,**}/*.spec.js",
+    "test:run": "jasmine ./__test/{,**}/*.spec.js",
+    "test": "yarn test:build && yarn test:run",
     "build": "tsc"
   },
   "dependencies": {

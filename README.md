@@ -18,15 +18,16 @@ or yarn
 yarn add @rmp135/imgur
 ```
 
-See the [documentation](https://rmp135.github.io/imgur/) for more information.
+Authorization, searching and image uploading are all supported. Refer to the [documentation](https://rmp135.github.io/imgur/) for more information.
 
 ```javascript
-import { Client } from @rmp135/imgur
+import { Client } from '@rmp135/imgur'
+
+// The client can be initialised with the client_id.
 
 let client = new Client('43652b743b5a7a0')
 
-// The client can also be initialised with authorization information.
-
+// Or with full authorization information.
 
 client = new Client({
   access_token: 'be3fb3e75b229254c8a44e41e376bfc01154ba42',

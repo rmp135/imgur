@@ -7,4 +7,5 @@ pages:
   - 'uploading.md'
   - Rate Limits: 'ratelimits.md'
   - Error Handling: 'errors.md'
+  - 'contributing.md'
   - 'typescript.md'

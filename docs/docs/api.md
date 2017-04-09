@@ -107,5 +107,5 @@ images = await client.Account.favorites(null, { page: 2, sort: 'best' })
 console.log(images)
 ```
 
-Due to `delete` being a keyword, this has been renamed to `remove` instead. e.g. `Client.Image.remove(23)` to delete an image.
+Due to `delete` being a keyword, this has been renamed to `remove`. e.g. `Client.Image.remove(23)` to delete an image.
 

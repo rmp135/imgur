@@ -1,7 +1,7 @@
 
 Imgur documentation: [https://api.imgur.com/oauth2]()
 
-imgur uses oath2 for authorization. A number of ways exist to retrieve the access token and refresh token from the user. All of which are supported by this client.
+Imgur uses oath2 for authorization. A number of ways exist to retrieve the access token and refresh token from the user. All of which are supported by this client.
 
 The following tokens are available on the client.
 
@@ -10,12 +10,11 @@ The following tokens are available on the client.
 - client_token
 - refresh_token
 
-All authorization call (except regenerating from a refresh token) return a url for the user to log in and an `authorize` function to authorize that the information supplied by the user is correct.
+All authorization calls (except regenerating from a refresh token) return a url for the user to log in and an `authorize` function to authorize that the information supplied by the user is correct.
 
 The application state argument can be ommitted in all cases.
 
 ## byCode
-
 
 This returns the authorization code as a url parameter that must be exchanged for the access code.
 
