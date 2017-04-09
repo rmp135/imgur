@@ -28,7 +28,7 @@ console.log(auth.url)
 
 // The user navigates to the url, enters their credentials and a url with a `code` url parameter is returned. Put this code into the `authorize` function.
 
-const tokens = await auth.authorize('d2a73efa3c92ba24a1285eddeb3c06b7abcf44b2')
+const tokens = await auth.authorize('https://imgur.com/?state=&code=e12f6b535469cc2a8b9c49cc42681eb8117f7a61')
 
 // If successful, the authorization tokens will be returned and populated on the client.
 
