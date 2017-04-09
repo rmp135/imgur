@@ -94,6 +94,11 @@
           
             <li class="toctree-l1">
 		
+    <a class="" href="../contributing/">Contributing</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <a class="" href="../typescript/">Typescript</a>
 	    </li>
           
@@ -130,7 +135,7 @@
             <div class="section">
               
                 <p>Imgur documentation: <a href="">https://api.imgur.com/oauth2</a></p>
-<p>imgur uses oath2 for authorization. A number of ways exist to retrieve the access token and refresh token from the user. All of which are supported by this client.</p>
+<p>Imgur uses oath2 for authorization. A number of ways exist to retrieve the access token and refresh token from the user. All of which are supported by this client.</p>
 <p>The following tokens are available on the client.</p>
 <ul>
 <li>client_id</li>
@@ -138,7 +143,7 @@
 <li>client_token</li>
 <li>refresh_token</li>
 </ul>
-<p>All authorization call (except regenerating from a refresh token) return a url for the user to log in and an <code>authorize</code> function to authorize that the information supplied by the user is correct.</p>
+<p>All authorization calls (except regenerating from a refresh token) return a url for the user to log in and an <code>authorize</code> function to authorize that the information supplied by the user is correct.</p>
 <p>The application state argument can be ommitted in all cases.</p>
 <h2 id="bycode">byCode</h2>
 <p>This returns the authorization code as a url parameter that must be exchanged for the access code.</p>

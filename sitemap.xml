@@ -51,6 +51,14 @@
 
     
     <url>
+     <loc>/contributing/</loc>
+     <lastmod>2017-04-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
      <loc>/typescript/</loc>
      <lastmod>2017-04-09</lastmod>
      <changefreq>daily</changefreq>

@@ -82,6 +82,11 @@
           
             <li class="toctree-l1">
 		
+    <a class="" href="../contributing/">Contributing</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <a class="" href="../typescript/">Typescript</a>
 	    </li>
           
@@ -119,7 +124,44 @@
               
                 <p>The imgur API is rate limited (see <a href="">https://api.imgur.com/#limits</a>).</p>
 <p>The rate limits can be found under the Client.RateLimits object. </p>
-<p>These are populated when a request is made. However, not all rates are returned so this is more of a guide than a hard number.</p>
+<p>You can fetch the most recent rate limit by calling <code>Client.Credits.get()</code>.</p>
+<pre><code class="javascript">const client = new Client('43652b743b5a7a0')
+const limits = await client.Credits.get()
+
+console.log(limits)
+</code></pre>
+
+<pre><code class="json">{
+  &quot;data&quot;: {
+    &quot;UserLimit&quot;: 2000,
+    &quot;UserRemaining&quot;: 2000,
+    &quot;UserReset&quot;: 1491753805,
+    &quot;ClientReset&quot;: 12500,
+    &quot;ClientRemaining&quot;: 12408
+  },
+  &quot;success&quot;: true,
+  &quot;status&quot;: 200
+}
+</code></pre>
+
+<p>The Client.RateLimits object will be updated to reflect these new values.</p>
+<p>Hint: <code>client.toString()</code> will print all the relevant information.</p>
+<pre><code class="text">Access Token: 92ff46119ace5e5728ac580a0ed3ee02a011ed82
+Client ID: 43652b743b5a7a3
+Client Secret: 2817603add0052fc9920bd3896abdd26992cf424
+Refresh Token: 4235a53f31464ed1c9e7099e414af25cb9c7ef32
+--- Rate Limits
+Client Limit: 12500
+Client Remaining: 12408
+User Limit: 2000
+User Remaining: 2000
+User Reset: Wed Apr 26 2017 22:25:58 GMT+0100 (BST)
+IP Limit: 1250
+IP Remaining: 1249
+IP Reset: Sun Apr 09 2017 17:02:00 GMT+0100 (BST)
+</code></pre>
+
+<p>These are also updated when a request is made. However, not all rates are returned with all calls so this is more of a guide than a hard number.</p>
               
             </div>
           </div>

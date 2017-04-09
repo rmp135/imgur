@@ -85,6 +85,11 @@
           
             <li class="toctree-l1">
 		
+    <a class="" href="contributing/">Contributing</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <a class="" href="typescript/">Typescript</a>
 	    </li>
           
@@ -131,14 +136,16 @@
 </code></pre>
 
 <p>import the Client from the package.</p>
-<pre><code class="javascript">import { Client } from @rmp135/imgur
+<pre><code class="javascript">import { Client } from '@rmp135/imgur'
 </code></pre>
 
 <p>Instantiate the Client with your credentails and call the relevant API endpoint. If you do not have credentials, refer to the <a href="authorization/">authorization</a> documentation on how to obtain these.</p>
 <p>The documentation in this guide will be written with Typescript / ES7 in mind. The <code>.then / .catch</code> callbacks still function as you would expect.</p>
-<pre><code class="javascript">let client = new Client('43652b743b5a7a0')
+<pre><code class="javascript">// The client can be initialised with the client_id.
 
-// The client can also be initialised with authorization information.
+let client = new Client('43652b743b5a7a0')
+
+// Or with full authorization information.
 
 client = new Client({
   access_token: 'be3fb3e75b229254c8a44e41e376bfc01154ba42',
@@ -197,5 +204,5 @@ console.log(images)
 
 <!--
 MkDocs version : 0.16.3
-Build Date UTC : 2017-04-09 13:02:13
+Build Date UTC : 2017-04-09 15:23:13
 -->

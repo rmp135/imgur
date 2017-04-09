@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Uploading - @rmp135/imgur</title>
+  <title>Contributing - @rmp135/imgur</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Uploading";
-    var mkdocs_page_input_path = "uploading.md";
-    var mkdocs_page_url = "/uploading/";
+    var mkdocs_page_name = "Contributing";
+    var mkdocs_page_input_path = "contributing.md";
+    var mkdocs_page_url = "/contributing/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -62,12 +62,9 @@
     <a class="" href="../api/">API</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">Uploading</a>
-    <ul class="subnav">
-            
-    </ul>
+    <a class="" href="../uploading/">Uploading</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -80,9 +77,12 @@
     <a class="" href="../errors/">Error Handling</a>
 	    </li>
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <a class="" href="../contributing/">Contributing</a>
+    <a class="current" href="./">Contributing</a>
+    <ul class="subnav">
+            
+    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -112,7 +112,7 @@
     
       
     
-    <li>Uploading</li>
+    <li>Contributing</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -122,15 +122,15 @@
           <div role="main">
             <div class="section">
               
-                <p>Images can be uploaded using either a base64 encoded string or web url. Other methods of uploading are currently being developed.</p>
-<pre><code class="javascript">const imageAsBase64 = fs.readFileSync('./someimage.png', 'base64')
-
-await client.Image.upload(imageAsBase64)
-</code></pre>
-
-<p>If a web url is being uploaded, it must be specified in the <code>type</code> option. Other options can be specified here including title and description. See the <a href="https://api.imgur.com/endpoints/image#image-upload">imgur docs</a> for more.</p>
-<pre><code class="javascript">await client.Image.upload('https://example.com/image.png', { type: 'url' })
-</code></pre>
+                <p>Development is currently active at <a href="">https://github.com/rmp135/imgur</a></p>
+<p>Pull requests welcome!</p>
+<p>To build the client for development, simply build the Typescript files.</p>
+<p><code>yarn build</code> </p>
+<p>You can run tests with:</p>
+<p><code>yarn test</code></p>
+<hr />
+<p>There is also a helper task for watching the tests. This requires <a href="https://github.com/remy/nodemon">nodemon</a> to be installed.</p>
+<p><code>yarn test:watch</code></p>
               
             </div>
           </div>
@@ -138,10 +138,10 @@ await client.Image.upload(imageAsBase64)
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../ratelimits/" class="btn btn-neutral float-right" title="Rate Limits">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../typescript/" class="btn btn-neutral float-right" title="Typescript">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../api/" class="btn btn-neutral" title="API"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../errors/" class="btn btn-neutral" title="Error Handling"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -167,10 +167,10 @@ await client.Image.upload(imageAsBase64)
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../api/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../errors/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../ratelimits/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../typescript/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
