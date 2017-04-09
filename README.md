@@ -18,7 +18,7 @@ or yarn
 yarn add @rmp135/imgur
 ```
 
-See the documentation for more information.
+See the [documentation](https://rmp135.github.io/imgur/) for more information.
 
 ```javascript
 import { Client } from @rmp135/imgur
