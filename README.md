@@ -2,6 +2,8 @@
 
 __A Typescript compatible imgur client for node.__
 
+[![Build Status](https://travis-ci.org/rmp135/imgur.svg?branch=master)](https://travis-ci.org/rmp135/imgur)
+
 ### Getting Started
 
 Install using npm.
