@@ -1,0 +1,10 @@
+site_name: '@rmp135/imgur'
+theme: readthedocs
+pages:
+  - 'index.md'
+  - 'authorization.md'
+  - API: 'api.md'
+  - 'uploading.md'
+  - Rate Limits: 'ratelimits.md'
+  - Error Handling: 'errors.md'
+  - 'typescript.md'

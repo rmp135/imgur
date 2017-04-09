@@ -3,3 +3,4 @@ dist
 .vscode
 yarn-error.log
 __test
+docs/site
