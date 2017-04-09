@@ -12,7 +12,7 @@
   "scripts": {
     "test:watch": "nodemon --ignore dist --ignore __test -e ts --exec yarn test",
     "test:build": "tsc -p tsconfig.test.json",
-    "test": "jasmine ./__test/{,**}/*.spec.js",
+    "test": "yarn test:build && jasmine ./__test/{,**}/*.spec.js",
     "build": "tsc"
   },
   "dependencies": {

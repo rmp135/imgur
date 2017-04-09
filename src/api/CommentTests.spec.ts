@@ -1,7 +1,7 @@
-import Client from '../Client';
-import * as Comment from './Comment';
-import * as rewire from 'rewire';
-import { ReportReasonEnum } from "./ReportReasonEnum";
+import Client from '../Client'
+import * as Comment from './Comment'
+import * as rewire from 'rewire'
+import { ReportReasonEnum } from '../ReportReasonEnum'
 
 let RewireComment = rewire('./Comment')
 const MockComment: typeof Comment & typeof RewireComment = <any> RewireComment

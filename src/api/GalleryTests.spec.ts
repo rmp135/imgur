@@ -1,7 +1,7 @@
-import Client from '../Client';
-import * as Gallery from './Gallery';
-import * as rewire from 'rewire';
-import { ReportReasonEnum } from "./ReportReasonEnum";
+import Client from '../Client'
+import * as Gallery from './Gallery'
+import * as rewire from 'rewire'
+import { ReportReasonEnum } from '../ReportReasonEnum'
 
 let RewireGallery = rewire('./Gallery')
 const MockGallery: typeof Gallery & typeof RewireGallery = <any> RewireGallery
