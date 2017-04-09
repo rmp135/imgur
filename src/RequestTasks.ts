@@ -19,7 +19,9 @@ export async function performRequest<T> (client: Client, config: AxiosRequestCon
     },
     ...config
   }
-  console.log(options)
+  if (process.env.NODE_ENV === 'development') {
+    console.log(options)
+  }
   try {
     const res = await axios(options)
     client.RateLimits.client_limit = res.headers['x-ratelimit-clientlimit'] || client.RateLimits.client_limit
