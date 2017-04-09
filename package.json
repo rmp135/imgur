@@ -19,13 +19,11 @@
   },
   "dependencies": {
     "axios": "^0.16.0",
-    "qs": "^6.4.0",
     "url-join": "^1.1.0"
   },
   "devDependencies": {
     "@types/jasmine": "^2.5.47",
     "@types/node": "^7.0.12",
-    "@types/qs": "^6.2.31",
     "@types/rewire": "^2.5.27",
     "@types/url-join": "^0.8.2",
     "jasmine": "^2.5.3",

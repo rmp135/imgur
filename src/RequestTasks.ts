@@ -1,5 +1,5 @@
 import * as join from 'url-join';
-import * as qs from 'qs';
+import * as querystring from 'querystring';
 import axios, { AxiosRequestConfig, AxiosError } from 'axios'
 import Client from './Client'
 
@@ -64,6 +64,6 @@ export function joinURL (url: URLConfig | string[]) : string {
   if (Array.isArray(url)) {
     return join(...url)
   }
-  const query = qs.stringify(url.params)
+  const query = querystring.stringify(url.params)
   return join(...url.path, query == '' ? '' : `?${query}`)
 }
