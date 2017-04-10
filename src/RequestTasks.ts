@@ -1,4 +1,5 @@
 import * as join from 'url-join';
+import * as url from 'url'
 import * as querystring from 'querystring';
 import axios, { AxiosRequestConfig, AxiosError } from 'axios'
 import Client from './Client'
@@ -60,10 +61,10 @@ export function performAPIRequest<T> (client: Client, url: URLConfig | any[], ax
   return performRequest(client, options)
 }
 
-export function joinURL (url: URLConfig | string[]) : string {
-  if (Array.isArray(url)) {
-    return join(...url)
+export function joinURL (urlToJoin: URLConfig | string[]) : string {
+  if (Array.isArray(urlToJoin)) {
+    return join(...urlToJoin)
   }
-  const query = querystring.stringify(url.params)
-  return join(...url.path, query == '' ? '' : `?${query}`)
+  const query = querystring.stringify(urlToJoin.params)
+  return url.format({ pathname: join(...urlToJoin.path), search: query })
 }
