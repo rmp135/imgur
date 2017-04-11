@@ -5,6 +5,7 @@ import axios, { AxiosRequestConfig, AxiosError } from 'axios'
 import Client from './Client'
 
 const API_BASE_PATH = 'https://api.imgur.com/3'
+const MASHAPE_BASE_PATH = 'https://imgur-apiv3.p.mashape.com/3'
 
 export interface URLConfig {
   path: any[],
@@ -43,20 +44,23 @@ export async function performRequest<T> (client: Client, config: AxiosRequestCon
 }
 
 export function performAPIRequest<T> (client: Client, url: URLConfig | any[], axiosConfig?: AxiosRequestConfig): Promise<APIResponse<T>> {
+  const apiBase = client.mashape_key != null ? MASHAPE_BASE_PATH : API_BASE_PATH
   if (Array.isArray(url)) {
-    url.unshift(API_BASE_PATH)
+    url.unshift(apiBase)
   } else {
-    url.path.unshift(API_BASE_PATH)
+    url.path.unshift(apiBase)
   }
   const options : AxiosRequestConfig = {
     url: joinURL(url),
+    headers: { },
     ...axiosConfig
   }
   const bearer = client.access_token || client.client_id
   if (bearer != null) {
-    options.headers = {
-      Authorization: `Bearer ${bearer}`
-    }
+    options.headers.Authorization = `Bearer ${bearer}`
+  }
+  if (client.mashape_key != null) {
+    options.headers['X-Mashape-Key'] = client.mashape_key
   }
   return performRequest(client, options)
 }

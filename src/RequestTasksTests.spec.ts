@@ -70,7 +70,7 @@ describe('RequestTasks', () => {
       const client = new Client()
       const res = MockRequestTasks.performAPIRequest(client, ['path1', 'path2'])
       expect(mockJoinURL).toHaveBeenCalledWith(['https://api.imgur.com/3', 'path1', 'path2'])
-      expect(mockPerformRequest).toHaveBeenCalledWith(client, { url: 'joined url' })
+      expect(mockPerformRequest).toHaveBeenCalledWith(client, { url: 'joined url', headers: { } })
       expect(res).toBe('request return' as any)
     })
     it('should set the client access token header', () => {
@@ -112,7 +112,7 @@ describe('RequestTasks', () => {
       const client = new Client()
       const res = MockRequestTasks.performAPIRequest(client, ['path1', 'path2'], { method: 'get'})
       expect(mockJoinURL).toHaveBeenCalledWith(['https://api.imgur.com/3', 'path1', 'path2'])
-      expect(mockPerformRequest).toHaveBeenCalledWith(client, { url: 'joined url', method: 'get' })
+      expect(mockPerformRequest).toHaveBeenCalledWith(client, { url: 'joined url', method: 'get', headers: { } })
       expect(res).toBe('request return' as any)
     })
     it('should call with a path and params', () => {
@@ -125,7 +125,36 @@ describe('RequestTasks', () => {
       const client = new Client()
       const res = MockRequestTasks.performAPIRequest(client, { path: ['path1', 'path2'], params: { param1: 'param1' }})
       expect(mockJoinURL).toHaveBeenCalledWith({ path: ['https://api.imgur.com/3', 'path1', 'path2'], params: { param1: 'param1' }})
-      expect(mockPerformRequest).toHaveBeenCalledWith(client, { url: 'joined url' })
+      expect(mockPerformRequest).toHaveBeenCalledWith(client, { url: 'joined url', headers: { } })
+      expect(res).toBe('request return' as any)
+    })
+    it('should call with the mashape header and url if available', () => {
+      const mockPerformRequest = jasmine.createSpy('performRequest').and.returnValue('request return')
+      const mockJoinURL = jasmine.createSpy('joinURL').and.returnValue('joined url')
+      MockRequestTasks.__set__({
+        joinURL: mockJoinURL,
+        performRequest: mockPerformRequest
+      })
+      const client = new Client()
+      client.mashape_key = 'mashape key'
+      const res = MockRequestTasks.performAPIRequest(client, { path: ['path1', 'path2'], params: { param1: 'param1' }})
+      expect(mockJoinURL).toHaveBeenCalledWith({ path: ['https://imgur-apiv3.p.mashape.com/3', 'path1', 'path2'], params: { param1: 'param1' }})
+      expect(mockPerformRequest).toHaveBeenCalledWith(client, { url: 'joined url', headers: { 'X-Mashape-Key': 'mashape key' } })
+      expect(res).toBe('request return' as any)
+    })
+    it('should call with the mashape and client header and url if available', () => {
+      const mockPerformRequest = jasmine.createSpy('performRequest').and.returnValue('request return')
+      const mockJoinURL = jasmine.createSpy('joinURL').and.returnValue('joined url')
+      MockRequestTasks.__set__({
+        joinURL: mockJoinURL,
+        performRequest: mockPerformRequest
+      })
+      const client = new Client()
+      client.access_token = 'access token'
+      client.mashape_key = 'mashape key'
+      const res = MockRequestTasks.performAPIRequest(client, { path: ['path1', 'path2'], params: { param1: 'param1' }})
+      expect(mockJoinURL).toHaveBeenCalledWith({ path: ['https://imgur-apiv3.p.mashape.com/3', 'path1', 'path2'], params: { param1: 'param1' }})
+      expect(mockPerformRequest).toHaveBeenCalledWith(client, { url: 'joined url', headers: { 'X-Mashape-Key': 'mashape key', Authorization: 'Bearer access token' } })
       expect(res).toBe('request return' as any)
     })
   })

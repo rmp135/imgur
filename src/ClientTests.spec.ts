@@ -16,6 +16,7 @@ describe('Client', () => {
       expect(client.client_id).toBeNull()
       expect(client.refresh_token).toBeNull()
       expect(client.client_secret).toBeNull()
+      expect(client.mashape_key).toBeNull()
     })
     it('should construct with only the access_token', () => {
       const client = new Client.default('access_token')
@@ -23,6 +24,7 @@ describe('Client', () => {
       expect(client.access_token).toBeNull()
       expect(client.refresh_token).toBeNull()
       expect(client.client_secret).toBeNull()
+      expect(client.mashape_key).toBeNull()
     })
     it('should construct with config', () => {
       const config = {

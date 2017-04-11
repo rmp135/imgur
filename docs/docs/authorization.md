@@ -9,6 +9,9 @@ The following tokens are available on the client.
 - client_secret
 - client_token
 - refresh_token
+- mashape_key
+
+If the mashape_key property is provided, the Mashape specific header and API URL will automatically be set.
 
 All authorization calls (except regenerating from a refresh token) return a url for the user to log in and an `authorize` function to authorize that the information supplied by the user is correct.
 

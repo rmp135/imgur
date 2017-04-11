@@ -16,6 +16,7 @@ export interface ClientConfig {
   client_secret?: string
   access_token?: string
   refresh_token?: string
+  mashape_key?: string
 }
 
 export default class {
@@ -23,6 +24,7 @@ export default class {
   client_secret: string | null = null
   access_token: string | null = null
   refresh_token: string | null = null
+  mashape_key: string | null = null
   RateLimits: {
     client_limit: number | null
     client_remaining: number | null
@@ -48,10 +50,11 @@ export default class {
       this.client_id = config
     }
     else if (config != null) {
-      this.client_id = config.client_id == null ? '' : config.client_id
-      this.client_secret = config.client_secret == null ? '' : config.client_secret
-      this.refresh_token = config.refresh_token == null ? '' : config.refresh_token
-      this.access_token = config.access_token == null ? '' : config.access_token
+      this.client_id = config.client_id || null
+      this.client_secret = config.client_secret || null
+      this.refresh_token = config.refresh_token || null
+      this.access_token = config.access_token || null
+      this.mashape_key = config.mashape_key || null
     }    
   }
   
@@ -60,6 +63,7 @@ export default class {
 Client ID: ${this.client_id}
 Client Secret: ${this.client_secret}
 Refresh Token: ${this.refresh_token}
+Mashape Key: ${this.mashape_key}
 --- Rate Limits
 Client Limit: ${this.RateLimits.client_limit}
 Client Remaining: ${this.RateLimits.client_remaining}
