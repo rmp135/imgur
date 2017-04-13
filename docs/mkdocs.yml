@@ -3,7 +3,12 @@ theme: readthedocs
 pages:
   - 'index.md'
   - 'authorization.md'
-  - API: 'api.md'
+  - API:
+    - 'api/account.md'
+    - 'api/comment.md'
+    - 'api/conversation.md'
+    - Custom Gallery: 'api/customgallery.md'
+    - 'api/image.md'
   - 'uploading.md'
   - Rate Limits: 'ratelimits.md'
   - Error Handling: 'errors.md'
