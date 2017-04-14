@@ -107,10 +107,10 @@ IP Reset: ${this.RateLimits.ip_reset}
     get: (username?: string) => Account.get(this, username),
     galleryFavorites: (username?: string | null, config?: Options.PageOption & Options.AccountCommentSortOption) => Account.galleryFavorites(this, username, config),
     favorites: (username?: string | null, options?: Options.PageOption & Options.AccountCommentSortOption) => Account.favorites(this, username, options),
-    accountSubmissions: (username?: string | null, page?: number) => Account.submissions(this, username, page),
-    accountSettings: () => Account.settings(this),
-    changeAccountSettings: (options: Options.ChangeAccountSettingsOptions) => Account.changeSettings(this, options),
-    accountGalleryProfile: (username?: string) => Account.galleryProfile(this, username),
+    submissions: (username?: string | null, page?: number) => Account.submissions(this, username, page),
+    settings: () => Account.settings(this),
+    changeSettings: (options: Options.ChangeAccountSettingsOptions) => Account.changeSettings(this, options),
+    galleryProfile: (username?: string) => Account.galleryProfile(this, username),
     verifyEmail: (username?: string) => Account.verifyEmail(this, username),
     sendVerificationEmail: () => Account.sendVerificationEmail(this),
     albums: (username?: string | null, page?: number) => Account.albums(this, username, page),
@@ -136,7 +136,7 @@ IP Reset: ${this.RateLimits.ip_reset}
     create: (imageId: string, comment: string, parentId?: string) => Comment.create(this, imageId, comment, parentId),
     remove: (commentId: string) => Comment.remove(this, commentId),
     replies: (commentId: string) => Comment.replies(this, commentId),
-    replyCreate: (commentId: string, imageId: string, comment: string,) => Comment.replyCreate(this, commentId, imageId, comment),
+    replyCreate: (commentId: string, imageId: string, comment: string) => Comment.replyCreate(this, commentId, imageId, comment),
     vote: (commentId: string, vote: 'up' | 'down') => Comment.vote(this, commentId, vote),
     report: (commentId: string, reason?: ReportReasonEnum) => Comment.report(this, commentId)
   }
@@ -158,10 +158,10 @@ IP Reset: ${this.RateLimits.ip_reset}
   }
 
   Gallery = {
-    get: (options?: Gallery.GalleryGetOptions) => Gallery.get(this, options),
+    get: (options?: Options.GalleryGetOptions) => Gallery.get(this, options),
     memesGallery: (options?: Options.GallerySortOption & Options.PageOption & Options.WindowOption) => Gallery.memesGallery(this, options),
     memesImage: (imageId: string) => Gallery.memesImage(this, imageId),
-    subredditGalleries: (subreddit: string, options?: Options.WindowOption & Options.PageOption & Options.GallerySortOption) => Gallery.subredditGalleries(this, subreddit, options),
+    subredditGalleries: (subreddit: string, options?: Options.SubredditGalleryOptions) => Gallery.subredditGalleries(this, subreddit, options),
     subredditImage: (subreddit: string, imageId: string) => Gallery.subredditImage(this, subreddit, imageId),
     tag: (tagName: string, options?: Options.PageOption & Options.GallerySortOption & Options.WindowOption) => Gallery.tag(this, tagName, options),
     tagImage: (tagName: string, imageId: string) => Gallery.tagImage(this, tagName, imageId),

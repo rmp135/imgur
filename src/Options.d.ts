@@ -49,4 +49,14 @@ declare namespace Options {
     show_mature?: boolean
     newsletter_subscribed?: boolean
   }
+
+  export interface SubredditGalleryOptions extends PageOption, WindowOption {
+    sort?: 'time' | 'top'
+  }
+
+  export interface GalleryGetOptions extends Options.SectionOption, Options.PageOption, Options.WindowOption {
+    sort?: GallerySort | 'rising'
+    showViral?: boolean
+  }
 }
+

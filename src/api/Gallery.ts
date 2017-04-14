@@ -2,11 +2,7 @@ import Client from "../Client";
 import { performAPIRequest, URLConfig } from '../RequestTasks';
 import { ReportReasonEnum } from '../ReportReasonEnum'
 
-export interface GalleryGetOptions extends Options.SectionOption, Options.GallerySortOption, Options.PageOption, Options.WindowOption {
-  showViral?: boolean
-}
-
-export function get (client: Client, options?: GalleryGetOptions): Promise<APIResponse<BaseGalleryResponse[]>> {
+export function get (client: Client, options?: Options.GalleryGetOptions): Promise<APIResponse<BaseGalleryResponse[]>> {
   const url: URLConfig = {
     path: [
       'gallery'
@@ -41,7 +37,7 @@ export function memesImage (client: Client, imageId: string): Promise<APIRespons
   return performAPIRequest<BaseGalleryResponse & MemeResponse>(client, url)
 }
 
-export function subredditGalleries (client: Client, subreddit: string, options?: Options.WindowOption & Options.PageOption & Options.GallerySortOption): Promise<APIResponse<SubRedditGalleriesResponse[]>> {
+export function subredditGalleries (client: Client, subreddit: string, options?: Options.SubredditGalleryOptions): Promise<APIResponse<SubRedditGalleriesResponse[]>> {
   const url: any = [
     'gallery',
     'r',
