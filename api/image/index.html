@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Image - @rmp135/imgur</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Image";
+    var mkdocs_page_input_path = "api/image.md";
+    var mkdocs_page_url = "/api/image/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> @rmp135/imgur</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../authorization/">Authorization</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">API</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../overview/">Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../account/">Account</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../comment/">Comment</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../conversation/">Conversation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../customgallery/">Custom Gallery</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../gallery/">Gallery</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Image</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#get">get</a></li>
+    
+
+    <li class="toctree-l3"><a href="#upload">upload</a></li>
+    
+
+    <li class="toctree-l3"><a href="#remove">remove</a></li>
+    
+
+    <li class="toctree-l3"><a href="#update">update</a></li>
+    
+
+    <li class="toctree-l3"><a href="#favorite">favorite</a></li>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../memegen/">Memegen</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../notification/">Notification</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../topic/">Topic</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../uploading/">Uploading</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../ratelimits/">Rate Limits</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../errors/">Error Handling</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../contributing/">Contributing</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../typescript/">Typescript</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">@rmp135/imgur</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>API &raquo;</li>
+        
+      
+    
+    <li>Image</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p><a href="https://api.imgur.com/endpoints/image">Imgur Documentation</a></p>
+<h2 id="get">get</h2>
+<p>Params:</p>
+<ul>
+<li>imageId: string</li>
+</ul>
+<pre><code class="javascript">client.Image.get('imageId')
+</code></pre>
+
+<h2 id="upload">upload</h2>
+<p>Images can be uploaded as a base64 string or a url. To upload as a url, you must pass the relevant <code>type</code> in the options.</p>
+<p>You do not have to be authorized to upload an image.</p>
+<p>Params:</p>
+<ul>
+<li>image: string</li>
+<li>options?<ul>
+<li>title?: string</li>
+<li>type?: 'base64' or 'url'</li>
+<li>album?: string</li>
+<li>description?: string</li>
+<li>name?: string</li>
+</ul>
+</li>
+</ul>
+<pre><code class="javascript">client.Image.upload('base64 encoded string', { title: 'some title', album: 'albumId' })
+</code></pre>
+
+<pre><code class="javascript">client.Image.upload('http://example.com/image.png', { type: 'url', title: 'some title', album: 'albumId' })
+</code></pre>
+
+<h2 id="remove">remove</h2>
+<p>The client must be authorized to remove an image of that user.</p>
+<p>Params:</p>
+<ul>
+<li>imageId: string</li>
+</ul>
+<pre><code class="javascript">client.Image.remove('imageId')
+</code></pre>
+
+<h2 id="update">update</h2>
+<p>Params:</p>
+<ul>
+<li>imageId: string</li>
+<li>options?<ul>
+<li>title?: string</li>
+<li>descriptiom?: string</li>
+</ul>
+</li>
+</ul>
+<pre><code class="javascript">client.Image.update('imageId', { title: 'new title' })
+</code></pre>
+
+<h2 id="favorite">favorite</h2>
+<p>Params:</p>
+<ul>
+<li>imageId: string</li>
+</ul>
+<pre><code class="javascript">client.Image.favorite('imageId')
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../memegen/" class="btn btn-neutral float-right" title="Memegen">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../gallery/" class="btn btn-neutral" title="Gallery"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../gallery/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../memegen/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>

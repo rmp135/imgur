@@ -59,7 +59,49 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../api/">API</a>
+    <span class="caption-text">API</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../api/overview/">Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../api/account/">Account</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../api/comment/">Comment</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../api/conversation/">Conversation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../api/customgallery/">Custom Gallery</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../api/gallery/">Gallery</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../api/image/">Image</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../api/memegen/">Memegen</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../api/notification/">Notification</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../api/topic/">Topic</a>
+                </li>
+    </ul>
 	    </li>
           
             <li class="toctree-l1 current">
@@ -131,6 +173,8 @@ await client.Image.upload(imageAsBase64)
 <p>If a web url is being uploaded, it must be specified in the <code>type</code> option. Other options can be specified here including title and description. See the <a href="https://api.imgur.com/endpoints/image#image-upload">imgur docs</a> for more.</p>
 <pre><code class="javascript">await client.Image.upload('https://example.com/image.png', { type: 'url' })
 </code></pre>
+
+<p>See <a href="../api/image/#upload">Client.Image.upload</a> for more information.</p>
               
             </div>
           </div>
@@ -141,7 +185,7 @@ await client.Image.upload(imageAsBase64)
         <a href="../ratelimits/" class="btn btn-neutral float-right" title="Rate Limits">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../api/" class="btn btn-neutral" title="API"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../api/topic/" class="btn btn-neutral" title="Topic"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -167,7 +211,7 @@ await client.Image.upload(imageAsBase64)
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../api/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../api/topic/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../ratelimits/" style="color: #fcfcfc">Next &raquo;</a></span>
