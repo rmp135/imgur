@@ -1,4 +1,4 @@
-Images can be uploaded using either a base64 encoded string or web url. Other methods of uploading are currently being developed.
+Images can be uploaded using either a base64 encoded string, web url or Buffer.
 
 ```javascript
 const imageAsBase64 = fs.readFileSync('./someimage.png', 'base64')

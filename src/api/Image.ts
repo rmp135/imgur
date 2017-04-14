@@ -26,21 +26,30 @@ export function get (client: Client, imageId: string) : Promise<APIResponse<Imag
   return performAPIRequest<ImageResponse>(client, url)
 }
 
-export function upload (client: Client, image: string, options?: UploadOptions) {
+export function upload (client: Client, image: string | Buffer, options?: UploadOptions) {
   const url = [
     'image'
   ]
   const config: AxiosRequestConfig = {
-    method: 'post'
+    method: 'post',
+    data: null
   }
-  config.data = {
-    image,
-    type: 'base64'
+  if (Buffer.isBuffer(image)) {
+    if (options != null) {
+      console.warn('Upload options are not supported when uploading by Buffer.')
+    }
+    config.data = image
   }
-  if (options != null) {
+  else {
     config.data = {
-      ...config.data,
-      ...options
+      image,
+      type: 'base64'
+    }
+    if (options != null) {
+      config.data = {
+        ...config.data,
+        ...options
+      }
     }
   }
   return performAPIRequest<ImageResponse>(client, url, config)

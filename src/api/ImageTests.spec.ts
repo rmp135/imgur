@@ -35,6 +35,22 @@ describe('Image', () => {
       expect(mockPerformAPIRequest).toHaveBeenCalledWith(client, ['image'], { method: 'post', data: { image: 'image', type: 'url', title: 'title', description: 'description', name: 'name', album: 'album' }})
       expect(res).toBe('mock return' as any)
     })
+    it('should upload by Buffer', () => {
+      const buffer = new Buffer('test')
+      const res = MockImage.upload(client, buffer)
+      expect(mockPerformAPIRequest).toHaveBeenCalledWith(client, ['image'], { method: 'post', data: buffer })
+      expect(res).toBe('mock return' as any)
+    })
+    it('should warn when setting options when uploading by Buffer', () => {
+      const buffer = new Buffer('test')
+      const origWarn = console.warn
+      console.warn = jasmine.createSpy('warn')
+      const res = MockImage.upload(client, buffer, { album: 'album', description: 'description', name: 'name', title: 'title', type: 'url' })
+      expect(console.warn).toHaveBeenCalledWith('Upload options are not supported when uploading by Buffer.')
+      console.warn = origWarn
+      expect(mockPerformAPIRequest).toHaveBeenCalledWith(client, ['image'], { method: 'post', data: buffer })
+      expect(res).toBe('mock return' as any)
+    })
   })
   describe('remove', () => {
     it('should call the api with the image only', () => {

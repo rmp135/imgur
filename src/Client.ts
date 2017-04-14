@@ -186,7 +186,7 @@ IP Reset: ${this.RateLimits.ip_reset}
 
   Image = {
     get: (imageId: string) => Image.get(this, imageId),
-    upload: (image: string, options?: Image.UploadOptions) => Image.upload(this, image, options),
+    upload: (image: string | Buffer, options?: Image.UploadOptions) => Image.upload(this, image, options),
     remove: (imageId: string) => Image.remove(this, imageId),
     update: (imageId: string, options: Image.UpdateOptions) => Image.update(this, imageId, options),
     favorite: (imageId: string) => Image.favorite(this, imageId)
