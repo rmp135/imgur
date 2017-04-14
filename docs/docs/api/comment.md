@@ -75,8 +75,6 @@ client.Comment.vote('commentId', 'up')
 
 ## report
 
-The client must be authorized to report a comment.
-
 Params:
 
 - commentId: string

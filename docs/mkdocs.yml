@@ -8,6 +8,7 @@ pages:
     - 'api/comment.md'
     - 'api/conversation.md'
     - Custom Gallery: 'api/customgallery.md'
+    - 'api/gallery.md'
     - 'api/image.md'
   - 'uploading.md'
   - Rate Limits: 'ratelimits.md'
