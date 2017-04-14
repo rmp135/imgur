@@ -20,7 +20,7 @@ import the Client from the package.
 import { Client } from '@rmp135/imgur'
 ```
 
-Instantiate the Client with your credentails and call the relevant API endpoint. If you do not have credentials, refer to the [authorization](authorization.md) documentation on how to obtain these.
+Instantiate the Client with your credentials and call the relevant API endpoint. If you do not have credentials, refer to the [authorization](authorization.md) documentation on how to obtain these.
 
 The documentation in this guide will be written with Typescript / ES7 in mind. The `.then / .catch` callbacks still function as you would expect.
 

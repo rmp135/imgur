@@ -21,7 +21,7 @@ Params:
 - image: string
 - options?
     - title?: string
-    - type?: 'base64' | 'url'
+    - type?: 'base64' or 'url'
     - album?: string
     - description?: string
     - name?: string

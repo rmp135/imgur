@@ -11,3 +11,5 @@ If a web url is being uploaded, it must be specified in the `type` option. Other
 ```javascript
 await client.Image.upload('https://example.com/image.png', { type: 'url' })
 ```
+
+See [Client.Image.upload](api/image.md#upload) for more information.
