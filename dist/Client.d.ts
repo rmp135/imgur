@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import * as AuthorizationTasks from './AuthorizationTasks';
 import * as Gallery from './api/Gallery';
 import * as Image from './api/Image';
@@ -113,7 +114,7 @@ export default class  {
     };
     Image: {
         get: (imageId: string) => Promise<APIResponse<ImageResponse>>;
-        upload: (image: string, options?: Image.UploadOptions | undefined) => Promise<APIResponse<ImageResponse>>;
+        upload: (image: string | Buffer, options?: Image.UploadOptions | undefined) => Promise<APIResponse<ImageResponse>>;
         remove: (imageId: string) => Promise<APIResponse<boolean>>;
         update: (imageId: string, options: Image.UpdateOptions) => Promise<APIResponse<boolean>>;
         favorite: (imageId: string) => Promise<APIResponse<boolean>>;

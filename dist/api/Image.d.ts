@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import Client from '../Client';
 export interface UploadOptions {
     title?: string;
@@ -12,7 +13,7 @@ export interface UpdateOptions {
     description?: string;
 }
 export declare function get(client: Client, imageId: string): Promise<APIResponse<ImageResponse>>;
-export declare function upload(client: Client, image: string, options?: UploadOptions): Promise<APIResponse<ImageResponse>>;
+export declare function upload(client: Client, image: string | Buffer, options?: UploadOptions): Promise<APIResponse<ImageResponse>>;
 export declare function remove(client: Client, id: string): Promise<APIResponse<boolean>>;
 export declare function update(client: Client, imageId: string, options: UpdateOptions): Promise<APIResponse<boolean>>;
 export declare function favorite(client: Client, imageId: string): Promise<APIResponse<boolean>>;

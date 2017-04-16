@@ -14,14 +14,23 @@ function upload(client, image, options) {
         'image'
     ];
     const config = {
-        method: 'post'
+        method: 'post',
+        data: null
     };
-    config.data = {
-        image,
-        type: 'base64'
-    };
-    if (options != null) {
-        config.data = Object.assign({}, config.data, options);
+    if (Buffer.isBuffer(image)) {
+        if (options != null) {
+            console.warn('Upload options are not supported when uploading by Buffer.');
+        }
+        config.data = image;
+    }
+    else {
+        config.data = {
+            image,
+            type: 'base64'
+        };
+        if (options != null) {
+            config.data = Object.assign({}, config.data, options);
+        }
     }
     return RequestTasks_1.performAPIRequest(client, url, config);
 }
