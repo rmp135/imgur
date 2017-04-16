@@ -193,11 +193,12 @@
 </code></pre>
 
 <h2 id="upload">upload</h2>
-<p>Images can be uploaded as a base64 string or a url. To upload as a url, you must pass the relevant <code>type</code> in the options.</p>
-<p>You do not have to be authorized to upload an image.</p>
+<p>Images can be uploaded as a base64 string, url or a raw Buffer. If a string is passed in, the file will be uploaded as base64 by default. To upload as a url, you must pass the relevant <code>type</code> in the options.</p>
+<p>Note: Upload options are not supported when uploading by Buffer. Combine this with <a href="#update">update</a>.</p>
+<p>You do not have to be authorized to upload an image. </p>
 <p>Params:</p>
 <ul>
-<li>image: string</li>
+<li>image: string or Buffer</li>
 <li>options?<ul>
 <li>title?: string</li>
 <li>type?: 'base64' or 'url'</li>
@@ -211,6 +212,10 @@
 </code></pre>
 
 <pre><code class="javascript">client.Image.upload('http://example.com/image.png', { type: 'url', title: 'some title', album: 'albumId' })
+</code></pre>
+
+<pre><code class="javascript">const file = fs.readFileSync('image.png')
+client.Image.upload(file)
 </code></pre>
 
 <h2 id="remove">remove</h2>
