@@ -4,11 +4,16 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
+  "description": "A Typescript compatible imgur client for node.",
   "website": "https://github.com/rmp135/imgur",
+  "repository": "rmp135/imgur",
+  "keywords": [
+    "imgur"
+  ],
   "author": {
     "name": "Ryan Poole",
     "email": "rmp135@gmail.com",
-    "url": "https://github.com/rmp135"
+    "url": "https://twitter.com/rmp135"
   },
   "scripts": {
     "test:watch": "nodemon --ignore dist --ignore __test -e ts --exec yarn test",
