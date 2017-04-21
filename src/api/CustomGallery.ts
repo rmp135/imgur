@@ -1,3 +1,4 @@
+import { Options } from '../'
 import { performAPIRequest } from "../RequestTasks";
 import Client from '../Client'
 

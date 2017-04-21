@@ -1,3 +1,4 @@
+import * as Options from '../Options'
 import { performAPIRequest } from '../RequestTasks';
 import Client from '../Client';
 

@@ -1,7 +1,7 @@
+import { Options } from '../index'
 import Client from '../Client'
 import * as Gallery from './Gallery'
 import * as rewire from 'rewire'
-import { ReportReasonEnum } from '../ReportReasonEnum'
 
 let RewireGallery = rewire('./Gallery')
 const MockGallery: typeof Gallery & typeof RewireGallery = <any> RewireGallery
@@ -220,7 +220,7 @@ describe('Gallery', () => {
       expect(res).toBe('mock return' as any)
     })
     it('should report with a reason', () => {
-      const res = MockGallery.report(client, 'imageId', ReportReasonEnum.SPAM)
+      const res = MockGallery.report(client, 'imageId', Options.ReportReasonEnum.SPAM)
       expect(mockPerformAPIRequest).toHaveBeenCalledWith(client, ['gallery', 'imageId', 'report'], { method: 'post', data: { reason: 2 }})
       expect(res).toBe('mock return' as any)
     })

@@ -1,3 +1,4 @@
+import * as Options from './Options'
 import * as AuthorizationTasks from './AuthorizationTasks'
 import * as Account from './api/Account';
 import * as Comment from './api/Comment'
@@ -9,7 +10,6 @@ import * as Image from './api/Image'
 import * as Memegen from './api/Memegen'
 import * as Notification from './api/Notification'
 import * as Topic from './api/Topic'
-import { ReportReasonEnum } from './ReportReasonEnum'
 
 export interface ClientConfig {
   client_id?: string
@@ -138,7 +138,7 @@ IP Reset: ${this.RateLimits.ip_reset}
     replies: (commentId: string) => Comment.replies(this, commentId),
     replyCreate: (commentId: string, imageId: string, comment: string) => Comment.replyCreate(this, commentId, imageId, comment),
     vote: (commentId: string, vote: 'up' | 'down') => Comment.vote(this, commentId, vote),
-    report: (commentId: string, reason?: ReportReasonEnum) => Comment.report(this, commentId)
+    report: (commentId: string, reason?: Options.ReportReasonEnum) => Comment.report(this, commentId)
   }
 
   Conversation = {
@@ -174,7 +174,7 @@ IP Reset: ${this.RateLimits.ip_reset}
     remove: (itemId: string) => Gallery.remove(this, itemId),
     album: (albumId: string) => Gallery.album(this, albumId),
     image: (imageId: string) => Gallery.image(this, imageId),
-    report: (itemId: string, reason?: ReportReasonEnum) => Gallery.report(this, itemId, reason),
+    report: (itemId: string, reason?: Options.ReportReasonEnum) => Gallery.report(this, itemId, reason),
     votes: (itemId: string) => Gallery.votes(this, itemId),
     comments: (itemId: string, sort?: Options.GalleryCommentSort) => Gallery.comments(this, itemId, sort),
     comment: (itemId: string, commentId: string) => Gallery.comment(this, itemId, commentId),

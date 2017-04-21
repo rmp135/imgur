@@ -1,7 +1,7 @@
+import { Options } from '../'
 import Client from '../Client'
 import * as Comment from './Comment'
 import * as rewire from 'rewire'
-import { ReportReasonEnum } from '../ReportReasonEnum'
 
 let RewireComment = rewire('./Comment')
 const MockComment: typeof Comment & typeof RewireComment = <any> RewireComment
@@ -67,7 +67,7 @@ describe('Comment', () => {
   })
   describe('report', () => {
     it('should report a comment with reason', () => {
-      const res = MockComment.report(client, 'commentId', ReportReasonEnum.SPAM)
+      const res = MockComment.report(client, 'commentId', Options.ReportReasonEnum.SPAM)
       expect(mockPerformAPIRequest).toHaveBeenCalledWith(client, ['comment', 'commentId', 'report'], { method: 'post', data: { reason: 2 }})
       expect(res as any).toBe('mock return')
     })

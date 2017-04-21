@@ -1,6 +1,6 @@
+import * as Options from '../Options'
 import Client from "../Client";
 import { performAPIRequest, URLConfig } from '../RequestTasks';
-import { ReportReasonEnum } from '../ReportReasonEnum'
 
 export function get (client: Client, options?: Options.GalleryGetOptions): Promise<APIResponse<BaseGalleryResponse[]>> {
   const url: URLConfig = {
@@ -230,7 +230,7 @@ export function image (client: Client, imageId: string): Promise<APIResponse<Gal
   return performAPIRequest<BaseImageResponse>(client, url)
 }
 
-export function report (client: Client, itemId: string, reason?: ReportReasonEnum): Promise<APIResponse<boolean>> {
+export function report (client: Client, itemId: string, reason?: Options.ReportReasonEnum): Promise<APIResponse<boolean>> {
   const url = [
     'gallery',
     itemId,

@@ -1,10 +1,9 @@
-/// <reference path="./Options.d.ts" />
 /// <reference path="./ResponseModels.d.ts" />
 
 import Client, { ClientConfig } from './Client'
-import { ReportReasonEnum } from './ReportReasonEnum'
+import * as Options from './Options'
 export {
   Client,
   ClientConfig,
-  ReportReasonEnum
+  Options
 } 

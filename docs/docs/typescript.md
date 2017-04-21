@@ -4,6 +4,4 @@ The response types are taken from [https://api.imgur.com/models](). However, the
 
 Full disclaimer: this is my first published Typescript project so it might be a little rough around the edges.
 
-All request types and interfaces can be found on the global `Options` namespace. These are usually joined together to form the final option interface.
-
-The main '@rmp135/imgur' module also contains a `ClientConfig` interface and `ReportReasonEnum` for reporting. Import these if you require them.
+The main '@rmp135/imgur' contains a `ClientConfig` interface for constructing the main client configuration, an `Options` module for the API options parameters and `ReportReasonEnum` for reporting. Import these if you require them.

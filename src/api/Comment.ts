@@ -1,6 +1,6 @@
+import * as Options from '../Options'
 import Client from '../Client';
 import { performAPIRequest } from '../RequestTasks'
-import { ReportReasonEnum } from '../ReportReasonEnum'
 
 export function get (client: Client, commentId: string): Promise<APIResponse<CommentResponse>> {
   const url = [
@@ -73,7 +73,7 @@ export function vote (client: Client, commentId: string, vote: 'up' | 'down'): P
   return performAPIRequest<boolean>(client, url, requestOptions)
 }
 
-export function report (client: Client, commentId: string, reason?: ReportReasonEnum): Promise<APIResponse<boolean>> {
+export function report (client: Client, commentId: string, reason?: Options.ReportReasonEnum): Promise<APIResponse<boolean>> {
   const url = [
     'comment',
     commentId,
