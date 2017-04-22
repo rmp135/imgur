@@ -472,7 +472,7 @@
         }, 
         {
             "location": "/typescript/", 
-            "text": "This library is written with full support for Typescript.\n\n\nThe response types are taken from \nhttps://api.imgur.com/models\n. However, they don't all appear to follow the specified documentation so there may be some irregularities.\n\n\nFull disclaimer: this is my first published Typescript project so it might be a little rough around the edges.\n\n\nAll request types and interfaces can be found on the global \nOptions\n namespace. These are usually joined together to form the final option interface.\n\n\nThe main '@rmp135/imgur' module also contains a \nClientConfig\n interface and \nReportReasonEnum\n for reporting. Import these if you require them.", 
+            "text": "This library is written with full support for Typescript.\n\n\nThe response types are taken from \nhttps://api.imgur.com/models\n. However, they don't all appear to follow the specified documentation so there may be some irregularities.\n\n\nFull disclaimer: this is my first published Typescript project so it might be a little rough around the edges.\n\n\nThe main '@rmp135/imgur' contains a \nClientConfig\n interface for constructing the main client configuration, an \nOptions\n module for the API options parameters and \nReportReasonEnum\n for reporting. Import these if you require them.", 
             "title": "Typescript"
         }
     ]

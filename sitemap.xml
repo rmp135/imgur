@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2017-04-16</lastmod>
+     <lastmod>2017-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,7 @@
     
     <url>
      <loc>/authorization/</loc>
-     <lastmod>2017-04-16</lastmod>
+     <lastmod>2017-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -21,61 +21,61 @@
         
     <url>
      <loc>/api/overview/</loc>
-     <lastmod>2017-04-16</lastmod>
+     <lastmod>2017-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/api/account/</loc>
-     <lastmod>2017-04-16</lastmod>
+     <lastmod>2017-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/api/comment/</loc>
-     <lastmod>2017-04-16</lastmod>
+     <lastmod>2017-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/api/conversation/</loc>
-     <lastmod>2017-04-16</lastmod>
+     <lastmod>2017-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/api/customgallery/</loc>
-     <lastmod>2017-04-16</lastmod>
+     <lastmod>2017-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/api/gallery/</loc>
-     <lastmod>2017-04-16</lastmod>
+     <lastmod>2017-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/api/image/</loc>
-     <lastmod>2017-04-16</lastmod>
+     <lastmod>2017-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/api/memegen/</loc>
-     <lastmod>2017-04-16</lastmod>
+     <lastmod>2017-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/api/notification/</loc>
-     <lastmod>2017-04-16</lastmod>
+     <lastmod>2017-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/api/topic/</loc>
-     <lastmod>2017-04-16</lastmod>
+     <lastmod>2017-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -84,7 +84,7 @@
     
     <url>
      <loc>/uploading/</loc>
-     <lastmod>2017-04-16</lastmod>
+     <lastmod>2017-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -92,7 +92,7 @@
     
     <url>
      <loc>/ratelimits/</loc>
-     <lastmod>2017-04-16</lastmod>
+     <lastmod>2017-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -100,7 +100,7 @@
     
     <url>
      <loc>/errors/</loc>
-     <lastmod>2017-04-16</lastmod>
+     <lastmod>2017-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -108,7 +108,7 @@
     
     <url>
      <loc>/contributing/</loc>
-     <lastmod>2017-04-16</lastmod>
+     <lastmod>2017-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -116,7 +116,7 @@
     
     <url>
      <loc>/typescript/</loc>
-     <lastmod>2017-04-16</lastmod>
+     <lastmod>2017-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
