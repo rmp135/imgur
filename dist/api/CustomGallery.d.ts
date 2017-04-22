@@ -1,3 +1,4 @@
+import { Options } from '../';
 import Client from '../Client';
 export declare function get(client: Client, options?: Options.PageOption & Options.GallerySortOption & Options.WindowOption): Promise<APIResponse<CustomGalleryResponse>>;
 export declare function image(client: Client, itemId: string): Promise<APIResponse<BaseImageResponse>>;

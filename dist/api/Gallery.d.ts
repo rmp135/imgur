@@ -1,5 +1,5 @@
+import * as Options from '../Options';
 import Client from "../Client";
-import { ReportReasonEnum } from '../ReportReasonEnum';
 export declare function get(client: Client, options?: Options.GalleryGetOptions): Promise<APIResponse<BaseGalleryResponse[]>>;
 export declare function memesGallery(client: Client, options?: Options.GallerySortOption & Options.PageOption & Options.WindowOption): Promise<APIResponse<(BaseGalleryResponse & MemeResponse)[]>>;
 export declare function memesImage(client: Client, imageId: string): Promise<APIResponse<BaseGalleryResponse & MemeResponse>>;
@@ -32,7 +32,7 @@ export declare function share(client: Client, itemId: string, title: string, opt
 export declare function remove(client: Client, imageId: string): Promise<APIResponse<boolean>>;
 export declare function album(client: Client, albumId: string): Promise<APIResponse<GalleryAlbumResponse>>;
 export declare function image(client: Client, imageId: string): Promise<APIResponse<GalleryImageResponse>>;
-export declare function report(client: Client, itemId: string, reason?: ReportReasonEnum): Promise<APIResponse<boolean>>;
+export declare function report(client: Client, itemId: string, reason?: Options.ReportReasonEnum): Promise<APIResponse<boolean>>;
 export declare function votes(client: Client, itemId: string): Promise<APIResponse<VoteResponse>>;
 export declare function comments(client: Client, itemId: string, sort?: Options.GalleryCommentSort): Promise<APIResponse<CommentResponse[]>>;
 export declare function comment(client: Client, itemId: string, commentId: string): Promise<APIResponse<CommentResponse>>;

@@ -1,8 +1,8 @@
 /// <reference types="node" />
+import * as Options from './Options';
 import * as AuthorizationTasks from './AuthorizationTasks';
 import * as Gallery from './api/Gallery';
 import * as Image from './api/Image';
-import { ReportReasonEnum } from './ReportReasonEnum';
 export interface ClientConfig {
     client_id?: string;
     client_secret?: string;
@@ -71,7 +71,7 @@ export default class  {
         replies: (commentId: string) => Promise<APIResponse<CommentResponse[]>>;
         replyCreate: (commentId: string, imageId: string, comment: string) => Promise<APIResponse<boolean>>;
         vote: (commentId: string, vote: "up" | "down") => Promise<APIResponse<boolean>>;
-        report: (commentId: string, reason?: ReportReasonEnum | undefined) => Promise<APIResponse<boolean>>;
+        report: (commentId: string, reason?: Options.ReportReasonEnum | undefined) => Promise<APIResponse<boolean>>;
     };
     Conversation: {
         getAll: () => Promise<APIResponse<ConversationResponse[]>>;
@@ -103,9 +103,9 @@ export default class  {
         remove: (itemId: string) => Promise<APIResponse<boolean>>;
         album: (albumId: string) => Promise<APIResponse<GalleryAlbumResponse>>;
         image: (imageId: string) => Promise<APIResponse<GalleryImageResponse>>;
-        report: (itemId: string, reason?: ReportReasonEnum | undefined) => Promise<APIResponse<boolean>>;
+        report: (itemId: string, reason?: Options.ReportReasonEnum | undefined) => Promise<APIResponse<boolean>>;
         votes: (itemId: string) => Promise<APIResponse<VoteResponse>>;
-        comments: (itemId: string, sort?: "best" | "top" | "new" | undefined) => Promise<APIResponse<CommentResponse[]>>;
+        comments: (itemId: string, sort?: "top" | "best" | "new" | undefined) => Promise<APIResponse<CommentResponse[]>>;
         comment: (itemId: string, commentId: string) => Promise<APIResponse<CommentResponse>>;
         commentCreate: (itemId: string, comment: string) => Promise<APIResponse<boolean>>;
         commentReply: (itemId: string, commentId: string, comment: string) => Promise<APIResponse<boolean>>;

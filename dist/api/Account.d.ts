@@ -1,3 +1,4 @@
+import * as Options from '../Options';
 import Client from '../Client';
 export declare function get(client: Client, username?: string): Promise<APIResponse<AccountResponse>>;
 export declare function galleryFavorites(client: Client, username?: string | null, options?: Options.PageOption & Options.AccountCommentSortOption): Promise<APIResponse<BaseGalleryResponse[]>>;
