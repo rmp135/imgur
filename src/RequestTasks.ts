@@ -55,9 +55,10 @@ export function performAPIRequest<T> (client: Client, url: URLConfig | any[], ax
     headers: { },
     ...axiosConfig
   }
-  const bearer = client.access_token || client.client_id
-  if (bearer != null) {
-    options.headers.Authorization = `Bearer ${bearer}`
+  if (client.access_token != null) {
+    options.headers.Authorization = `Bearer ${client.access_token}`
+  } else if (client.client_id != null) {
+    options.headers.Authorization = `Client-ID ${client.client_id}`
   }
   if (client.mashape_key != null) {
     options.headers['X-Mashape-Key'] = client.mashape_key

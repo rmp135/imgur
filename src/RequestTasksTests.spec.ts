@@ -73,7 +73,7 @@ describe('RequestTasks', () => {
       expect(mockPerformRequest).toHaveBeenCalledWith(client, { url: 'joined url', headers: { } })
       expect(res).toBe('request return' as any)
     })
-    it('should set the client access token header', () => {
+    it('should set the bearer if the access_token is specified', () => {
       const mockPerformRequest = jasmine.createSpy('performRequest').and.returnValue('request return')
       const mockJoinURL = jasmine.createSpy('joinURL').and.returnValue('joined url')
       MockRequestTasks.__set__({
@@ -88,7 +88,7 @@ describe('RequestTasks', () => {
       expect(mockPerformRequest).toHaveBeenCalledWith(client, { url: 'joined url', headers: { Authorization: 'Bearer access_token' } })
       expect(res).toBe('request return' as any)
     })
-    it('should fall back to the client id header', () => {
+    it('should set the Client-ID if the client id is specified', () => {
       const mockPerformRequest = jasmine.createSpy('performRequest').and.returnValue('request return')
       const mockJoinURL = jasmine.createSpy('joinURL').and.returnValue('joined url')
       MockRequestTasks.__set__({
@@ -99,7 +99,7 @@ describe('RequestTasks', () => {
       client.client_id = 'client_id'
       const res = MockRequestTasks.performAPIRequest(client, ['path1', 'path2'])
       expect(mockJoinURL).toHaveBeenCalledWith(['https://api.imgur.com/3', 'path1', 'path2'])
-      expect(mockPerformRequest).toHaveBeenCalledWith(client, { url: 'joined url', headers: { Authorization: 'Bearer client_id' } })
+      expect(mockPerformRequest).toHaveBeenCalledWith(client, { url: 'joined url', headers: { Authorization: 'Client-ID client_id' } })
       expect(res).toBe('request return' as any)
     })
     it('should call with only a url and request options', () => {
