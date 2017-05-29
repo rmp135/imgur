@@ -2,7 +2,7 @@ import * as Options from '../Options'
 import { performAPIRequest } from '../RequestTasks';
 import Client from '../Client'
 
-export function get (client: Client, username?: string) : Promise<APIResponse<AccountResponse>> {
+export function get (client: Client, username?: string): Promise<APIResponse<AccountResponse>> {
   const url = [
     'account',
     username || 'me',
@@ -10,7 +10,7 @@ export function get (client: Client, username?: string) : Promise<APIResponse<Ac
   return performAPIRequest<AccountResponse>(client, url)
 }
 
-export function galleryFavorites (client: Client, username?: string | null, options? : Options.PageOption & Options.AccountCommentSortOption) : Promise<APIResponse<BaseGalleryResponse[]>> {
+export function galleryFavorites (client: Client, username?: string | null, options?: Options.PageOption & Options.AccountCommentSortOption): Promise<APIResponse<BaseGalleryResponse[]>> {
   const defaultOptions = {
     username,
     page: null,
@@ -29,7 +29,7 @@ export function galleryFavorites (client: Client, username?: string | null, opti
   return performAPIRequest<BaseGalleryResponse[]>(client, url)
 }
 
-export function favorites (client: Client, username?: string | null, options?: Options.PageOption & Options.AccountFavoriteSortOption) : Promise<APIResponse<BaseGalleryResponse[]>> {
+export function favorites (client: Client, username?: string | null, options?: Options.PageOption & Options.AccountFavoriteSortOption): Promise<APIResponse<BaseGalleryResponse[]>> {
   const defaultOptions: any = {
     username,
     page: null,
@@ -59,7 +59,7 @@ export function submissions (client: Client, username?: string | null, page?: nu
   return performAPIRequest<BaseGalleryResponse[]>(client, url)
 }
 
-export function settings (client: Client) : Promise<APIResponse<AccountResponse>> {
+export function settings (client: Client): Promise<APIResponse<AccountResponse>> {
   const url = [
     'account',
     'me',
@@ -81,7 +81,7 @@ export function changeSettings (client: Client, options: Options.ChangeAccountSe
   return performAPIRequest<boolean>(client, url, requestOptions)
 }
 
-export function galleryProfile (client: Client, username?: string) : Promise<APIResponse<GalleryProfileResponse>> {
+export function galleryProfile (client: Client, username?: string): Promise<APIResponse<GalleryProfileResponse>> {
   const url = [
     'account',
     username || 'me',
@@ -131,7 +131,7 @@ export function album (client: Client, username: string | null, albumId: string)
   return performAPIRequest<AlbumResponse>(client, url)
 }
 
-export function albumIds (client: Client, username?: string | null, page?: number) : Promise<APIResponse<number[]>> {
+export function albumIds (client: Client, username?: string | null, page?: number): Promise<APIResponse<number[]>> {
   const url = [
     'account',
     username || 'me',
@@ -165,7 +165,7 @@ export function albumRemove (client: Client, username: string | null, albumId: s
   return performAPIRequest<boolean>(client, url, requestOptions)
 }
 
-export function comments (client: Client, username?: string | null, options?: Options.AccountCommentSortOption & Options.PageOption) : Promise<APIResponse<CommentResponse[]>> {
+export function comments (client: Client, username?: string | null, options?: Options.AccountCommentSortOption & Options.PageOption): Promise<APIResponse<CommentResponse[]>> {
   const url: any[] = [
     'account',
     username || 'me',
@@ -223,7 +223,7 @@ export function commentRemove (client: Client, commentId: string): Promise<APIRe
   return performAPIRequest<boolean>(client, url, requestOptions)
 }
 
-export function images (client: Client, username?: string | null, page?: number) : Promise<APIResponse<ImageResponse[]>> {
+export function images (client: Client, username?: string | null, page?: number): Promise<APIResponse<ImageResponse[]>> {
   const url = [
     'account',
     username || 'me',

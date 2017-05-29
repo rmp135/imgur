@@ -14,8 +14,8 @@ export interface URLConfig {
   }
 }
 
-export async function performRequest<T> (client: Client, config: AxiosRequestConfig) : Promise<T> {
-  const options : AxiosRequestConfig = {
+export async function performRequest<T> (client: Client, config: AxiosRequestConfig): Promise<T> {
+  const options: AxiosRequestConfig = {
     validateStatus (status) {
       return status === 200
     },
@@ -50,7 +50,7 @@ export function performAPIRequest<T> (client: Client, url: URLConfig | any[], ax
   } else {
     url.path.unshift(apiBase)
   }
-  const options : AxiosRequestConfig = {
+  const options: AxiosRequestConfig = {
     url: joinURL(url),
     headers: { },
     ...axiosConfig
@@ -66,7 +66,7 @@ export function performAPIRequest<T> (client: Client, url: URLConfig | any[], ax
   return performRequest(client, options)
 }
 
-export function joinURL (urlToJoin: URLConfig | string[]) : string {
+export function joinURL (urlToJoin: URLConfig | string[]): string {
   if (Array.isArray(urlToJoin)) {
     return join(...urlToJoin)
   }

@@ -11,7 +11,7 @@ export interface TwoStageAuthReturn {
   authorize: (input: string) => Promise<RequestTokenResponse>
 }
 
-export function regenerateFromRefreshToken (client: Client, refreshToken?: string) : Promise<RequestTokenResponse> | null {
+export function regenerateFromRefreshToken (client: Client, refreshToken?: string): Promise<RequestTokenResponse> | null {
   const token = refreshToken || client.refresh_token
   if (token == null) {
     console.error('Please provide a refresh token on the client or as an argument.')
@@ -20,8 +20,8 @@ export function regenerateFromRefreshToken (client: Client, refreshToken?: strin
   return generateAuthRequest(client, 'refresh_token', 'refresh_token')(token)
 }
 
-export function generateAuthRequest (client: Client, grantType: string, responseType: string) : (responseValue: string) => Promise<RequestTokenResponse> {
-  return async (responseValue: string) : Promise<RequestTokenResponse> => {
+export function generateAuthRequest (client: Client, grantType: string, responseType: string): (responseValue: string) => Promise<RequestTokenResponse> {
+  return async (responseValue: string): Promise<RequestTokenResponse> => {
     const requestConfig: AxiosRequestConfig = {
       data: {
         client_id: client.client_id,
@@ -39,13 +39,13 @@ export function generateAuthRequest (client: Client, grantType: string, response
   }
 }
 
-export function twoStageAuth (client: Client, grantType: string, responseType: string, applicationState?: string) : TwoStageAuthReturn {
+export function twoStageAuth (client: Client, grantType: string, responseType: string, applicationState?: string): TwoStageAuthReturn {
   const authorize = generateAuthRequest(client, grantType, responseType)
   let userURL = RequestTasks.joinURL({ path: [OATH_BASE_PATH, 'authorize'], params: { client_id: client.client_id, response_type: responseType, state: applicationState } })
   return { url: userURL, authorize }
 }
 
-export function generateTokenURL (client: Client, applicationState?: string) : string {
+export function generateTokenURL (client: Client, applicationState?: string): string {
   let userURL = RequestTasks.joinURL({ path: [OATH_BASE_PATH, 'authorize'], params: { client_id: client.client_id, response_type: 'token', state: applicationState }})
   return userURL
 }
@@ -55,7 +55,7 @@ export function parseCodeURL (url: string): string {
   return res.code
 }
 
-export function parseTokenURL (url: string) : RequestTokenResponse {
+export function parseTokenURL (url: string): RequestTokenResponse {
   const res = querystring.parse(URL.parse(url).hash as string)
   return {
     access_token: res['#access_token'],

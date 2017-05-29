@@ -15,10 +15,10 @@ export type UploadType = 'base64' | 'url'
 
 export interface UpdateOptions {
   title?: string,
-  description? : string
+  description?: string
 }
 
-export function get (client: Client, imageId: string) : Promise<APIResponse<ImageResponse>> {
+export function get (client: Client, imageId: string): Promise<APIResponse<ImageResponse>> {
   const url = [
     'image',
     imageId,
@@ -55,7 +55,7 @@ export function upload (client: Client, image: string | Buffer, options?: Upload
   return performAPIRequest<ImageResponse>(client, url, config)
 }
 
-export function remove (client: Client, id: string) : Promise<APIResponse<boolean>> {
+export function remove (client: Client, id: string): Promise<APIResponse<boolean>> {
   const url = [
     'image',
     id
@@ -66,7 +66,7 @@ export function remove (client: Client, id: string) : Promise<APIResponse<boolea
   return performAPIRequest<boolean>(client, url, requestConfig)
 }
 
-export function update (client: Client, imageId: string, options: UpdateOptions) : Promise<APIResponse<boolean>> {
+export function update (client: Client, imageId: string, options: UpdateOptions): Promise<APIResponse<boolean>> {
   const url = [
     'image',
     imageId
@@ -81,7 +81,7 @@ export function update (client: Client, imageId: string, options: UpdateOptions)
   return performAPIRequest<boolean>(client, url, requestConfig)
 }
 
-export function favorite (client: Client, imageId: string) : Promise<APIResponse<boolean>> {
+export function favorite (client: Client, imageId: string): Promise<APIResponse<boolean>> {
   const url = [
     'image',
     imageId,

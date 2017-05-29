@@ -42,7 +42,7 @@ export interface ChangeAccountSettingsOptions {
   bio?: string,
   public_images?: boolean
   messaging_enabled?: boolean
-  album_privacy? : AlbumPrivacy
+  album_privacy?: AlbumPrivacy
   accepted_gallery_terms?: boolean
   username?: string
   show_mature?: boolean
