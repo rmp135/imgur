@@ -1,124 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-    
     <url>
-     <loc>/</loc>
-     <lastmod>2017-04-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2019-11-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
-     <loc>/authorization/</loc>
-     <lastmod>2017-04-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2019-11-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
-        
     <url>
-     <loc>/api/overview/</loc>
-     <lastmod>2017-04-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2019-11-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/api/account/</loc>
-     <lastmod>2017-04-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2019-11-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/api/comment/</loc>
-     <lastmod>2017-04-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2019-11-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/api/conversation/</loc>
-     <lastmod>2017-04-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2019-11-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/api/customgallery/</loc>
-     <lastmod>2017-04-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2019-11-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/api/gallery/</loc>
-     <lastmod>2017-04-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2019-11-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/api/image/</loc>
-     <lastmod>2017-04-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2019-11-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/api/memegen/</loc>
-     <lastmod>2017-04-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2019-11-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/api/notification/</loc>
-     <lastmod>2017-04-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2019-11-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/api/topic/</loc>
-     <lastmod>2017-04-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2019-11-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
-    
-
-    
     <url>
-     <loc>/uploading/</loc>
-     <lastmod>2017-04-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2019-11-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
-     <loc>/ratelimits/</loc>
-     <lastmod>2017-04-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2019-11-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
-     <loc>/errors/</loc>
-     <lastmod>2017-04-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2019-11-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
-     <loc>/contributing/</loc>
-     <lastmod>2017-04-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2019-11-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
-     <loc>/typescript/</loc>
-     <lastmod>2017-04-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2019-11-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
+    <url>
+     <loc>None</loc>
+     <lastmod>2019-11-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
 </urlset>

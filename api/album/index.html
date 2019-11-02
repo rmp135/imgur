@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Conversation - @rmp135/imgur</title>
+  <title>Album - @rmp135/imgur</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Conversation";
-    var mkdocs_page_input_path = "api\\conversation.md";
+    var mkdocs_page_name = "Album";
+    var mkdocs_page_input_path = "api\\album.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -70,26 +70,50 @@
                     
     <a class="" href="../account/">Account</a>
                 </li>
-                <li class="">
+                <li class=" current">
                     
-    <a class="" href="../album/">Album</a>
+    <a class="current" href="./">Album</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#get">get</a></li>
+    
+
+    <li class="toctree-l3"><a href="#images">images</a></li>
+    
+
+    <li class="toctree-l3"><a href="#image">image</a></li>
+    
+
+    <li class="toctree-l3"><a href="#create">create</a></li>
+    
+
+    <li class="toctree-l3"><a href="#update">update</a></li>
+    
+
+    <li class="toctree-l3"><a href="#remove">remove</a></li>
+    
+
+    <li class="toctree-l3"><a href="#favorite">favorite</a></li>
+    
+
+    <li class="toctree-l3"><a href="#setimages">setImages</a></li>
+    
+
+    <li class="toctree-l3"><a href="#addimages">addImages</a></li>
+    
+
+    <li class="toctree-l3"><a href="#removeimages">removeImages</a></li>
+    
+
+    </ul>
                 </li>
                 <li class="">
                     
     <a class="" href="../comment/">Comment</a>
                 </li>
-                <li class=" current">
+                <li class="">
                     
-    <a class="current" href="./">Conversation</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#getall">getAll</a></li>
-    
-
-    <li class="toctree-l3"><a href="#get">get</a></li>
-    
-
-    </ul>
+    <a class="" href="../conversation/">Conversation</a>
                 </li>
                 <li class="">
                     
@@ -169,7 +193,7 @@
         
       
     
-    <li>Conversation</li>
+    <li>Album</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -179,23 +203,115 @@
           <div role="main">
             <div class="section">
               
-                <p><a href="https://api.imgur.com/endpoints/conversation">Imgur Documentation</a></p>
-<p>The client must be authorized to retrieve the conversations of a user.</p>
-<h2 id="getall">getAll</h2>
-<pre><code class="javascript">client.Conversation.getAll()
-</code></pre>
-
+                <p><a href="https://api.imgur.com/endpoints/album">Imgur Documentation</a></p>
+<p>If the username is ommitted or set as null, the currently authorized user will be used.</p>
 <h2 id="get">get</h2>
+<p>Returns the images and album info from an album.</p>
 <p>Params:</p>
 <ul>
-<li>conversationid: string</li>
-<li>options?<ul>
-<li>page?: number</li>
-<li>offset?: number</li>
+<li>id: string</li>
+</ul>
+<pre><code class="javascript">client.Album.get('23ffdW')
+</code></pre>
+
+<h2 id="images">images</h2>
+<p>Returns only the images from an album.</p>
+<p>Params:</p>
+<ul>
+<li>id: string</li>
+</ul>
+<pre><code class="javascript">client.Album.images('23ff6W')
+</code></pre>
+
+<h2 id="image">image</h2>
+<p>Params:</p>
+<ul>
+<li>albumId: string</li>
+<li>imageId: string</li>
+</ul>
+<pre><code class="javascript">client.Album.image('2f33F', '9dWf23')
+</code></pre>
+
+<h2 id="create">create</h2>
+<p>Creates an album under the currently authenticated user, or an album not assigned to a user.</p>
+<p>Use either <code>ids</code> for an array of image ids that should be added to the album, or <code>deletehashes</code> for the delete hashes (for public images) that should be applied to the album.</p>
+<p>Params:</p>
+<ul>
+<li>options<ul>
+<li>title?: string</li>
+<li>description?: boolean</li>
+<li>privacy?: string</li>
+<li>layout?: string</li>
+<li>cover?: string</li>
+<li>ids?: string[]</li>
+<li>deletehashes?: string[]</li>
 </ul>
 </li>
 </ul>
-<pre><code class="javascript">client.Conversation.get('conversationId', { page: 2, offset: 3 })
+<pre><code class="javascript">client.Album.create({ ids: ['g2dWWf'], title: 'album title' })
+</code></pre>
+
+<h2 id="update">update</h2>
+<p>Params:</p>
+<ul>
+<li>options<ul>
+<li>title?: string</li>
+<li>description?: boolean</li>
+<li>privacy?: string</li>
+<li>layout?: string</li>
+<li>cover?: string</li>
+<li>ids?: string[]</li>
+<li>deletehashes?: string[]</li>
+</ul>
+</li>
+</ul>
+<pre><code class="javascript">client.Album.create({ ids: ['g2dWWf'], title: 'album title' })
+</code></pre>
+
+<h2 id="remove">remove</h2>
+<p>Params:</p>
+<ul>
+<li>id: string</li>
+</ul>
+<pre><code class="javascript">client.Album.remove('g2g22K')
+</code></pre>
+
+<h2 id="favorite">favorite</h2>
+<p>Params:</p>
+<ul>
+<li>id: string</li>
+</ul>
+<pre><code class="javascript">client.Album.remove('g2g22K')
+</code></pre>
+
+<h2 id="setimages">setImages</h2>
+<p>Replaces all images in an album with images specified by id or delete hash.</p>
+<p>To specify only delete hashes, set <code>imageIds</code> to <code>null</code>.</p>
+<p>Params:</p>
+<ul>
+<li>imageIds: string[] | null</li>
+<li>deleteHashes?: string[]</li>
+</ul>
+<pre><code class="javascript">client.Album.setImages(['g2g22K'])
+</code></pre>
+
+<h2 id="addimages">addImages</h2>
+<p>Adds images to an album with images specified by id or delete hash.</p>
+<p>To specify only delete hashes, set <code>imageIds</code> to <code>null</code>.</p>
+<p>Params:</p>
+<ul>
+<li>imageIds: string[] | null</li>
+<li>deleteHashes?: string[]</li>
+</ul>
+<pre><code class="javascript">client.Album.addImages(['g2g22K'])
+</code></pre>
+
+<h2 id="removeimages">removeImages</h2>
+<p>Params:</p>
+<ul>
+<li>imageIds: string[]</li>
+</ul>
+<pre><code class="javascript">client.Album.removeImages(['g2g22K'])
 </code></pre>
               
             </div>
@@ -204,10 +320,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../customgallery/" class="btn btn-neutral float-right" title="Custom Gallery">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../comment/" class="btn btn-neutral float-right" title="Comment">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../comment/" class="btn btn-neutral" title="Comment"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../account/" class="btn btn-neutral" title="Account"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -233,10 +349,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../comment/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../account/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../customgallery/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../comment/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
