@@ -6,6 +6,7 @@ pages:
   - API:
     - 'api/overview.md'
     - 'api/account.md'
+    - 'api/album.md'
     - 'api/comment.md'
     - 'api/conversation.md'
     - Custom Gallery: 'api/customgallery.md'
