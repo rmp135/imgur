@@ -1,6 +1,7 @@
 import * as Options from './Options'
 import * as AuthorizationTasks from './AuthorizationTasks'
-import * as Account from './api/Account';
+import * as Account from './api/Account'
+import * as Album from './api/Album'
 import * as Comment from './api/Comment'
 import * as Conversation from './api/Conversation'
 import * as Credits from './api/Credits'
@@ -129,6 +130,19 @@ IP Reset: ${this.RateLimits.ip_reset}
     imageCount: (username?: string) => Account.imageCount(this, username),
     imageRemove: (username: string | null, deleteHash: string) => Account.imageRemove(this, username, deleteHash),
     replies: () => Account.replies(this)
+  }
+
+  Album = {
+    get: (id: string) => Album.get(this, id),
+    images: (id: string) => Album.images(this, id),
+    image: (albumId: string, imageId: string) => Album.image(this, albumId, imageId),
+    create: (options: Options.CreateAlbumOptions) => Album.create(this, options),
+    update: (id: string, options: Options.CreateAlbumOptions) => Album.update(this, id, options),
+    remote: (id: string) => Album.remove(this, id),
+    favorite: (id: string) => Album.favorite(this, id),
+    setImages: (id: string, imageIds: string[] | null, deleteHashes?: string[]) => Album.setImages(this, id, imageIds, deleteHashes),
+    addImages: (id: string, imageIds: string[] | null, deleteHashes?: string[]) => Album.addImages(this, id, imageIds, deleteHashes),
+    removeImages: (id: string, imageIds: string[]) => Album.removeImages(this, id, imageIds)
   }
 
   Comment = {

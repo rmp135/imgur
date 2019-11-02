@@ -78,6 +78,11 @@ interface AlbumResponse {
   in_gallery: boolean
 }
 
+interface AlbumCreateResponse {
+  id: string
+  deletehash: string
+}
+
 interface BaseImageResponse {
   id: string
   title: string
