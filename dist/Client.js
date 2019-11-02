@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const AuthorizationTasks = require("./AuthorizationTasks");
 const Account = require("./api/Account");
+const Album = require("./api/Album");
 const Comment = require("./api/Comment");
 const Conversation = require("./api/Conversation");
 const Credits = require("./api/Credits");
@@ -80,6 +81,18 @@ class default_1 {
             imageCount: (username) => Account.imageCount(this, username),
             imageRemove: (username, deleteHash) => Account.imageRemove(this, username, deleteHash),
             replies: () => Account.replies(this)
+        };
+        this.Album = {
+            get: (id) => Album.get(this, id),
+            images: (id) => Album.images(this, id),
+            image: (albumId, imageId) => Album.image(this, albumId, imageId),
+            create: (options) => Album.create(this, options),
+            update: (id, options) => Album.update(this, id, options),
+            remote: (id) => Album.remove(this, id),
+            favorite: (id) => Album.favorite(this, id),
+            setImages: (id, imageIds, deleteHashes) => Album.setImages(this, id, imageIds, deleteHashes),
+            addImages: (id, imageIds, deleteHashes) => Album.addImages(this, id, imageIds, deleteHashes),
+            removeImages: (id, imageIds) => Album.removeImages(this, id, imageIds)
         };
         this.Comment = {
             get: (commentId) => Comment.get(this, commentId),

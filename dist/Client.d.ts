@@ -64,6 +64,18 @@ export default class  {
         imageRemove: (username: string | null, deleteHash: string) => Promise<APIResponse<boolean>>;
         replies: () => Promise<APIResponse<NotificationResponse[]>>;
     };
+    Album: {
+        get: (id: string) => Promise<APIResponse<AlbumResponse>>;
+        images: (id: string) => Promise<APIResponse<ImageResponse[]>>;
+        image: (albumId: string, imageId: string) => Promise<APIResponse<ImageResponse[]>>;
+        create: (options: Options.CreateAlbumOptions) => Promise<APIResponse<AlbumCreateResponse>>;
+        update: (id: string, options: Options.CreateAlbumOptions) => Promise<APIResponse<AlbumCreateResponse>>;
+        remote: (id: string) => Promise<APIResponse<AlbumCreateResponse>>;
+        favorite: (id: string) => Promise<APIResponse<AlbumCreateResponse>>;
+        setImages: (id: string, imageIds: string[] | null, deleteHashes?: string[] | undefined) => Promise<APIResponse<AlbumCreateResponse>>;
+        addImages: (id: string, imageIds: string[] | null, deleteHashes?: string[] | undefined) => Promise<APIResponse<AlbumCreateResponse>>;
+        removeImages: (id: string, imageIds: string[]) => Promise<APIResponse<AlbumCreateResponse>>;
+    };
     Comment: {
         get: (commentId: string) => Promise<APIResponse<CommentResponse>>;
         create: (imageId: string, comment: string, parentId?: string | undefined) => Promise<APIResponse<boolean>>;

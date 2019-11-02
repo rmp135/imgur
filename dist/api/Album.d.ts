@@ -1,0 +1,12 @@
+import * as Options from '../Options';
+import Client from '../Client';
+export declare function get(client: Client, id: string): Promise<APIResponse<AlbumResponse>>;
+export declare function images(client: Client, id: string): Promise<APIResponse<ImageResponse[]>>;
+export declare function image(client: Client, albumId: string, imageId: string): Promise<APIResponse<ImageResponse[]>>;
+export declare function create(client: Client, options: Options.CreateAlbumOptions): Promise<APIResponse<AlbumCreateResponse>>;
+export declare function update(client: Client, id: string, options: Options.CreateAlbumOptions): Promise<APIResponse<AlbumCreateResponse>>;
+export declare function remove(client: Client, id: string): Promise<APIResponse<AlbumCreateResponse>>;
+export declare function favorite(client: Client, id: string): Promise<APIResponse<AlbumCreateResponse>>;
+export declare function setImages(client: Client, id: string, imageIds: string[] | null, deleteHashes?: string[]): Promise<APIResponse<AlbumCreateResponse>>;
+export declare function addImages(client: Client, id: string, imageIds: string[] | null, deleteHashes?: string[]): Promise<APIResponse<AlbumCreateResponse>>;
+export declare function removeImages(client: Client, id: string, imageIds: string[]): Promise<APIResponse<AlbumCreateResponse>>;

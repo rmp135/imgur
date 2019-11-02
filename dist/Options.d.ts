@@ -39,6 +39,15 @@ export interface ChangeAccountSettingsOptions {
     show_mature?: boolean;
     newsletter_subscribed?: boolean;
 }
+export interface CreateAlbumOptions {
+    ids?: string[];
+    deletehashes?: string[];
+    title?: string;
+    description?: string;
+    privacy?: AlbumPrivacy;
+    layout?: 'blog' | 'grid' | 'horizontal' | 'vertical';
+    cover?: string;
+}
 export interface SubredditGalleryOptions extends PageOption, WindowOption {
     sort?: 'time' | 'top';
 }
