@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.report = exports.vote = exports.replyCreate = exports.replies = exports.remove = exports.create = exports.get = void 0;
 const RequestTasks_1 = require("../RequestTasks");
 function get(client, commentId) {
     const url = [

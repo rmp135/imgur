@@ -10,7 +10,7 @@ export interface ClientConfig {
     refresh_token?: string;
     mashape_key?: string;
 }
-export default class  {
+export default class {
     client_id: string | null;
     client_secret: string | null;
     access_token: string | null;
@@ -40,7 +40,7 @@ export default class  {
     Account: {
         get: (username?: string | undefined) => Promise<APIResponse<AccountResponse>>;
         galleryFavorites: (username?: string | null | undefined, config?: (Options.PageOption & Options.AccountCommentSortOption) | undefined) => Promise<APIResponse<BaseGalleryResponse[]>>;
-        favorites: (username?: string | null | undefined, options?: (Options.PageOption & Options.AccountCommentSortOption) | undefined) => Promise<APIResponse<BaseGalleryResponse[]>>;
+        favorites: (username?: string | null | undefined, options?: (Options.PageOption & Options.AccountFavoriteSortOption) | undefined) => Promise<APIResponse<BaseGalleryResponse[]>>;
         submissions: (username?: string | null | undefined, page?: number | undefined) => Promise<APIResponse<BaseGalleryResponse[]>>;
         settings: () => Promise<APIResponse<AccountResponse>>;
         changeSettings: (options: Options.ChangeAccountSettingsOptions) => Promise<APIResponse<boolean>>;
@@ -82,7 +82,7 @@ export default class  {
         remove: (commentId: string) => Promise<APIResponse<boolean>>;
         replies: (commentId: string) => Promise<APIResponse<CommentResponse[]>>;
         replyCreate: (commentId: string, imageId: string, comment: string) => Promise<APIResponse<boolean>>;
-        vote: (commentId: string, vote: "up" | "down") => Promise<APIResponse<boolean>>;
+        vote: (commentId: string, vote: 'up' | 'down') => Promise<APIResponse<boolean>>;
         report: (commentId: string, reason?: Options.ReportReasonEnum | undefined) => Promise<APIResponse<boolean>>;
     };
     Conversation: {
@@ -107,17 +107,17 @@ export default class  {
         tag: (tagName: string, options?: (Options.PageOption & Options.GallerySortOption & Options.WindowOption) | undefined) => Promise<APIResponse<TagResponse>>;
         tagImage: (tagName: string, imageId: string) => Promise<APIResponse<GalleryImageResponse>>;
         itemTags: (itemId: string) => Promise<APIResponse<TagVoteResponse[]>>;
-        tagVoting: (itemId: string, tagName: string, vote: "up" | "down") => Promise<APIResponse<boolean>>;
+        tagVoting: (itemId: string, tagName: string, vote: 'up' | 'down') => Promise<APIResponse<boolean>>;
         updateTags: (itemId: string, tags: string[]) => Promise<APIResponse<boolean>>;
         search: (searchOptions: string | Gallery.GallerySearchOptions, filterOptions: Options.GallerySortOption & Options.WindowOption & Options.PageOption) => Promise<APIResponse<BaseGalleryResponse[]>>;
         random: () => Promise<APIResponse<BaseGalleryResponse[]>>;
         share: (itemId: string, title: string, options?: Gallery.ShareOptions | undefined) => Promise<APIResponse<boolean>>;
         remove: (itemId: string) => Promise<APIResponse<boolean>>;
         album: (albumId: string) => Promise<APIResponse<GalleryAlbumResponse>>;
-        image: (imageId: string) => Promise<APIResponse<GalleryImageResponse>>;
+        image: (imageId: string) => Promise<APIResponse<BaseImageResponse>>;
         report: (itemId: string, reason?: Options.ReportReasonEnum | undefined) => Promise<APIResponse<boolean>>;
         votes: (itemId: string) => Promise<APIResponse<VoteResponse>>;
-        comments: (itemId: string, sort?: "top" | "best" | "new" | undefined) => Promise<APIResponse<CommentResponse[]>>;
+        comments: (itemId: string, sort?: Options.GalleryCommentSort | undefined) => Promise<APIResponse<CommentResponse[]>>;
         comment: (itemId: string, commentId: string) => Promise<APIResponse<CommentResponse>>;
         commentCreate: (itemId: string, comment: string) => Promise<APIResponse<boolean>>;
         commentReply: (itemId: string, commentId: string, comment: string) => Promise<APIResponse<boolean>>;

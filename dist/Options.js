@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ReportReasonEnum = void 0;
 var ReportReasonEnum;
 (function (ReportReasonEnum) {
     ReportReasonEnum[ReportReasonEnum["DOES_NOT_BELONG"] = 1] = "DOES_NOT_BELONG";

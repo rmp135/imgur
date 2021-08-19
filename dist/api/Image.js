@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.favorite = exports.update = exports.remove = exports.upload = exports.get = void 0;
 const RequestTasks_1 = require("../RequestTasks");
 function get(client, imageId) {
     const url = [
@@ -29,7 +30,7 @@ function upload(client, image, options) {
             type: 'base64'
         };
         if (options != null) {
-            config.data = Object.assign({}, config.data, options);
+            config.data = Object.assign(Object.assign({}, config.data), options);
         }
     }
     return RequestTasks_1.performAPIRequest(client, url, config);

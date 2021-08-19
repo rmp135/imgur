@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.removeTage = exports.addTags = exports.image = exports.get = void 0;
 const RequestTasks_1 = require("../RequestTasks");
 function get(client, options) {
     const url = [

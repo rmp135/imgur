@@ -31,7 +31,7 @@ export interface ShareOptions {
 export declare function share(client: Client, itemId: string, title: string, options?: ShareOptions): Promise<APIResponse<boolean>>;
 export declare function remove(client: Client, imageId: string): Promise<APIResponse<boolean>>;
 export declare function album(client: Client, albumId: string): Promise<APIResponse<GalleryAlbumResponse>>;
-export declare function image(client: Client, imageId: string): Promise<APIResponse<GalleryImageResponse>>;
+export declare function image(client: Client, imageId: string): Promise<APIResponse<BaseImageResponse>>;
 export declare function report(client: Client, itemId: string, reason?: Options.ReportReasonEnum): Promise<APIResponse<boolean>>;
 export declare function votes(client: Client, itemId: string): Promise<APIResponse<VoteResponse>>;
 export declare function comments(client: Client, itemId: string, sort?: Options.GalleryCommentSort): Promise<APIResponse<CommentResponse[]>>;

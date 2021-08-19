@@ -7,5 +7,5 @@ export declare function regenerateFromRefreshToken(client: Client, refreshToken?
 export declare function generateAuthRequest(client: Client, grantType: string, responseType: string): (responseValue: string) => Promise<RequestTokenResponse>;
 export declare function twoStageAuth(client: Client, grantType: string, responseType: string, applicationState?: string): TwoStageAuthReturn;
 export declare function generateTokenURL(client: Client, applicationState?: string): string;
-export declare function parseCodeURL(url: string): string;
-export declare function parseTokenURL(url: string): RequestTokenResponse;
+export declare function parseCodeURL(urlToParse: string): string;
+export declare function parseTokenURL(urlToParse: string): RequestTokenResponse;

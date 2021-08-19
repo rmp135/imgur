@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.removeImages = exports.addImages = exports.setImages = exports.favorite = exports.remove = exports.update = exports.create = exports.image = exports.images = exports.get = void 0;
 const RequestTasks_1 = require("../RequestTasks");
 function get(client, id) {
     const url = [

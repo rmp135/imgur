@@ -27,7 +27,7 @@ export interface AccountCommentSortOption {
     sort?: AccountCommentsSort;
 }
 export interface AccountFavoriteSortOption {
-    sort?: AccountFavoriteSortOption;
+    sort?: AccountFavoriteSort;
 }
 export interface ChangeAccountSettingsOptions {
     bio?: string;
@@ -60,5 +60,5 @@ export declare enum ReportReasonEnum {
     SPAM = 2,
     ABUSIVE = 3,
     UNMARKED_MATURE = 4,
-    PORN = 5,
+    PORN = 5
 }
