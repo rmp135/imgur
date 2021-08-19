@@ -1,5 +1,5 @@
 import * as RequestTasks from "./RequestTasks";
-import * as rewire from 'rewire'
+import rewire from 'rewire'
 import Client from './Client'
 
 let RewireRequestTasks = rewire('./RequestTasks')
@@ -10,7 +10,7 @@ describe('RequestTasks', () => {
     RewireRequestTasks = rewire('./RequestTasks')
   })
   describe('performRequest', () => {
-    it('should send a request and fill in the headers', async (done) => {
+    it('should send a request and fill in the headers', async () => {
       const mockAxios = jasmine.createSpy('axios').and.returnValue({
         headers: {
           'x-ratelimit-clientlimit': 23,
@@ -42,9 +42,8 @@ describe('RequestTasks', () => {
       expect(client.RateLimits.ip_limit).toBe(1121)
       expect(client.RateLimits.ip_remaining).toBe(233)
       expect(client.RateLimits.ip_reset).toEqual(new Date(2017, 1, 1, 1, 1, 5))
-      done()
     })
-    it('should throw the header and response data when an error occurs', async (done) => {
+    it('should throw the header and response data when an error occurs', async () => {
       const mockAxios = jasmine.createSpy('axios').and.returnValue(Promise.reject({ response: { status: 123 , data: 'error body' }}))
       MockRequestTasks.__set__({
         axios_1: {
@@ -55,7 +54,6 @@ describe('RequestTasks', () => {
       MockRequestTasks.performRequest(client, { method: 'post' })
       .catch((err) => {
         expect(err).toEqual({ status: 123, body: 'error body' })
-        done()
       })
     })
   })
@@ -160,31 +158,20 @@ describe('RequestTasks', () => {
   })
   describe('joinURL', () => {
     it('should join only a path string array', () => {
-      const mockJoin = jasmine.createSpy('mockJoin').and.returnValue('joined url')
-      MockRequestTasks.__set__({
-        join: mockJoin
-      })
       const res = MockRequestTasks.joinURL(['p1', 'p2', 'p3'])
-      expect(mockJoin).toHaveBeenCalledWith('p1', 'p2', 'p3')
-      expect(res).toBe('joined url')
+      expect(res).toBe('p1/p2/p3')
     })
     it('should join a path and params object', () => {
-      const mockJoin = jasmine.createSpy('mockJoin').and.returnValue('joined url')
-      const mockStringify = jasmine.createSpy('stringify').and.returnValue('query')
       const mockFormat = jasmine.createSpy('format').and.returnValue('formatted url')
+      const mockSearchParams = jasmine.createSpy('searchParams').and.returnValues({ toString: () => 'searchparams' })
       MockRequestTasks.__set__({
-        join: mockJoin,
-        querystring: {
-          stringify: mockStringify
-        },
         url: {
+          URLSearchParams: mockSearchParams,
           format: mockFormat
         }
       })
       const res = MockRequestTasks.joinURL({ path: ['p1', 'p2', 'p3'], params: { p1: 2, p2: 3 }})
-      expect(mockStringify).toHaveBeenCalledWith({ p1: 2, p2: 3})
-      expect(mockJoin).toHaveBeenCalledWith('p1', 'p2', 'p3')
-      expect(mockFormat).toHaveBeenCalledWith({ pathname: 'joined url', search: 'query'})
+      expect(mockFormat).toHaveBeenCalledWith({ pathname: 'p1/p2/p3', search: 'searchparams'})
       expect(res).toBe('formatted url')
     })
   })

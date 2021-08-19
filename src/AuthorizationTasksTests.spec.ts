@@ -1,6 +1,5 @@
-import * as urlJoin from 'url-join';
-import * as AuthorizationTasks from "./AuthorizationTasks";
-import * as rewire from 'rewire'
+import * as AuthorizationTasks from './AuthorizationTasks'
+import rewire from 'rewire'
 import Client from './Client'
 
 let RewireAuthorizationTasks = rewire('./AuthorizationTasks')
@@ -20,7 +19,7 @@ describe('AuthorizationTasks', () => {
       expect(res).toBeNull()
       console.error = origError
     })
-    it('should use the parameter over the client refresh token', async (done) => {
+    it('should use the parameter over the client refresh token', async () => {
       const clientOptions = {
         client_id: 'client id',
         client_secret: 'client secret'
@@ -47,9 +46,8 @@ describe('AuthorizationTasks', () => {
         method: 'post',
         url: 'url'
       })
-      done()
     })
-    it('should fall back to the client refresh token', async (done) => {
+    it('should fall back to the client refresh token', async () => {
       const clientOptions = {
         client_id: 'client id',
         client_secret: 'client secret',
@@ -77,9 +75,8 @@ describe('AuthorizationTasks', () => {
         method: 'post',
         url: 'url'
       })
-      done()
     })
-    it('should set the client access and refresh tokens', async (done) => {
+    it('should set the client access and refresh tokens', async () => {
       const clientOptions = {
         client_id: 'client id',
         client_secret: 'client secret'
@@ -111,7 +108,6 @@ describe('AuthorizationTasks', () => {
       })
       expect(client.access_token).toBe('new access token')
       expect(client.refresh_token).toBe('new refresh token')
-      done()
     })
   })
   describe('generateAuthRequest', () => {
@@ -151,7 +147,7 @@ describe('AuthorizationTasks', () => {
       })
       expect(client.access_token).toBe('access_token')
       expect(client.refresh_token).toBe('refresh_token')
-      expect(res).toBe(mockAPIReturn as RequestTokenResponse)
+      expect(res).toBe(mockAPIReturn as any)
     })
   })
   describe('twoStateAuth', () => {
@@ -196,18 +192,17 @@ describe('AuthorizationTasks', () => {
         refresh_token: 'refresh token',
         account_username: 'account username'
       })
-      const mockUParse = jasmine.createSpy('URLParse').and.returnValue({ hash: 'parsed hash' })
+      const mockURL = jasmine.createSpy('URL').and.returnValue({ hash: 'parsed hash' })
+      const mockGet = jasmine.createSpy().and.returnValues('access token', '12345', 'token type', 'account id', 'refresh token', 'account username')
+      const mockSearchParams = jasmine.createSpy('URLSearchParams').and.returnValue({ get: mockGet })
       MockAuthorizationTask.__set__({
-        querystring: {
-          parse: mockQParse
-        },
-        URL: {
-          parse: mockUParse
+        url: {
+          URL: mockURL,
+          URLSearchParams: mockSearchParams
         }
       })
       const res = MockAuthorizationTask.parseTokenURL('url to parse')
-      expect(mockUParse).toHaveBeenCalledWith('url to parse')
-      expect(mockQParse).toHaveBeenCalledWith('parsed hash')
+      expect(mockURL).toHaveBeenCalledWith('url to parse')
       expect(res).toEqual({
         access_token: 'access token',
         expires_in: 12345,
@@ -220,19 +215,15 @@ describe('AuthorizationTasks', () => {
   })
   describe('parseCodeURL', () => {
     it('should parse the code url', () => {
-      const mockUParse = jasmine.createSpy('URLParse').and.returnValue({ query: 'parsed query'})
-      const mockQParse = jasmine.createSpy('queryParse').and.returnValue({ code: 'code' })
+      const mockGet = jasmine.createSpy().and.returnValues('code')
+      const mockURL = jasmine.createSpy('URLParse').and.returnValue({ searchParams: { get: mockGet} })
       MockAuthorizationTask.__set__({
-        querystring: {
-          parse: mockQParse
-        },
-        URL: {
-          parse: mockUParse
+        url: {
+          URL: mockURL
         }
       })
       const res = MockAuthorizationTask.parseCodeURL('url')
-      expect(mockUParse).toHaveBeenCalledWith('url')
-      expect(mockQParse).toHaveBeenCalledWith('parsed query')
+      expect(mockURL).toHaveBeenCalledWith('url')
       expect(res).toBe('code')
     })
   })

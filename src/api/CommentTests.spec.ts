@@ -1,7 +1,7 @@
 import { Options } from '../'
 import Client from '../Client'
 import * as Comment from './Comment'
-import * as rewire from 'rewire'
+import rewire from 'rewire'
 
 let RewireComment = rewire('./Comment')
 const MockComment: typeof Comment & typeof RewireComment = <any> RewireComment

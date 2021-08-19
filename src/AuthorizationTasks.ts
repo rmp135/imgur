@@ -1,8 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 import Client from './Client'
 import * as RequestTasks from './RequestTasks'
-import * as querystring from 'querystring'
-import * as URL from 'url'
+import * as url from 'url'
 
 const OATH_BASE_PATH = 'https://api.imgur.com/oauth2'
 
@@ -50,19 +49,19 @@ export function generateTokenURL (client: Client, applicationState?: string): st
   return userURL
 }
 
-export function parseCodeURL (url: string): string {
-  const res = querystring.parse(URL.parse(url).query)
-  return res.code
+export function parseCodeURL (urlToParse: string): string {
+  const res = new url.URL(urlToParse).searchParams
+  return res.get("code") as string
 }
 
-export function parseTokenURL (url: string): RequestTokenResponse {
-  const res = querystring.parse(URL.parse(url).hash as string)
+export function parseTokenURL (urlToParse: string): RequestTokenResponse {
+  const res = new url.URLSearchParams(new url.URL(urlToParse).hash)
   return {
-    access_token: res['#access_token'],
-    expires_in: Number(res.expires_in),
-    token_type: res.token_type,
-    account_id: res.account_id,
-    refresh_token: res.refresh_token,
-    account_username: res.account_username
+    access_token: res.get("#access_token") as string,
+    expires_in: Number(res.get("expires_in")),
+    token_type: res.get("token_type") as string,
+    account_id: res.get("account_id") as string,
+    refresh_token: res.get("refresh_token") as string,
+    account_username: res.get("account_username") as string
   }
 }

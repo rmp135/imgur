@@ -1,6 +1,7 @@
 import { Options } from '../'
 import { performAPIRequest } from "../RequestTasks";
 import Client from '../Client'
+import { AxiosRequestConfig } from 'axios'
 
 export function get (client: Client, options?: Options.PageOption & Options.GallerySortOption & Options.WindowOption): Promise<APIResponse<CustomGalleryResponse>> {
   const url: any[] = [
@@ -25,7 +26,7 @@ export function addTags (client: Client, tags: string[]): Promise<APIResponse<bo
     'custom',
     'add_tags'
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'put',
     data: {
       tags: tags.join(',')
@@ -39,7 +40,7 @@ export function removeTage (client: Client, tags: string[]): Promise<APIResponse
     'custom',
     'remove_tags'
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'delete',
     data: {
       tags: tags.join(',')

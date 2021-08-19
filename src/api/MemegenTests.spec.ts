@@ -1,6 +1,6 @@
 import Client from '../Client';
 import * as Memegen from './Memegen';
-import * as rewire from 'rewire';
+import rewire from 'rewire';
 
 let RewireMemegen = rewire('./Memegen')
 const MockMemegen: typeof Memegen & typeof RewireMemegen = <any> RewireMemegen

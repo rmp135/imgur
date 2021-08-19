@@ -1,6 +1,7 @@
 import * as Options from '../Options'
 import { performAPIRequest } from '../RequestTasks'
 import Client from '../Client'
+import { AxiosRequestConfig } from 'axios'
 
 export function get (client: Client, id: string): Promise<APIResponse<AlbumResponse>> {
   const url = [
@@ -33,7 +34,7 @@ export function create (client: Client, options: Options.CreateAlbumOptions): Pr
   const url = [
     'album'
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'post',
     data: {
       title: options.title,
@@ -57,7 +58,7 @@ export function update (client: Client, id: string, options: Options.CreateAlbum
     'album',
     id
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'post',
     data: {
       title: options.title,
@@ -81,7 +82,7 @@ export function remove (client: Client, id: string): Promise<APIResponse<AlbumCr
     'album',
     id
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'delete'
   }
   return performAPIRequest<AlbumCreateResponse>(client, url, requestOptions)
@@ -93,7 +94,7 @@ export function favorite (client: Client, id: string): Promise<APIResponse<Album
     id,
     'favorite'
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'post'
   }
   return performAPIRequest<AlbumCreateResponse>(client, url, requestOptions)
@@ -104,7 +105,7 @@ export function setImages (client: Client, id: string, imageIds: string[] | null
     'album',
     id
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'post',
     data: { } as any
   }
@@ -123,7 +124,7 @@ export function addImages (client: Client, id: string, imageIds: string[] | null
     id,
     'add'
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'put',
     data: { } as any
   }
@@ -142,7 +143,7 @@ export function removeImages (client: Client, id: string, imageIds: string[]): P
     id,
     'remove_images'
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'delete',
     data: {
       ids: imageIds.join(',')

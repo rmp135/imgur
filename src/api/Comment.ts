@@ -1,6 +1,7 @@
 import * as Options from '../Options'
 import Client from '../Client';
 import { performAPIRequest } from '../RequestTasks'
+import { AxiosRequestConfig } from 'axios'
 
 export function get (client: Client, commentId: string): Promise<APIResponse<CommentResponse>> {
   const url = [
@@ -14,7 +15,7 @@ export function create (client: Client, imageId: string, comment: string, parent
   const url = [
     'comment'
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'post',
     data: {
       comment,
@@ -30,7 +31,7 @@ export function remove (client: Client, commentId: string): Promise<APIResponse<
     'comment',
     commentId
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'delete'
   }
   return performAPIRequest<boolean>(client, url, requestOptions)
@@ -50,7 +51,7 @@ export function replyCreate (client: Client, commentId: string, imageId: string,
     'comment',
     commentId
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'post',
     data: {
       comment,
@@ -67,7 +68,7 @@ export function vote (client: Client, commentId: string, vote: 'up' | 'down'): P
     'vote',
     vote
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'post'
   }
   return performAPIRequest<boolean>(client, url, requestOptions)
@@ -79,7 +80,7 @@ export function report (client: Client, commentId: string, reason?: Options.Repo
     commentId,
     'report'
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'post',
     data: {
       reason

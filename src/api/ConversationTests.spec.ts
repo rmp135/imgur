@@ -1,6 +1,6 @@
 import Client from '../Client';
 import * as Conversation from './Conversation';
-import * as rewire from 'rewire';
+import rewire from 'rewire';
 
 let RewireConversation = rewire('./Conversation')
 const MockConversation: typeof Conversation & typeof RewireConversation = <any> RewireConversation

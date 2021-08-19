@@ -35,7 +35,7 @@ export interface AccountCommentSortOption {
 }
 
 export interface AccountFavoriteSortOption {
-  sort?: AccountFavoriteSortOption
+  sort?: AccountFavoriteSort
 }
 
 export interface ChangeAccountSettingsOptions {

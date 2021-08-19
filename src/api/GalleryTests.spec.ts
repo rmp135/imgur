@@ -1,7 +1,7 @@
 import { Options } from '../index'
 import Client from '../Client'
 import * as Gallery from './Gallery'
-import * as rewire from 'rewire'
+import rewire from 'rewire'
 
 let RewireGallery = rewire('./Gallery')
 const MockGallery: typeof Gallery & typeof RewireGallery = <any> RewireGallery

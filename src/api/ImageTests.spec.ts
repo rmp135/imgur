@@ -1,6 +1,6 @@
 import Client from '../Client';
 import * as Image from './Image';
-import * as rewire from 'rewire';
+import rewire from 'rewire';
 
 let RewireImage = rewire('./Image')
 const MockImage: typeof Image & typeof RewireImage = <any> RewireImage
@@ -36,13 +36,13 @@ describe('Image', () => {
       expect(res).toBe('mock return' as any)
     })
     it('should upload by Buffer', () => {
-      const buffer = new Buffer('test')
+      const buffer = Buffer.from('test')
       const res = MockImage.upload(client, buffer)
       expect(mockPerformAPIRequest).toHaveBeenCalledWith(client, ['image'], { method: 'post', data: buffer })
       expect(res).toBe('mock return' as any)
     })
     it('should warn when setting options when uploading by Buffer', () => {
-      const buffer = new Buffer('test')
+      const buffer = Buffer.from('test')
       const origWarn = console.warn
       console.warn = jasmine.createSpy('warn')
       const res = MockImage.upload(client, buffer, { album: 'album', description: 'description', name: 'name', title: 'title', type: 'url' })

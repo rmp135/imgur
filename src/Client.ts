@@ -107,7 +107,7 @@ IP Reset: ${this.RateLimits.ip_reset}
   Account = {
     get: (username?: string) => Account.get(this, username),
     galleryFavorites: (username?: string | null, config?: Options.PageOption & Options.AccountCommentSortOption) => Account.galleryFavorites(this, username, config),
-    favorites: (username?: string | null, options?: Options.PageOption & Options.AccountCommentSortOption) => Account.favorites(this, username, options),
+    favorites: (username?: string | null, options?: Options.PageOption & Options.AccountFavoriteSortOption) => Account.favorites(this, username, options),
     submissions: (username?: string | null, page?: number) => Account.submissions(this, username, page),
     settings: () => Account.settings(this),
     changeSettings: (options: Options.ChangeAccountSettingsOptions) => Account.changeSettings(this, options),

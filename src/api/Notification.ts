@@ -1,5 +1,6 @@
 import { performAPIRequest } from '../RequestTasks';
 import Client from '../Client';
+import { AxiosRequestConfig } from 'axios'
 
 export function getAll (client: Client, unreadOnly?: boolean): Promise<APIResponse<NotificationsContainerResponse>> {
   const path = [
@@ -23,7 +24,7 @@ export function markAsRead (client: Client, notificationId: string | string[]): 
   const url = [
     'notification'
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'post',
     data: {
       ids: typeof notificationId == 'string' ? notificationId : notificationId.join(',')

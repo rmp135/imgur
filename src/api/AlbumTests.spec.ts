@@ -1,8 +1,7 @@
 import 'jasmine'
-import { Options } from '../'
 import Client from '../Client'
 import * as Album from './Album'
-import * as rewire from 'rewire'
+import rewire from 'rewire'
 
 let RewireAlbum = rewire('./Album')
 const MockAlbum: typeof Album & typeof RewireAlbum = <any> RewireAlbum

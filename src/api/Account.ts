@@ -1,6 +1,7 @@
 import * as Options from '../Options'
 import { performAPIRequest } from '../RequestTasks';
 import Client from '../Client'
+import { AxiosRequestConfig } from 'axios'
 
 export function get (client: Client, username?: string): Promise<APIResponse<AccountResponse>> {
   const url = [
@@ -74,7 +75,7 @@ export function changeSettings (client: Client, options: Options.ChangeAccountSe
     'me',
     'settings'
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'put',
     data: options
   }
@@ -105,7 +106,7 @@ export function sendVerificationEmail (client: Client): Promise<APIResponse<bool
     'me',
     'verifyemail'
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'post'
   }
   return performAPIRequest<boolean>(client, url, requestOptions)
@@ -159,7 +160,7 @@ export function albumRemove (client: Client, username: string | null, albumId: s
     'album',
     albumId
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'delete'
   }
   return performAPIRequest<boolean>(client, url, requestOptions)
@@ -217,7 +218,7 @@ export function commentRemove (client: Client, commentId: string): Promise<APIRe
     'comment',
     commentId
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'delete'
   }
   return performAPIRequest<boolean>(client, url, requestOptions)
@@ -269,7 +270,7 @@ export function imageRemove (client: Client, username: string | null, deleteHash
     'image',
     deleteHash
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'delete'
   }
   return performAPIRequest<boolean>(client, url, requestOptions)

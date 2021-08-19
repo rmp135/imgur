@@ -12,12 +12,6 @@ Install using npm.
 npm install @rmp135/imgur
 ```
 
-or yarn
-
-```shell
-yarn add @rmp135/imgur
-```
-
 Authorization, searching and image uploading are all supported. Refer to the [documentation](https://rmp135.github.io/imgur/) for more information.
 
 ```javascript

@@ -1,6 +1,6 @@
 import Client from '../Client';
 import * as CustomGallery from './CustomGallery';
-import * as rewire from 'rewire';
+import rewire from 'rewire';
 
 let RewireCustomGallery = rewire('./CustomGallery')
 const MockCustomGallery: typeof CustomGallery & typeof RewireCustomGallery = <any> RewireCustomGallery

@@ -1,6 +1,6 @@
 import Client from '../Client';
 import * as Notification from './Notification';
-import * as rewire from 'rewire';
+import rewire from 'rewire';
 
 let RewireNotification = rewire('./Notification')
 const MockNotification: typeof Notification & typeof RewireNotification = <any> RewireNotification

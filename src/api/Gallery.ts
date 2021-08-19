@@ -1,6 +1,7 @@
 import * as Options from '../Options'
 import Client from "../Client";
 import { performAPIRequest, URLConfig } from '../RequestTasks';
+import { AxiosRequestConfig } from 'axios'
 
 export function get (client: Client, options?: Options.GalleryGetOptions): Promise<APIResponse<BaseGalleryResponse[]>> {
   const url: URLConfig = {
@@ -99,7 +100,7 @@ export function tagVoting (client: Client, itemId: string, tagName: string, vote
     tagName,
     vote
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'post'
   }
   return performAPIRequest<boolean>(client, url, requestOptions)
@@ -111,7 +112,7 @@ export function updateTags (client: Client, itemId: string, tags: string[]): Pro
     'tags',
     itemId
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'post',
     data: {
       tags: tags.join(',')
@@ -206,7 +207,7 @@ export function remove (client: Client, imageId: string): Promise<APIResponse<bo
     'gallery',
     imageId
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'delete'
   }
   return performAPIRequest<boolean>(client, url, requestOptions)
@@ -221,7 +222,7 @@ export function album (client: Client, albumId: string): Promise<APIResponse<Gal
   return performAPIRequest<GalleryAlbumResponse>(client, url)
 }
 
-export function image (client: Client, imageId: string): Promise<APIResponse<GalleryImageResponse>> {
+export function image (client: Client, imageId: string): Promise<APIResponse<BaseImageResponse>> {
   const url = [
     'gallery',
     'image',
@@ -236,7 +237,7 @@ export function report (client: Client, itemId: string, reason?: Options.ReportR
     itemId,
     'report'
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'post',
     data: {
       reason
@@ -280,7 +281,7 @@ export function commentCreate (client: Client, itemId: string, comment: string):
     itemId,
     'comment'
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'post',
     data: {
       comment
@@ -296,7 +297,7 @@ export function commentReply (client: Client, itemId: string, commentId: string,
     'comment',
     commentId
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'post',
     data: {
       comment

@@ -1,6 +1,6 @@
 import Client from '../Client';
 import * as Account from './Account';
-import * as rewire from 'rewire';
+import rewire from 'rewire';
 
 let RewireAccount = rewire('./Account')
 const MockAccount: typeof Account & typeof RewireAccount = <any> RewireAccount

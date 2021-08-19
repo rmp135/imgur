@@ -1,7 +1,5 @@
-import * as join from 'url-join';
 import * as url from 'url'
-import * as querystring from 'querystring';
-import axios, { AxiosRequestConfig, AxiosError } from 'axios'
+import axios, { AxiosRequestConfig } from 'axios'
 import Client from './Client'
 
 const API_BASE_PATH = 'https://api.imgur.com/3'
@@ -68,8 +66,8 @@ export function performAPIRequest<T> (client: Client, url: URLConfig | any[], ax
 
 export function joinURL (urlToJoin: URLConfig | string[]): string {
   if (Array.isArray(urlToJoin)) {
-    return join(...urlToJoin)
+    return urlToJoin.join('/')
   }
-  const query = querystring.stringify(urlToJoin.params)
-  return url.format({ pathname: join(...urlToJoin.path), search: query })
+  const query = new url.URLSearchParams(urlToJoin.params).toString()
+  return url.format({ pathname: urlToJoin.path.join('/'), search: query })
 }

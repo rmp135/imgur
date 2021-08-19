@@ -1,4 +1,3 @@
-import * as url from 'url';
 import { performAPIRequest } from '../RequestTasks';
 import { AxiosRequestConfig } from 'axios';
 import Client from '../Client'
@@ -60,7 +59,7 @@ export function remove (client: Client, id: string): Promise<APIResponse<boolean
     'image',
     id
   ]
-  const requestConfig = {
+  const requestConfig: AxiosRequestConfig = {
     method: 'delete'
   }
   return performAPIRequest<boolean>(client, url, requestConfig)
@@ -71,7 +70,7 @@ export function update (client: Client, imageId: string, options: UpdateOptions)
     'image',
     imageId
   ]
-  const requestConfig = {
+  const requestConfig: AxiosRequestConfig = {
     method: 'post',
     data: {
       title: options.title,
@@ -87,7 +86,7 @@ export function favorite (client: Client, imageId: string): Promise<APIResponse<
     imageId,
     'favorite'
   ]
-  const requestOptions = {
+  const requestOptions: AxiosRequestConfig = {
     method: 'post'
   }
   return performAPIRequest<boolean>(client, url, requestOptions)

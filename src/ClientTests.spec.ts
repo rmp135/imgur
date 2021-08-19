@@ -1,5 +1,5 @@
 import * as Client from './Client'
-import * as rewire from 'rewire'
+import rewire from 'rewire'
 import { TwoStageAuthReturn } from './AuthorizationTasks'
 
 let RewireClient = rewire('./Client')
